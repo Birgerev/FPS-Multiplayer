@@ -42,7 +42,7 @@ public class RuntimeWeapon : NetworkBehaviour {
         GameObject obj = Instantiate(weapon.WeaponModel.gameObject);
 
         model = obj.GetComponent<WeaponModel>();
-        model.armAnimatior = GetComponent<Player>().model.armAnimator;
+        model.playerModel = GetComponent<Player>().model;
 
         return obj;
     }
@@ -168,9 +168,10 @@ public class RuntimeWeapon : NetworkBehaviour {
         {
 
         }
-
+        
         if (model != null)
-            model.armAnimatior.SetBool("aiming", aiming);
+            if (aiming)
+                model.playerModel.armAim = true;
     }
 
     [ClientRpc]
@@ -179,5 +180,11 @@ public class RuntimeWeapon : NetworkBehaviour {
         GameObject obj = Instantiate(weapon.projectile);
         obj.transform.rotation = model.barrel.transform.rotation;
         obj.transform.position = model.barrel.transform.position;
+
+        if (model != null)
+        {
+            model.playerModel.armAim = true;
+            model.playerModel.Quickdraw();
+        }
     }
 }
