@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterModel : MonoBehaviour {
+public class CharacterModel : MonoBehaviour
+{
 
     public Animator armAnimator;
     public SpineRotation spineRotator;
@@ -12,12 +13,14 @@ public class CharacterModel : MonoBehaviour {
     public bool armAim = false;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         gameObject.name = "character_model";
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         armAnimator.SetBool("aiming", armAim);
 
     }
@@ -30,6 +33,6 @@ public class CharacterModel : MonoBehaviour {
 
     public void Quickdraw()
     {
-        armAnimator.SetTrigger("quickdraw");
+        //TODO armAnimator.SetTrigger("quickdraw");
     }
 }
