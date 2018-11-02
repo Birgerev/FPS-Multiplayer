@@ -172,10 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472fb36c0daad7a4ebfd1e7c9f342586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
+  damage: 12
   calibre: 
   speed: 5000
-  gravityMultiplier: 1
+  gravityMultiplier: 0.3
   owner: {fileID: 0}
   maxage: 8
   hitEffect: {fileID: 1614572127005044, guid: 4a049bbef79ee7845b541e2d0d83b4cc, type: 2}

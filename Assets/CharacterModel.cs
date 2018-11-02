@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CharacterModel : MonoBehaviour
 {
-
+    public Animator characterAnimator;
+    public Animator headAnimator;
     public Animator armAnimator;
     public SpineRotation spineRotator;
     public GameObject mainCamera;
     public GameObject weaponModelHolder;
 
     public bool armAim = false;
+    public bool headTilt = false;
 
     // Use this for initialization
     void Start()
@@ -22,6 +24,7 @@ public class CharacterModel : MonoBehaviour
     void Update()
     {
         armAnimator.SetBool("aiming", armAim);
+        headAnimator.SetBool("tilting", headTilt);
 
     }
 

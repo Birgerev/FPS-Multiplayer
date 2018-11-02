@@ -1,85 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Networking;
 using UnityEngine;
 
-public class PlayerController : NetworkBehaviour {
+public class PlayerController : CharacterController {
     
+    public float sensitivity = 1;
+
     private float sensitivityX = 4.0f;
     private float sesitivityY = 4.0f;
 
-    private float yaw = 0.0f;
-    private float pitch = 0.0f;
-
-    public float maxpitch = 89.9f;
-    public float minpitch = -89.9f;
-
-    public float speed = 10.0f;
-    public float gravity = 9.81f;
-    public float maxVelocityChange = 10.0f;
-    public bool canJump = true;
-    public float jumpHeight = 2.0f;
-    public float airSpeed = 4f;
-    private bool grounded = false;
+    private float joystickMultiplier = 1f;
 
     public static bool showMouse = false;
 
-    void Update()
+    private int lastframecrouch = 0;
+    private int lastframesprint = 0;
+    
+    public override void Update()
     {
-        Mouse();
-        Interaction();
+        base.Update();
+
+
     }
     
-    void Awake()
+    public override void FixedUpdate()
     {
-        GetComponent<Rigidbody>().freezeRotation = true;
-        GetComponent<Rigidbody>().useGravity = false;
-    }
+        base.FixedUpdate();
 
-    void FixedUpdate()
-    {
         Movement();
-    }
-
-    private void Interaction()
-    {
-        if (isLocalPlayer)
-        {
-            //GetComponent<Player>().CmdInterract(new WeaponInput(
-            //    (Input.GetKeyDown(InputManager.interact1)),
-            //    (Input.GetKey(InputManager.interact1)), 
-            //    (Input.GetKey(InputManager.interact2)),
-            //    (Input.GetKeyDown(InputManager.reload))));
-        }
+        Mouse();
+        CursorSettings();
     }
 
     private void Movement()
     {
         if (isLocalPlayer)
         {
+
             // Calculate how fast we should be moving
-            Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            targetVelocity = transform.TransformDirection(targetVelocity);
-
-            if (!grounded)
-                targetVelocity *= airSpeed;
-            else
-                targetVelocity *= speed;
-
-            // Apply a force that attempts to reach our target velocity
-            Vector3 velocity = GetComponent<Rigidbody>().velocity;
-            Vector3 velocityChange = (targetVelocity - velocity);
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0;
-            GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
-
+            targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            
+            
             // Jump
             if (grounded)
             {
                 if (canJump && Input.GetButtonDown("Jump"))
                 {
-                    GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+                    CmdJump(true);
                 }
             }
 
@@ -87,47 +54,52 @@ public class PlayerController : NetworkBehaviour {
             GetComponent<Rigidbody>().AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
 
             grounded = false;
+            
+            //Crouching
+            if (Input.GetButtonDown("Crouch"))
+                CmdCrouch(true);
+            else if (Input.GetButtonUp("Crouch"))
+                CmdCrouch(false);
+            else if ((Input.GetButtonDown("Joystick Crouch") && lastframecrouch > 10)) { 
+                print("crouch:");
+                CmdCrouch(!crouching);
+                lastframecrouch = 0;
+            }
+            else lastframecrouch++;
+
+            //Sprinting
+            if (Input.GetButtonDown("Sprint"))
+                CmdSprint(true);
+            else if (Input.GetButtonUp("Sprint"))
+                CmdSprint(false);
+            else if ((Input.GetButtonDown("Joystick Sprint") && lastframesprint > 10))
+            {
+                CmdSprint(!sprinting);
+                lastframesprint = 0;
+            }
+            else lastframesprint++;
+
         }
-    }
-
-
-    void OnCollisionStay()
-    {
-        grounded = true;
-    }
-
-    float CalculateJumpVerticalSpeed()
-    {
-        // From the jump height and gravity we deduce the upwards speed 
-        // for the character to reach at the apex.
-        return Mathf.Sqrt(2 * jumpHeight * gravity);
     }
 
     private void Mouse()
     {
+        //print(Input.GetAxis("Look X"));
         if (isLocalPlayer)
         {
-            yaw += sensitivityX * Input.GetAxis("Mouse X");
-            pitch -= sesitivityY * Input.GetAxis("Mouse Y");
-
-            if (pitch > maxpitch)
-                pitch = maxpitch;
-
-            if (pitch < minpitch)
-                pitch = minpitch;
-
-            transform.GetComponent<Player>().localpitch = pitch;
-            if (pitch != transform.GetComponent<Player>().pitch)
-                transform.GetComponent<Player>().CmdSetPitch(pitch);
-            transform.GetComponent<Player>().yaw = yaw;
-
-            Cursor.visible = showMouse;
-            Cursor.lockState = (showMouse) ? CursorLockMode.None : CursorLockMode.Locked;
-
-            if (Input.GetMouseButtonDown(0))
-                showMouse = false;
-            if (Input.GetKeyDown(KeyCode.Escape))
-                showMouse = true;
+            yaw += sensitivityMultiplier * (sensitivityX * (Input.GetAxis("Mouse X")));// + (Input.GetAxis("Look X") * joystickMultiplier));
+            pitch -= sensitivityMultiplier * (sesitivityY * (Input.GetAxis("Mouse Y")));// + (Input.GetAxis("Look Y") * joystickMultiplier));
         }
+    }
+
+    private void CursorSettings()
+    {
+        Cursor.visible = showMouse;
+        Cursor.lockState = (showMouse) ? CursorLockMode.None : CursorLockMode.Locked;
+
+        if (Input.GetMouseButtonDown(0))
+            showMouse = false;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            showMouse = true;
     }
 }

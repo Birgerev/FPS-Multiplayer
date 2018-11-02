@@ -12,10 +12,16 @@ public class RuntimeWeapon : NetworkBehaviour {
 
     private bool _initialized = false;  // Is the Initialize() funtion called yet? if not, show errors
 
-    private bool aiming = false;
+    public bool aiming = false;
     private bool mouse = false;
     private bool mouseDown = false;
     private bool mouseUp = false;
+
+    public bool reloading;
+
+    [SyncVar]
+    public int bulletsLeft;
+
 
     #region Local Initiation
     public void Reset()
@@ -23,6 +29,8 @@ public class RuntimeWeapon : NetworkBehaviour {
         //weapon = null;
         if(model != null)
             Destroy(model.gameObject);
+
+        bulletsLeft = weapon.clipSize;
     }
 
     public void Initialize()
@@ -90,9 +98,11 @@ public class RuntimeWeapon : NetworkBehaviour {
 
     IEnumerator release_handle()
     {
-        model.handler.SetBool("pulled", false);
-        yield return new WaitForSeconds(weapon.handleReleaseSpeed/2);
-        handlePulledBack = false;
+        yield return new WaitForSeconds(weapon.handleReleaseSpeed);
+        model.handler.Play("handle_normal");//.SetBool("pulled", false);
+
+        if (isServer)
+            handlePulledBack = false;
 
         //if automatic gun, automaticly pull pack handle to ready another shot
         if (weapon.fireMode == FireMode.Automatic)
@@ -102,52 +112,116 @@ public class RuntimeWeapon : NetworkBehaviour {
     }
     IEnumerator pull_handle()
     {
-        model.handler.SetBool("pulled", true);
         yield return new WaitForSeconds(weapon.handlePullSpeed);
-        handlePulledBack = true;
+        model.handler.Play("handle_pulled");//.SetBool("pulled", true);
+        if (isServer)
+            handlePulledBack = true;
     }
 
     public void shoot()
     {
         if (isServer)
         {
-            if (handlePulledBack)
+            if (bulletsLeft > 0 && !reloading)
             {
-                StartCoroutine(release_handle());
-                RpcVisual_shoot();
+                //stop player sprinting
+                model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
+                if (handlePulledBack)
+                {
+                    RpcVisual_shoot();
+                    bulletsLeft--;
+                }
+
             }
+            //TODO click noise
         }
     }
 
     public void input()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetButtonDown("Fire2") || (!aiming && Input.GetAxis("Fire2") > 0))
             CmdInput_Aim(true);
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetButtonUp("Fire2") || (aiming && Input.GetAxis("Fire2") == 0))
             CmdInput_Aim(false);
-
-        if (Input.GetMouseButtonDown(0))
+        if((mouse && Input.GetAxis("Fire1") == 0))
+            print(!mouse + "" + Input.GetAxis("Fire1"));
+        if (Input.GetButtonDown("Fire1") || (!mouse && Input.GetAxis("Fire1") > 0))
+        {
+            if (!isServer)
+                mouse = true;
             CmdInput_Mouse(true);
-        if (Input.GetMouseButtonUp(0))
+        }
+        if (Input.GetButtonUp("Fire1") || (mouse && Input.GetAxis("Fire1") == 0))
+        {
+            if(!isServer)
+                mouse = false;
             CmdInput_Mouse(false);
+        }
+
+        if (Input.GetButtonDown("Reload"))
+        {
+            CmdReload();
+        }
+    }
+
+    [Command]
+    public void CmdReload()
+    {
+        if (!reloading)
+        {
+            if (bulletsLeft != 0 && !handlePulledBack)
+            {
+                RpcVisual_HandPullHandle();  //TODO animations with hands
+            }
+            else RpcReload();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcVisual_HandPullHandle()
+    {
+        //TODO animations
+        StartCoroutine(pull_handle());
+    }
+
+    [ClientRpc]
+    public void RpcReload()
+    {
+        //TODO animations
+        model.playerModel.armAnimator.SetTrigger("reloading");
+        if (isServer)
+            StartCoroutine(Reload());
+    }
+
+    IEnumerator Reload()
+    {
+        reloading = true;
+        yield return new WaitForSeconds(weapon.reloadTime);
+        bulletsLeft = weapon.clipSize;
+        reloading = false;
     }
 
     [Command]
     public void CmdInput_Aim(bool aim)
     {
+        //stop player sprinting
+        model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
+
         //Show results to all connected clients
-        RpcVisual_aim(aim);
+        if(!reloading)
+            RpcVisual_aim(aim);
     }
 
     [Command]
-    public void CmdInput_Mouse(bool mouse)
+    public void CmdInput_Mouse(bool value)
     {
+        print("mouse: "+value);
         //Set input variables for later use
-        if (mouse)
+        if (value)
             mouseDown = true;
         else mouseUp = true;
 
-        this.mouse = mouse;
+        mouse = value;
     }
 
     [ClientRpc]
@@ -164,19 +238,26 @@ public class RuntimeWeapon : NetworkBehaviour {
         if (aim)
         {
 
-        }else
+        }
+        else
         {
 
         }
-        
+
         if (model != null)
+        {
+            model.playerModel.headTilt = aim;
+
             if (aiming)
                 model.playerModel.armAim = true;
+        }
     }
 
     [ClientRpc]
     public void RpcVisual_shoot()
     {
+        StartCoroutine(release_handle());
+
         GameObject obj = Instantiate(weapon.projectile);
         obj.transform.rotation = model.barrel.transform.rotation;
         obj.transform.position = model.barrel.transform.position;

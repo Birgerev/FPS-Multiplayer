@@ -24,7 +24,7 @@ namespace Menu
         void Start()
         {
             if (Debug.isDebugBuild)
-            //    textDuration = 1f;
+                textDuration = 1f;
 
             StartCoroutine(loop());
         }

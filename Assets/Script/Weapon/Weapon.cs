@@ -21,5 +21,7 @@ public class Weapon {
     public float handlePullSpeed;                        // How long the pull handle animation will take
     public float handleReleaseSpeed;                        // How long the release handle animation will take
 
+    public float reloadTime;                        // How long reloading of the weapon lasts
+
     public GameObject projectile;
 }

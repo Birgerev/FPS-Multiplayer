@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour{
     public float maxage = 8;
     public GameObject hitEffect;
 
+    private Rigidbody rb;
+
     public GameObject casing;
 
     void Start() {
@@ -21,12 +23,19 @@ public class Bullet : MonoBehaviour{
 
         obj.GetComponent<Casing>();
 
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward*speed);
         rb.mass = gravityMultiplier;
+        rb.useGravity = false;
 
         //Destroy object if it never hit anything
         Destroy(gameObject, maxage);
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 gravity = 9.81f * gravityMultiplier * Vector3.up;
+        rb.AddForce(-gravity, ForceMode.Acceleration);
     }
 
     void OnCollisionEnter(Collision col)
@@ -35,9 +44,7 @@ public class Bullet : MonoBehaviour{
         obj.transform.position = col.contacts[0].point;
         //TODO COLISSION ROTATION
         Destroy(obj, 1);
-
-        print("bullet hit "+ col.gameObject.name +": " + (col.gameObject.GetComponent<Hitbox>() != null));
-
+        
         if (col.gameObject.GetComponent<Hitbox>() != null)
             col.gameObject.GetComponent<Hitbox>().hit(damage);
 

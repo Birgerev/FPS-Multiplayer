@@ -21,12 +21,11 @@ public class Hitbox : MonoBehaviour
 
     public void hit(float damage)
     {
-        print("hitbox: " + damage * damageMultiplier);
         gameObject.GetComponentInParent<Player>().TakeDamage(damage * damageMultiplier);
     }
 
     void OnCollisionEnter(Collision col)
     {
-        print(col.gameObject.name);
+
     }
 }

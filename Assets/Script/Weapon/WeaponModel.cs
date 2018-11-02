@@ -15,6 +15,7 @@ public class WeaponModel : MonoBehaviour {
 
     private void Start()
     {
+        gameObject.name = gameObject.name.Replace("(Clone)", "");
     }
 
     private void Update()
