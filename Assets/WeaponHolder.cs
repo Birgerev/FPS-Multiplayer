@@ -14,7 +14,7 @@ public class WeaponHolder : NetworkBehaviour {
 
     private void Start()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer || isServer)
             SetRuntimeWeapon(0);
     }
 

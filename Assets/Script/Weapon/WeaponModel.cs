@@ -11,22 +11,23 @@ public class WeaponModel : MonoBehaviour {
     public Animator animator;
     public Animator handler;
 
-    public Animator armAnimatior;
+    public CharacterModel playerModel;
 
     private void Start()
     {
+        gameObject.name = gameObject.name.Replace("(Clone)", "");
     }
 
     private void Update()
     {
         resetPosition();
-        if (armAnimatior == null)
+        if (playerModel.armAnimator == null)
             Debug.LogError("No arm animator assigned to weapon model");
     }
 
     public void initializeAnimator()
     {
-        armAnimatior.runtimeAnimatorController = armAnimatorController;
+        playerModel.armAnimator.runtimeAnimatorController = armAnimatorController;
     }
 
     public void resetPosition()

@@ -9,32 +9,60 @@ public class Player : NetworkBehaviour {
 
     public CharacterModel model;
     public GameObject modelPrefab;
+    public CharacterController controller;
 
     [SyncVar]
     public float pitch;
     public float yaw;
     public float localpitch;
-
-
+    
     public const int maxHealth = 100;
 
-    [SyncVar(hook = "RpcOnChangeHealth")]
+    [SyncVar(hook = "OnChangeHealth")]
     public float health = maxHealth;
     
     public void TakeDamage(float amount)
     {
+        if (!isServer)
+            return;
+
+        health -= amount;
+        if (health <= 0)
+        {
+            health = 0;
+            Debug.Log("Dead!");
+            CmdRespawn();
+        }
+    }
+
+    [Command]
+    public void CmdRespawn()
+    {
+        RpcRespawn();
+    }
+
+    [ClientRpc]
+    public void RpcRespawn()
+    {
+        print("rpc");
+        Respawn();
+    }
+
+    public void Respawn()
+    {
         if (isServer)
         {
-            print("take damage");
-            if (!isServer)
-                return;
+            health = maxHealth;
+        }
+        print("local: "+ isLocalPlayer);
+        if (hasAuthority)
+        {
+            Spawnpoint[] spawnpoints = Object.FindObjectsOfType<Spawnpoint>();
+            Spawnpoint spawnpoint = spawnpoints[Random.Range(0, spawnpoints.Length)];
+            print("sp: "+spawnpoint.gameObject.name);
 
-            health -= amount;
-            if (health <= 0)
-            {
-                health = 0;
-                Debug.Log("Dead!");
-            }
+            transform.position = spawnpoint.transform.position;
+            transform.rotation = spawnpoint.transform.rotation;
         }
     }
 
@@ -47,9 +75,8 @@ public class Player : NetworkBehaviour {
 
         model = obj.GetComponent<CharacterModel>();
     }
-
-    [ClientRpc]
-    void RpcOnChangeHealth(float health)
+    
+    void OnChangeHealth(float health)
     {
         if(!isServer)
             this.health = health;
@@ -58,17 +85,30 @@ public class Player : NetworkBehaviour {
     // At initialazation of component
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
+        print("player spawned");
         ApplyModel();
         removeForeingComponents();
+        print("camera: "+ model.mainCamera.name);
+
+        Respawn();
     }
 
     private void Update()
     {
-        if (isLocalPlayer)
+
+        model.characterAnimator.SetFloat("horizontal", controller.velocityInput.x);
+        model.characterAnimator.SetFloat("vertical", controller.velocityInput.z);
+
+        model.characterAnimator.SetBool("crouching", controller.crouching); 
+        model.characterAnimator.SetBool("sprinting", controller.sprinting);
+
+        if (hasAuthority)
         {
             if (localPlayer == null)
                 localPlayer = this;
             transform.localEulerAngles = new Vector3(0, yaw, 0.0f);
+
         }
         else
         {
@@ -95,7 +135,6 @@ public class Player : NetworkBehaviour {
             {
                 if (!isLocalPlayer)
                 {
-                    Destroy(GetComponent<PlayerController>());
                     Destroy(model.mainCamera.GetComponent<FlareLayer>());
                     Destroy(model.mainCamera.GetComponent<Camera>());
                     Destroy(model.mainCamera.GetComponent<AudioListener>());

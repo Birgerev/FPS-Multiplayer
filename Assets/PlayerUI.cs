@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour {
 
-    public Player player;
+    public GameObject model;
+    private Player player;
     public Text healthText;
     public GameObject healthFiller;
 
@@ -16,6 +17,13 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(player == null)
+        {
+            if(model.transform.parent != null)
+                if(model.transform.parent.GetComponent<Player>() != null)
+                    player = model.transform.parent.GetComponent<Player>();
+            return;
+        }
         if (!player.isLocalPlayer)
             Destroy(gameObject);
 

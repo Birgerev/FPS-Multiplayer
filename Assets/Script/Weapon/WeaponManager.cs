@@ -25,8 +25,7 @@ public class WeaponManager : MonoBehaviour
         RuntimeWeapon weapon = obj.GetComponent<RuntimeWeapon>();
         weapon.weapon = weapons[id];
         weapon.Initialize();
-
-        print("weapon: " + weapon);
+        
         return weapon;
     }
 }

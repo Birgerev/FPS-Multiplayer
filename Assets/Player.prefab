@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 54977165972805040}
   - component: {fileID: 136325882671168376}
   - component: {fileID: 114555352348275982}
-  - component: {fileID: 114661443352328172}
   - component: {fileID: 114364774076257046}
+  - component: {fileID: 114661443352328172}
   - component: {fileID: 114348165794683966}
   - component: {fileID: 114087100950501114}
   - component: {fileID: 114361834522355150}
@@ -139,6 +139,7 @@ MonoBehaviour:
     projectile: {fileID: 0}
   model: {fileID: 0}
   handlePulledBack: 1
+  aiming: 0
 --- !u!114 &114364774076257046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,14 +151,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade812d60464345448bf064b77f4e252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxpitch: 89.9
-  minpitch: -89.9
-  speed: 10
-  gravity: 9.81
+  sensitivityMultiplier: 1
+  yaw: 0
+  pitch: 0
   maxVelocityChange: 10
+  gravity: 9.81
   canJump: 1
-  jumpHeight: 2
+  jumpHeight: 1
   airSpeed: 4
+  grounded: 0
+  targetVelocity: {x: 0, y: 0, z: 0}
+  crouching: 0
+  sprinting: 0
+  velocityInput: {x: 0, y: 0, z: 0}
+  jumping: 0
+  sensitivity: 1
 --- !u!114 &114555352348275982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,6 +180,7 @@ MonoBehaviour:
   model: {fileID: 0}
   modelPrefab: {fileID: 1003826166453020, guid: 66590a0991676f04f934e39016a61f6f,
     type: 2}
+  controller: {fileID: 114364774076257046}
   pitch: 0
   yaw: 0
   localpitch: 0
@@ -187,9 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e14d3a2b5295c840b29da97194305f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponModelHolder: {fileID: 0}
   weapon: {fileID: 0}
-  armAnimator: {fileID: 0}
   weaponType: -1
   weapons: 
 --- !u!136 &136325882671168376
