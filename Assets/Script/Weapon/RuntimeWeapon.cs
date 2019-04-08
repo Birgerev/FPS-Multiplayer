@@ -160,8 +160,8 @@ public class RuntimeWeapon : MonoBehaviour {
     {
         print("shoot");
         GameObject obj = Instantiate(weapon.projectile);//TODO projectile position
-        obj.transform.rotation = transform.Find("Camera").rotation;
-        obj.transform.position = transform.Find("Camera").position;
+        obj.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
+        obj.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
 /*
         if (model != null)
         {

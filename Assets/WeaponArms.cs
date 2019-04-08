@@ -57,7 +57,7 @@ public class WeaponArms : MonoBehaviour
     private void LateUpdate()
     {
         //Set arms to camera position, so that the arms pivot around the camera
-        Transform camera = GetComponentInParent<Player>().transform.Find("Camera").transform;
+        Transform camera = GetComponentInParent<Player>().transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform;
 
         transform.position = camera.position;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, camera.localRotation.eulerAngles.x - 90);

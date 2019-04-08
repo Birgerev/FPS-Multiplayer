@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-public class CameraController : NetworkBehaviour {
+public class CameraController : MonoBehaviour {
 
     private const float normalFoV = 60;
 
@@ -15,14 +15,23 @@ public class CameraController : NetworkBehaviour {
 
     public Animator animator;
 
+    public Player player;
+
     // Use this for initialization
     void Start () {
         camera = GetComponent<Camera>();
+        animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        animator.SetBool("aiming", aiming);
+        if (player == null)
+            player = GetComponentInParent<Player>();
+
+        if (player.networkInstance != null)
+        {
+            animator.SetBool("crouching", player.networkInstance.input.crouch);
+        }
 
         if (aiming)
         {
