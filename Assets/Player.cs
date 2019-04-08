@@ -3,66 +3,71 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-public class Player : NetworkBehaviour {
+public class Player : MonoBehaviour {
 
     public static Player localPlayer;
+
+    public PlayerInstance networkInstance;
+
+    public RuntimeWeapon weapon;
 
     public CharacterModel model;
     public GameObject modelPrefab;
     public CharacterController controller;
-
-    [SyncVar]
+    
     public float pitch;
     public float yaw;
-    public float localpitch;
     
     public const int maxHealth = 100;
+    
+    public float health {
+        get
+        {
+            if (networkInstance == null)
+                return 100;
 
-    [SyncVar(hook = "OnChangeHealth")]
-    public float health = maxHealth;
+            return networkInstance.health;
+        }
+
+        set
+        {
+            if (networkInstance == null)
+                return;
+
+            networkInstance.health = value;
+        }
+    }
+
     
     public void TakeDamage(float amount)
     {
-        if (!isServer)
-            return;
 
         health -= amount;
         if (health <= 0)
         {
             health = 0;
             Debug.Log("Dead!");
-            CmdRespawn();
+            if (networkInstance.isServer)
+                Destroy(gameObject);
         }
     }
 
-    [Command]
-    public void CmdRespawn()
+    public void Spawn()
     {
-        RpcRespawn();
-    }
-
-    [ClientRpc]
-    public void RpcRespawn()
-    {
-        print("rpc");
-        Respawn();
-    }
-
-    public void Respawn()
-    {
-        if (isServer)
+        //if (isServer)
         {
             health = maxHealth;
         }
-        print("local: "+ isLocalPlayer);
-        if (hasAuthority)
+        //if (hasAuthority)
         {
-            Spawnpoint[] spawnpoints = Object.FindObjectsOfType<Spawnpoint>();
-            Spawnpoint spawnpoint = spawnpoints[Random.Range(0, spawnpoints.Length)];
-            print("sp: "+spawnpoint.gameObject.name);
+            //              TODO
 
-            transform.position = spawnpoint.transform.position;
-            transform.rotation = spawnpoint.transform.rotation;
+            //Spawnpoint[] spawnpoints = Object.FindObjectsOfType<Spawnpoint>();
+            //Spawnpoint spawnpoint = spawnpoints[Random.Range(0, spawnpoints.Length)];
+            //print("sp: "+spawnpoint.gameObject.name);
+
+            //transform.position = spawnpoint.transform.position;
+            //transform.rotation = spawnpoint.transform.rotation;
         }
     }
 
@@ -78,7 +83,7 @@ public class Player : NetworkBehaviour {
     
     void OnChangeHealth(float health)
     {
-        if(!isServer)
+        //if(!isServer)
             this.health = health;
     }
 
@@ -89,40 +94,46 @@ public class Player : NetworkBehaviour {
         print("player spawned");
         ApplyModel();
         removeForeingComponents();
-        print("camera: "+ model.mainCamera.name);
 
-        Respawn();
+        Spawn();
     }
 
     private void Update()
     {
-
+        //Update walk animations for character model
         model.characterAnimator.SetFloat("horizontal", controller.velocityInput.x);
         model.characterAnimator.SetFloat("vertical", controller.velocityInput.z);
 
+        //Update state(crouch/sprint) animation variables for character model
         model.characterAnimator.SetBool("crouching", controller.crouching); 
         model.characterAnimator.SetBool("sprinting", controller.sprinting);
+        
+        //Set global variable so that we easily can access the local player
+        if(networkInstance != null)
+            if(networkInstance.isLocalPlayer)
+                if (localPlayer == null)
+                    localPlayer = this;
 
-        if (hasAuthority)
-        {
-            if (localPlayer == null)
-                localPlayer = this;
+        //Rotate the player along the yaw axis
+        if(networkInstance.isLocalPlayer)
+            transform.localEulerAngles = new Vector3(0, networkInstance.GetComponent<PlayerInstanceInput>().input.yaw, 0.0f);
+        else
             transform.localEulerAngles = new Vector3(0, yaw, 0.0f);
 
-        }
-        else
-        {
-            localpitch = pitch;
-        }
+        //Animate spine / player model looks up or down
+        if(model != null)   //Make sure we dont get a null pointer error
+            if(networkInstance == null)
+                model.spineRotator.pitch = pitch;
+            else if (!networkInstance.isLocalPlayer)  //Make sure we arent the local player, since animating the spine would mess up camera animations
+                model.spineRotator.pitch = pitch;
 
-        if(model != null)
-            model.spineRotator.pitch = localpitch;
+        //Runtime weapon instance
+        weapon = transform.GetComponent<RuntimeWeapon>();
     }
-
-    [Command]
+    
     public void CmdSetPitch(float pitch)
     {
-        if (isServer)
+        //if (isServer)
         {
             this.pitch = pitch;
         }
@@ -133,7 +144,7 @@ public class Player : NetworkBehaviour {
         if(model != null)
             if (model.mainCamera != null)
             {
-                if (!isLocalPlayer)
+        //        if (!isLocalPlayer)
                 {
                     Destroy(model.mainCamera.GetComponent<FlareLayer>());
                     Destroy(model.mainCamera.GetComponent<Camera>());

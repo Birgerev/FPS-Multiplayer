@@ -6,7 +6,7 @@ public class WeaponModel : MonoBehaviour {
     
     public GameObject barrel;
 
-    public RuntimeAnimatorController armAnimatorController;
+    //public RuntimeAnimatorController armAnimatorController;
 
     public Animator animator;
     public Animator handler;
@@ -21,13 +21,13 @@ public class WeaponModel : MonoBehaviour {
     private void Update()
     {
         resetPosition();
-        if (playerModel.armAnimator == null)
-            Debug.LogError("No arm animator assigned to weapon model");
+        //if (playerModel.armAnimator == null)
+        //    Debug.LogError("No arm animator assigned to weapon model");
     }
 
     public void initializeAnimator()
     {
-        playerModel.armAnimator.runtimeAnimatorController = armAnimatorController;
+        //playerModel.armAnimator.runtimeAnimatorController = armAnimatorController;
     }
 
     public void resetPosition()
@@ -40,6 +40,6 @@ public class WeaponModel : MonoBehaviour {
     private void setGlobalScale()
     {
         transform.localScale = Vector3.one;
-        transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
+        //transform.localScale = new Vector3(1 / transform.lossyScale.x, 1 / transform.lossyScale.y, 1 / transform.lossyScale.z);
     }
 }

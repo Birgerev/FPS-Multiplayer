@@ -17,11 +17,12 @@ public class Bullet : MonoBehaviour{
     public GameObject casing;
 
     void Start() {
-        GameObject obj = Instantiate(casing);
-        casing.transform.position = transform.position;
-        casing.transform.rotation = transform.rotation;
+        //      TODO
+        //GameObject obj = Instantiate(casing);
+        //casing.transform.position = transform.position;
+        //casing.transform.rotation = transform.rotation;
 
-        obj.GetComponent<Casing>();
+        //obj.GetComponent<Casing>();
 
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward*speed);

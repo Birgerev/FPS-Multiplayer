@@ -24,8 +24,8 @@ public class PlayerUI : MonoBehaviour {
                     player = model.transform.parent.GetComponent<Player>();
             return;
         }
-        if (!player.isLocalPlayer)
-            Destroy(gameObject);
+        //if (!player.isLocalPlayer)
+        //Destroy(gameObject);
 
         HealthBar(player.health);
     }

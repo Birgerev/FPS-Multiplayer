@@ -54,7 +54,5 @@ public class ConnectionManager : MonoBehaviour {
         SceneManager.LoadScene(map, LoadSceneMode.Single);
 
         StartCoroutine(later());
-        print(SceneManager.GetActiveScene());
-
     }
 }

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 448901cc173e4b8409589015c9964281
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 24
   fileIDToRecycleName:
     100000: Boole
     100002: Boole_1
@@ -104,6 +104,64 @@ ModelImporter:
     100196: Null
     100198: Null_5
     100200: Handle
+    100202: Boole_10
+    100204: Boole_1_4
+    100206: Boole_2_10
+    100208: Boole_2_7
+    100210: Boole_2_8
+    100212: Boole_2_9
+    100214: Boole_3
+    100216: Boole_3_2
+    100218: Boole_4
+    100220: Boole_5
+    100222: Boole_6
+    100224: Boole_7
+    100226: Boole_8
+    100228: Boole_9
+    100230: Cube_1_3
+    100232: Cube_2_10
+    100234: Cube_2_11
+    100236: Cube_2_12
+    100238: Cube_2_13
+    100240: Cube_2_14
+    100242: Cube_2_15
+    100244: Cube_2_16
+    100246: Cube_2_4
+    100248: Cube_2_5
+    100250: Cube_2_6
+    100252: Cube_2_7
+    100254: Cube_2_8
+    100256: Cube_2_9
+    100258: Cube_3_23
+    100260: Cube_3_24
+    100262: Cube_3_25
+    100264: Cube_3_26
+    100266: Cube_4_14
+    100268: Cube_5_14
+    100270: Cube_6_2
+    100272: Cube_6_3
+    100274: Cube_6_4
+    100276: Cube_6_5
+    100278: Cube_6_6
+    100280: Cube_6_7
+    100282: Cube_6_8
+    100284: Cylinder_1_10
+    100286: Cylinder_1_11
+    100288: Cylinder_1_12
+    100290: Cylinder_1_5
+    100292: Cylinder_1_6
+    100294: Cylinder_1_7
+    100296: Cylinder_1_8
+    100298: Cylinder_1_9
+    100300: Cylinder_3_20
+    100302: Cylinder_3_21
+    100304: Cylinder_3_22
+    100306: Cylinder_5
+    100308: Cylinder_6
+    100310: Null_1
+    100312: Null_1_2
+    100314: Trigger
+    100316: Trigger_2
     400000: Boole
     400002: Boole_1
     400004: Boole_1_2
@@ -205,6 +263,64 @@ ModelImporter:
     400196: Null
     400198: Null_5
     400200: Handle
+    400202: Boole_10
+    400204: Boole_1_4
+    400206: Boole_2_10
+    400208: Boole_2_7
+    400210: Boole_2_8
+    400212: Boole_2_9
+    400214: Boole_3
+    400216: Boole_3_2
+    400218: Boole_4
+    400220: Boole_5
+    400222: Boole_6
+    400224: Boole_7
+    400226: Boole_8
+    400228: Boole_9
+    400230: Cube_1_3
+    400232: Cube_2_10
+    400234: Cube_2_11
+    400236: Cube_2_12
+    400238: Cube_2_13
+    400240: Cube_2_14
+    400242: Cube_2_15
+    400244: Cube_2_16
+    400246: Cube_2_4
+    400248: Cube_2_5
+    400250: Cube_2_6
+    400252: Cube_2_7
+    400254: Cube_2_8
+    400256: Cube_2_9
+    400258: Cube_3_23
+    400260: Cube_3_24
+    400262: Cube_3_25
+    400264: Cube_3_26
+    400266: Cube_4_14
+    400268: Cube_5_14
+    400270: Cube_6_2
+    400272: Cube_6_3
+    400274: Cube_6_4
+    400276: Cube_6_5
+    400278: Cube_6_6
+    400280: Cube_6_7
+    400282: Cube_6_8
+    400284: Cylinder_1_10
+    400286: Cylinder_1_11
+    400288: Cylinder_1_12
+    400290: Cylinder_1_5
+    400292: Cylinder_1_6
+    400294: Cylinder_1_7
+    400296: Cylinder_1_8
+    400298: Cylinder_1_9
+    400300: Cylinder_3_20
+    400302: Cylinder_3_21
+    400304: Cylinder_3_22
+    400306: Cylinder_5
+    400308: Cylinder_6
+    400310: Null_1
+    400312: Null_1_2
+    400314: Trigger
+    400316: Trigger_2
     2100000: No Name
     2300000: Cube
     2300002: Cube_1
@@ -246,6 +362,36 @@ ModelImporter:
     2300074: Cylinder_4
     2300076: Cube_5_13
     2300078: Handle
+    2300080: Cube_1_2
+    2300082: Cube_2_10
+    2300084: Cube_2_11
+    2300086: Cube_2_12
+    2300088: Cube_2_13
+    2300090: Cube_2_4
+    2300092: Cube_2_5
+    2300094: Cube_2_6
+    2300096: Cube_3_10
+    2300098: Cube_3_11
+    2300100: Cube_3_26
+    2300102: Cube_3_8
+    2300104: Cube_3_9
+    2300106: Cube_4_5
+    2300108: Cube_5_5
+    2300110: Cube_6_3
+    2300112: Cube_6_8
+    2300114: Cylinder_1_5
+    2300116: Cylinder_1_7
+    2300118: Cylinder_1_8
+    2300120: Cylinder_2_2
+    2300122: Cylinder_3_12
+    2300124: Cylinder_3_13
+    2300126: Cylinder_3_17
+    2300128: Cylinder_3_19
+    2300130: Cylinder_3_21
+    2300132: Cylinder_3_4
+    2300134: Cylinder_3_8
+    2300136: Cylinder_6
+    2300138: Trigger_2
     3300000: Cube
     3300002: Cube_1
     3300004: Cube_2
@@ -286,6 +432,36 @@ ModelImporter:
     3300074: Cylinder_4
     3300076: Cube_5_13
     3300078: Handle
+    3300080: Cube_1_2
+    3300082: Cube_2_10
+    3300084: Cube_2_11
+    3300086: Cube_2_12
+    3300088: Cube_2_13
+    3300090: Cube_2_4
+    3300092: Cube_2_5
+    3300094: Cube_2_6
+    3300096: Cube_3_10
+    3300098: Cube_3_11
+    3300100: Cube_3_26
+    3300102: Cube_3_8
+    3300104: Cube_3_9
+    3300106: Cube_4_5
+    3300108: Cube_5_5
+    3300110: Cube_6_3
+    3300112: Cube_6_8
+    3300114: Cylinder_1_5
+    3300116: Cylinder_1_7
+    3300118: Cylinder_1_8
+    3300120: Cylinder_2_2
+    3300122: Cylinder_3_12
+    3300124: Cylinder_3_13
+    3300126: Cylinder_3_17
+    3300128: Cylinder_3_19
+    3300130: Cylinder_3_21
+    3300132: Cylinder_3_4
+    3300134: Cylinder_3_8
+    3300136: Cylinder_6
+    3300138: Trigger_2
     4300000: Cube
     4300002: Cube_2
     4300004: Cylinder_3
@@ -326,6 +502,36 @@ ModelImporter:
     4300074: Cylinder_3_18
     4300076: Handle
     4300078: Cube_5_13
+    4300080: Trigger_2
+    4300082: Cylinder_1_5
+    4300084: Cube_2_4
+    4300086: Cube_2_5
+    4300088: Cube_2_6
+    4300090: Cube_2_10
+    4300092: Cylinder_3_4
+    4300094: Cylinder_2_2
+    4300096: Cube_2_11
+    4300098: Cylinder_1_7
+    4300100: Cylinder_3_8
+    4300102: Cylinder_3_12
+    4300104: Cube_3_8
+    4300106: Cube_3_9
+    4300108: Cube_3_10
+    4300110: Cube_5_5
+    4300112: Cube_4_5
+    4300114: Cube_3_11
+    4300116: Cylinder_3_13
+    4300118: Cube_2_12
+    4300120: Cylinder_1_8
+    4300122: Cube_6_3
+    4300124: Cube_2_13
+    4300126: Cube_3_26
+    4300128: Cylinder_3_17
+    4300130: Cylinder_6
+    4300132: Cube_1_2
+    4300134: Cylinder_3_19
+    4300136: Cube_6_8
+    4300138: Cylinder_3_21
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -361,6 +567,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -368,21 +575,26 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -397,7 +609,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

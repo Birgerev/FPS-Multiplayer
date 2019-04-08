@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-public class CharacterController : NetworkBehaviour
+public class CharacterController : MonoBehaviour
 {
     public float sensitivityMultiplier = 1;
 
@@ -29,49 +29,29 @@ public class CharacterController : NetworkBehaviour
 
     public Vector3 targetVelocity;
     
-    [SyncVar]
     public bool crouching;
-    [SyncVar]
     public bool sprinting;
-    [SyncVar]
     public Vector3 velocityInput;
-    [SyncVar]
     public bool jumping;
-
-    [Command]
-    public void CmdJump(bool value)
+    
+    public void Jump(bool value)
     {
-        if (isServer)
-        {
-            jumping = value;
-        }
+        jumping = value;
     }
 
-    [Command]
-    public void CmdCrouch(bool value)
+    public void Crouch(bool value)
     {
-        if (isServer)
-        {
-            crouching = value;
-        }
+        crouching = value;
     }
-
-    [Command]
-    public void CmdSprint(bool value)
+    
+    public void Sprint(bool value)
     {
-        if (isServer)
-        {
-            sprinting = value;
-        }
+        sprinting = value;
     }
-
-    [Command]
-    public void CmdVelocityInput(Vector3 value)
+    
+    public void VelocityInput(Vector3 value)
     {
-        if (isServer)
-        {
-            velocityInput = value;
-        }
+        velocityInput = value;
     }
 
     void Awake()
@@ -111,53 +91,47 @@ public class CharacterController : NetworkBehaviour
 
     private void Movement()
     {
-        if (isLocalPlayer)
+        if (targetVelocity.magnitude > 1)
+            targetVelocity.Normalize();
+
+        VelocityInput(targetVelocity);
+
+        targetVelocity = transform.TransformDirection(targetVelocity);
+        // Apply a force that attempts to reach our target velocity
+        Vector3 velocity = GetComponent<Rigidbody>().velocity;
+        Vector3 velocityChange = (targetVelocity * speed - velocity);
+        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+        velocityChange.y = 0;
+
+        if (jumping)
         {
-            if (targetVelocity.magnitude > 1)
-                targetVelocity.Normalize();
-
-            CmdVelocityInput(targetVelocity);
-
-            targetVelocity = transform.TransformDirection(targetVelocity);
-            // Apply a force that attempts to reach our target velocity
-            Vector3 velocity = GetComponent<Rigidbody>().velocity;
-            Vector3 velocityChange = (targetVelocity * speed - velocity);
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0;
-
-            if (jumping)
-            {
-                GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
-                CmdJump(false);
-            }
-
-            GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
-
-
-            //
-            if (!grounded)
-                targetVelocity *= airSpeed;
-            else
-                targetVelocity *= speed;
+            GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+            Jump(false);
         }
+
+        GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
+
+
+        //
+        if (!grounded)
+            targetVelocity *= airSpeed;
+        else
+            targetVelocity *= speed;
     }
 
     private void Face()
     {
-        if (isLocalPlayer)
-        {
-            if (pitch > maxpitch)
-                pitch = maxpitch;
+        if (pitch > maxpitch)
+            pitch = maxpitch;
 
-            if (pitch < minpitch)
-                pitch = minpitch;
+        if (pitch < minpitch)
+            pitch = minpitch;
 
-            transform.GetComponent<Player>().localpitch = pitch;
-            if (pitch != transform.GetComponent<Player>().pitch)
-                transform.GetComponent<Player>().CmdSetPitch(pitch);
-            transform.GetComponent<Player>().yaw = yaw;
-        }
+        transform.GetComponent<Player>().pitch = pitch;
+        if (pitch != transform.GetComponent<Player>().pitch)
+            transform.GetComponent<Player>().CmdSetPitch(pitch);
+        transform.GetComponent<Player>().yaw = yaw;
     }
     
     void OnCollisionStay()

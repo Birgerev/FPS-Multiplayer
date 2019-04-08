@@ -30,7 +30,6 @@ public class CharacterModel : MonoBehaviour
 
     public void DisableCamera()
     {
-        print("disable");
         mainCamera.SetActive(false);
     }
 
