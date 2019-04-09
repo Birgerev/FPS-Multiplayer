@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class WeaponModel : MonoBehaviour {
     
-    public GameObject barrel;
-
-    //public RuntimeAnimatorController armAnimatorController;
-
     public Animator animator;
-    public Animator handler;
-
-    public CharacterModel playerModel;
 
     private void Start()
     {
+        //Remove the "(Clone)" part of the name
         gameObject.name = gameObject.name.Replace("(Clone)", "");
     }
 
