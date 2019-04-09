@@ -10,7 +10,7 @@ public class ConnectionManager : MonoBehaviour {
     //public static bool singleplayer = false;
     public static string map = "mp_Test";
     public static string ip = "localhost";
-    public static int port = 4455;
+    public static int port = 630;
 
     private NetworkManager network;
 
@@ -25,7 +25,7 @@ public class ConnectionManager : MonoBehaviour {
 
     IEnumerator later()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
 
         network.networkAddress = ip;
         network.networkPort = port;
