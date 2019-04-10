@@ -101,23 +101,10 @@ public class RuntimeWeapon : MonoBehaviour {
         {
             if (bulletsLeft != 0)
             {
-                RpcVisual_HandPullHandle();  //TODO animations with hands
+                StartCoroutine(Reload());
             }
-            else RpcReload();
+            else StartCoroutine(Reload());
         }
-    }
-    
-    public void RpcVisual_HandPullHandle()
-    {
-        //TODO animations
-        //StartCoroutine(pull_handle());
-    }
-    
-    public void RpcReload()
-    {
-        //TODO animations
-        //model.playerModel.armAnimator.SetTrigger("reloading");
-        StartCoroutine(Reload());
     }
 
     IEnumerator Reload()
