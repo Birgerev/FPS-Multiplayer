@@ -129,6 +129,7 @@ public class Player : MonoBehaviour {
 
         //Runtime weapon instance
         weapon = transform.GetComponent<RuntimeWeapon>();
+        weapon.weapon = WeaponManager.instance.weapons[0];
     }
     
     public void CmdSetPitch(float pitch)
