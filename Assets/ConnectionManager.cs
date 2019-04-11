@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ConnectionManager : MonoBehaviour {
 
-    public static bool host = true;
+    public static bool host = false;
     //public static bool singleplayer = false;
     public static string map = "mp_Test";
     public static string ip = "localhost";
@@ -19,6 +19,8 @@ public class ConnectionManager : MonoBehaviour {
     private void Start()
     {
         network = GetComponent<NetworkManager>();
+
+        DontDestroyOnLoad(gameObject);
 
         Initialize();
     }

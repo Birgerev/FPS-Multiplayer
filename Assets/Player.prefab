@@ -86,6 +86,7 @@ MonoBehaviour:
   modelPrefab: {fileID: 1003826166453020, guid: 66590a0991676f04f934e39016a61f6f,
     type: 3}
   controller: {fileID: 875}
+  death: {fileID: 1428540705898108, guid: 05773da76fe5ee64584ab0c3d9169be9, type: 3}
   pitch: 0
   yaw: 0
 --- !u!114 &875

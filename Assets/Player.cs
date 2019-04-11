@@ -14,7 +14,9 @@ public class Player : MonoBehaviour {
     public CharacterModel model;
     public GameObject modelPrefab;
     public CharacterController controller;
-    
+
+    public GameObject death;
+
     public float pitch;
     public float yaw;
     
@@ -47,6 +49,10 @@ public class Player : MonoBehaviour {
         {
             health = 0;
             Debug.Log("Dead!");
+
+            GameObject boom =Instantiate(death);
+            boom.transform.position = transform.position;
+
             if (networkInstance.isServer)
                 Destroy(gameObject);
         }
