@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponArms : MonoBehaviour
+public class ItemArms : MonoBehaviour
 {
     public Animator anim;
 
-    public Weapon lastWeapon;
+    public Item lastItem;
     public Player player;
 
     public bool ready = false;
+
+    public Transform weaponSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -30,17 +32,17 @@ public class WeaponArms : MonoBehaviour
         if (anim == null)
             anim = GetComponent<Animator>();
 
-        if (player.weapon == null)
+        if (player.item == null)
             return;
 
         //If current weapon has been changed, update our weapon
-        if(lastWeapon != player.weapon.weapon)
+        if(lastItem != player.item.item)
         {
 
             print("h");
-            lastWeapon = player.weapon.weapon;
+            lastItem = player.item.item;
 
-            EquipModel(lastWeapon);
+            EquipModel(lastItem);
         }
 
         //ready or not
@@ -70,18 +72,23 @@ public class WeaponArms : MonoBehaviour
         anim.SetBool("ready", ready);
     }
 
-    private void EquipModel(Weapon weapon)
+    private void EquipModel(Item weapon)
     {
-        Transform weaponSlot = transform.Find("WeaponSlot");
-
         if (weaponSlot == null)
             Debug.LogError("Weapon Slot is null");
 
         if(weaponSlot.childCount > 0)
             Destroy(weaponSlot.GetChild(0));
 
-        GameObject obj = Instantiate(weapon.WeaponModel.gameObject);
+        GameObject obj = Instantiate(weapon.Model.gameObject);
 
         obj.transform.parent = weaponSlot;
+
+        obj.name = obj.name.Replace("(Clone)", "");
+
+        //Reset orientations, scale and position
+        obj.transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        obj.transform.localScale = Vector3.one;
     }
 }

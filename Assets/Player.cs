@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 
     public PlayerInstance networkInstance;
 
-    public RuntimeWeapon weapon;
+    public RuntimeItem item;
 
     public CharacterModel model;
     public GameObject modelPrefab;
@@ -102,6 +102,9 @@ public class Player : MonoBehaviour {
         removeForeingComponents();
 
         Spawn();
+
+        //Debug equip
+        ItemManager.instance.createInstance(gameObject, 0);
     }
 
     private void Update()
@@ -134,8 +137,8 @@ public class Player : MonoBehaviour {
                 model.spineRotator.pitch = pitch;
 
         //Runtime weapon instance
-        weapon = transform.GetComponent<RuntimeWeapon>();
-        weapon.weapon = WeaponManager.instance.weapons[0];
+        item = transform.GetComponent<RuntimeWeapon>();
+        item.item = ItemManager.instance.items[0];
     }
     
     public void CmdSetPitch(float pitch)

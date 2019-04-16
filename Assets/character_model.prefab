@@ -480,20 +480,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  lastWeapon:
+  lastItem:
     Name: Weapon name is null
-    WeaponModel: {fileID: 0}
-    fireMode: 0
-    clipSize: 0
-    startClipAmount: 0
+    Model: {fileID: 0}
+    runtimeScript: RuntimeItem
     id: -1
-    aimFoV: 30
-    handlePullSpeed: 0
-    handleReleaseSpeed: 0
-    reloadTime: 0
-    projectile: {fileID: 0}
+    weaponData:
+      fireMode: 0
+      clipSize: 0
+      startClipAmount: 0
+      aimFoV: 30
+      handlePullSpeed: 0
+      handleReleaseSpeed: 0
+      reloadTime: 0
+      projectile: {fileID: 0}
+    magazineData:
+      cartridges: 0
   player: {fileID: 0}
   ready: 0
+  weaponSlot: {fileID: 684737712917580384}
 --- !u!1 &1094304531738934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4573822669108246}
   - component: {fileID: 95565760193560500}
-  - component: {fileID: 114143610368430358}
   m_Layer: 0
   m_Name: AimController
   m_TagString: Untagged
@@ -1257,7 +1261,7 @@ Animator:
   m_GameObject: {fileID: 1277687611011710}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a630776104976a643bbdf48f804dde66, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1266,19 +1270,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114143610368430358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277687611011710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95eb8debcdbd933449bc3a4264977b43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 95565760193560500}
 --- !u!1 &1285831356861538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,7 +2288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4235188376057312
 Transform:
   m_ObjectHideFlags: 0
@@ -3552,7 +3543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4443721173093732
 Transform:
   m_ObjectHideFlags: 0
@@ -4140,9 +4131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46dfa274b96d77447be1de9284009a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1003826166453020}
-  healthText: {fileID: 114377067708884960}
-  healthFiller: {fileID: 1297687457817412}
 --- !u!1 &1877193327074500
 GameObject:
   m_ObjectHideFlags: 0
@@ -4543,6 +4531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95472133882081240}
+  player: {fileID: 0}
 --- !u!1 &8976161601446766809
 GameObject:
   m_ObjectHideFlags: 0

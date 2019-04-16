@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Weapon {
-
+public class Item
+{
     public string Name = "Weapon name is null";     // Example: "Ppsh-41"
 
-    public WeaponModel WeaponModel;                 // The Weapon Model Prefab
+    public GameObject Model;                 // The Item Model Prefab
 
+    public string runtimeScript = "RuntimeItem";
+    
+    public int id = -1;
+
+    [Header("Item Specific Data")]
+    public WeaponData weaponData;
+    public MagazineData magazineData;
+}
+
+[System.Serializable]
+public class WeaponData
+{
     public FireMode fireMode;                       // Weapons availible FireModes TODO multiple fire modes
 
     public int clipSize;                            // The amount of bullets in each Magazine
     public int startClipAmount;                     // How many Magazines does the player spawn with
-
-    public int id = -1;
-
+    
     public float aimFoV = 30;
 
     public float handlePullSpeed;                        // How long the pull handle animation will take
@@ -24,4 +34,10 @@ public class Weapon {
     public float reloadTime;                        // How long reloading of the weapon lasts
 
     public GameObject projectile;
+}
+
+[System.Serializable]
+public class MagazineData
+{
+    public int cartridges;
 }
