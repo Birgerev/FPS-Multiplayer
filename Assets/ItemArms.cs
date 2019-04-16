@@ -72,7 +72,7 @@ public class ItemArms : MonoBehaviour
         anim.SetBool("ready", ready);
     }
 
-    private void EquipModel(Item weapon)
+    private void EquipModel(Item item)
     {
         if (weaponSlot == null)
             Debug.LogError("Weapon Slot is null");
@@ -80,7 +80,7 @@ public class ItemArms : MonoBehaviour
         if(weaponSlot.childCount > 0)
             Destroy(weaponSlot.GetChild(0));
 
-        GameObject obj = Instantiate(weapon.Model.gameObject);
+        GameObject obj = Instantiate(item.Model.gameObject);
 
         obj.transform.parent = weaponSlot;
 
@@ -88,7 +88,10 @@ public class ItemArms : MonoBehaviour
 
         //Reset orientations, scale and position
         obj.transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        obj.transform.localRotation = Quaternion.identity;
         obj.transform.localScale = Vector3.one;
+
+        //Apply animator
+        GetComponent<Animator>().runtimeAnimatorController = item.firstPersonAnimator;
     }
 }

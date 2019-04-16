@@ -13,6 +13,11 @@ public class Item
     
     public int id = -1;
 
+
+    //Animators
+    public RuntimeAnimatorController firstPersonAnimator;
+    public RuntimeAnimatorController thirdPersonAnimator;
+
     [Header("Item Specific Data")]
     public WeaponData weaponData;
     public MagazineData magazineData;
