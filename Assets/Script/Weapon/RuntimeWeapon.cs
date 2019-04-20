@@ -3,69 +3,52 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
 
-public class RuntimeWeapon : MonoBehaviour {
+public class RuntimeWeapon : RuntimeItem {
 
-    public Weapon weapon;               // Stats for weapon
-
-    private bool _initialized = false;  // Is the Initialize() funtion called yet? if not, show errors
-
-    public bool aiming = false;
-    private bool mouse = false;
-    private bool mouseDown = false;
-    private bool mouseUp = false;
-
+    
     public bool reloading;
 
     public int bulletsLeft;
 
+    public bool isLoaded = true; //ie when there is a magazine in the gun
 
-    #region Local Initiation
-    public void Reset()
-    {
-        bulletsLeft = weapon.clipSize;
-    }
-
-    public void Initialize()
-    {
-        Reset();
-
-        if (weapon.id == -1)
-            Debug.LogError("Weapon id is -1 for "+weapon.Name);
-    }
-
-    #endregion
+    public WeaponModel model;
 
     private void Start()
     {
-        //Initialize();
+
     }
 
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         //Make sure the aimfov for camera is set to this guns specified value
         //TODO
-        CameraController.aimingFoV = weapon.aimFoV;
+        CameraController.aimingFoV = item.weaponData.aimFoV;
         //Check and update server input
-        input();
+
+
+        reloading = (GetComponent<Player>().model.armAnimator.GetBool("removeMagazine") ||
+            GetComponent<Player>().model.armAnimator.GetBool("insertMagazine"));
+
+
+        if (model == null)
+            model = GetComponent<Player>().model.armAnimator.GetComponentInChildren<WeaponModel>();
 
         if (mouseDown)
         {
             shoot();
-        }else if(weapon.fireMode == FireMode.Automatic)
+        }else if(item.weaponData.fireMode == FireMode.Automatic)
         {
             if (mouse)
                 shoot();
         }
-
-        //since these variables should only be set to true one frame at a time, we mark them as false
-        mouseDown = false;
-        mouseUp = false;
     }
 
     public void shoot()
     {
-        if (bulletsLeft > 0 && !reloading)
+        if (bulletsLeft > 0 && isLoaded && !reloading)
         {
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
@@ -75,80 +58,51 @@ public class RuntimeWeapon : MonoBehaviour {
         //TODO click noise
     }
 
-    public void input()
+    public override void Aim(bool aim)
     {
-        if (GetComponent<Player>().networkInstance == null)
-            return;
-
-        PlayerInstanceInput.InputData input = GetComponent<Player>().networkInstance.input;
-
-        if (input.aim)
-            Aim(true);
-        if (!input.aim)
-            Aim(false);
-        
-        mouse = input.shoot;
-
-        if (input.reload)
-        {
-            reload();
-        }
-    }
-    
-    public void reload()
-    {
-        if (!reloading)
-        {
-            if (bulletsLeft != 0)
-            {
-                StartCoroutine(Reload());
-            }
-            else StartCoroutine(Reload());
-        }
+        //prevent aiming while reloading
+        if(!reloading)
+            base.Aim(aim);
     }
 
-    IEnumerator Reload()
+    public override void reload()
     {
-        reloading = true;
-        yield return new WaitForSeconds(weapon.reloadTime);
-        bulletsLeft = weapon.clipSize;
-        reloading = false;
-    }
+        base.reload();
 
-    public void Aim(bool aim)
-    {
+        //Wont continiue if we're still reloading
         if (reloading)
             return;
 
-        //TODO remove AimController
-       // AimController.aiming = aim;
-        CameraController.aiming = aim;
-
-        this.aiming = aim;
-        if (aim)
+        if (isLoaded)//Remove Magazine
         {
+            GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().RemoveMagazine();
+            reloading = false;
+            isLoaded = false;
 
+            bulletsLeft = 0;
         }
         else
-        {
-
+        {            //Insert magazine
+            GetComponent<InventoryManager>().reloadMode = !GetComponent<InventoryManager>().reloadMode;
         }
+    }
+    public void insertMagazine(Item mag)        //Called by Inventory Manager when exiting reloading mode
+    {
+        bulletsLeft = mag.magazineData.cartridges;
+        isLoaded = true;
 
-        /*if (model != null)
-        {
-            model.playerModel.headTilt = aim;
-
-            if (aiming)
-                model.playerModel.armAim = true;
-        }*/
+        GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().InsertMagazine(mag);
     }
 
     public void Shoot()
     {
         print("shoot");
-        GameObject obj = Instantiate(weapon.projectile);//TODO projectile position
+        GameObject obj = Instantiate(item.weaponData.projectile);//TODO projectile position
         obj.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
         obj.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
+
+        model.Shoot();
+        
 /*
         if (model != null)
         {

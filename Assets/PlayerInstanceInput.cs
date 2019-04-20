@@ -24,6 +24,8 @@ public class PlayerInstanceInput : MonoBehaviour
         public bool aim;
         public bool shoot;
         public bool reload;
+
+        public int lastNumpad;
     }
 
     private float mouseSensitivityX = 4.0f;
@@ -58,7 +60,34 @@ public class PlayerInstanceInput : MonoBehaviour
 
         input.aim = Input.GetMouseButton(1);
         input.shoot = Input.GetMouseButton(0);
-        input.reload = Input.GetKey(KeyCode.R);
+        input.reload = Input.GetKeyDown(KeyCode.R);
+
+        KeyCode[] keyCodes = {
+         KeyCode.Alpha0,
+         KeyCode.Alpha1,
+         KeyCode.Alpha2,
+         KeyCode.Alpha3,
+         KeyCode.Alpha4,
+         KeyCode.Alpha5,
+         KeyCode.Alpha6,
+         KeyCode.Alpha7,
+         KeyCode.Alpha8,
+         KeyCode.Alpha9,
+     };
+
+        bool changedNumpad = false;
+        for (int i = 0; i < keyCodes.Length; i++)
+        {
+            if (Input.GetKeyUp(keyCodes[i]))
+            {
+                input.lastNumpad = i;
+                changedNumpad = true;
+            }
+        }
+        if (!changedNumpad)
+            input.lastNumpad = -1;
+
+
 
         if (showMouse == false)
         {

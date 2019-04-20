@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 
     public PlayerInstance networkInstance;
 
-    public RuntimeWeapon weapon;
+    public RuntimeItem item;
 
     public CharacterModel model;
     public GameObject modelPrefab;
@@ -121,10 +121,15 @@ public class Player : MonoBehaviour {
                     localPlayer = this;
 
         //Rotate the player along the yaw axis
-        if(networkInstance.isLocalPlayer)
-            transform.localEulerAngles = new Vector3(0, networkInstance.GetComponent<PlayerInstanceInput>().input.yaw, 0.0f);
-        else
-            transform.localEulerAngles = new Vector3(0, yaw, 0.0f);
+        if (networkInstance != null)
+            if (networkInstance.isLocalPlayer)
+            {
+                transform.localEulerAngles = new Vector3(0, networkInstance.GetComponent<PlayerInstanceInput>().input.yaw, 0.0f);
+            }
+            else
+            {
+                transform.localEulerAngles = new Vector3(0, yaw, 0.0f);
+            }
 
         //Animate spine / player model looks up or down
         if(model != null)   //Make sure we dont get a null pointer error
@@ -134,8 +139,7 @@ public class Player : MonoBehaviour {
                 model.spineRotator.pitch = pitch;
 
         //Runtime weapon instance
-        weapon = transform.GetComponent<RuntimeWeapon>();
-        weapon.weapon = WeaponManager.instance.weapons[0];
+        item = transform.GetComponent<RuntimeItem>();
     }
     
     public void CmdSetPitch(float pitch)

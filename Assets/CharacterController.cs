@@ -77,7 +77,7 @@ public class CharacterController : MonoBehaviour
         else
             speed = walkSpeed;
 
-        if(GetComponent<RuntimeWeapon>().aiming)
+        if(GetComponent<RuntimeItem>().aiming)
             sensitivityMultiplier = 0.5f;
         else
             sensitivityMultiplier = 1f;

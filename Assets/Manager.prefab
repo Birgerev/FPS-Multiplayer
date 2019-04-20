@@ -48,20 +48,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a009d4ad7d1858340a8ef94af8ca379d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - Name: Ppd-40
-    WeaponModel: {fileID: 114385620856298282, guid: 7fccc29fd4fca214080e107e1bc6c4ac,
-      type: 3}
-    fireMode: 0
-    clipSize: 71
-    startClipAmount: 1
-    id: -1
-    aimFoV: 30
-    handlePullSpeed: 0.0375
-    handleReleaseSpeed: 0.0375
-    reloadTime: 1.75
-    projectile: {fileID: 1687746713840202, guid: 8ccb5adf1e92418418b995b25303dec9,
-      type: 3}
+  items:
+  - Name: PPD-40
+    Model: {fileID: 1235166565920392, guid: 7fccc29fd4fca214080e107e1bc6c4ac, type: 3}
+    runtimeScript: RuntimeWeapon
+    id: 0
+    firstPersonAnimator: {fileID: 9100000, guid: d7546a4e77d1c8443a155f15e7dc1465,
+      type: 2}
+    thirdPersonAnimator: {fileID: 0}
+    weaponData:
+      fireMode: 0
+      clipSize: 71
+      startClipAmount: 2
+      aimFoV: 30
+      handlePullSpeed: 0
+      handleReleaseSpeed: 0
+      reloadTime: 2
+      projectile: {fileID: 1687746713840202, guid: 8ccb5adf1e92418418b995b25303dec9,
+        type: 3}
+    magazineData:
+      cartridges: 0
+  - Name: 7.62 x 25mm Tokarev Drum Magazine
+    Model: {fileID: 5205435559868112425, guid: 331e410af7c268a42966839bc1ad3c11, type: 3}
+    runtimeScript: RuntimeItem
+    id: 1
+    firstPersonAnimator: {fileID: 9100000, guid: 90b26aab684f5394387a698ad4373db6,
+      type: 2}
+    thirdPersonAnimator: {fileID: 0}
+    weaponData:
+      fireMode: 0
+      clipSize: 0
+      startClipAmount: 0
+      aimFoV: 30
+      handlePullSpeed: 0
+      handleReleaseSpeed: 0
+      reloadTime: 0
+      projectile: {fileID: 0}
+    magazineData:
+      cartridges: 71
 --- !u!114 &114564397694564514
 MonoBehaviour:
   m_ObjectHideFlags: 0
