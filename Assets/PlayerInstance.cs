@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class PlayerInstance : NetworkBehaviour
 {
+    public static PlayerInstance localInstance;
+
     public const int TickRate = 40;
 
     public GameObject playerPrefab;
+    public GameObject spawnMenuPrefab;
 
     public Player player;
 
@@ -16,6 +19,8 @@ public class PlayerInstance : NetworkBehaviour
 
     [SyncVar]
     public bool spawned = false;
+    [SyncVar]
+    public Vector3 spawnPosition;
 
     [SyncVar]
     public PlayerInstanceInput.InputData input;
@@ -27,6 +32,9 @@ public class PlayerInstance : NetworkBehaviour
         //Spawn on Game Start
 
         StartCoroutine(tick());
+
+        if (isLocalPlayer)
+            localInstance = this;
     }
 
     // Update is called once per frame
@@ -40,9 +48,9 @@ public class PlayerInstance : NetworkBehaviour
 
         if(isLocalPlayer)
         {
-            //TODO improve spawning
             if (player == null)
-                CmdSpawn();
+                if(FindObjectOfType<SpawnMenu>() == null)
+                    Instantiate(spawnMenuPrefab);
         }
 
         //Always syncing local values, so that local players get a smooth experience
@@ -96,8 +104,9 @@ public class PlayerInstance : NetworkBehaviour
 
     //Spawn
     [Command]
-    public void CmdSpawn()
+    public void CmdSpawn(Vector3 position)
     {
+        spawnPosition = position;
         spawned = true;
     }
     
@@ -109,6 +118,8 @@ public class PlayerInstance : NetworkBehaviour
         player = obj.GetComponent<Player>();
 
         player.networkInstance = this;
+
+        obj.transform.position = spawnPosition;
 
         print("client spawn done");
 
