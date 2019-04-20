@@ -21,6 +21,11 @@ public class ItemManager : MonoBehaviour
 
     public RuntimeItem createInstance(GameObject obj, int id)
     {
+        if (id < 0 || id > items.Count)
+            return null;
+
+        print("weapon: " + id);
+
         //Create and initialize a RuntimeWeapon
         RuntimeItem item;
 
@@ -33,7 +38,10 @@ public class ItemManager : MonoBehaviour
 
         item.item = items[id];
         print("item: "+ item.item.Name);
-        
+
+
+        print("item: " + item.gameObject.name);
+
         return item;
     }
 }

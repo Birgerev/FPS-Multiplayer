@@ -9,7 +9,11 @@ public class RuntimeWeapon : RuntimeItem {
     public bool reloading;
 
     public int bulletsLeft;
-    
+
+    public bool isLoaded = true; //ie when there is a magazine in the gun
+
+    public WeaponModel model;
+
     private void Start()
     {
 
@@ -24,6 +28,14 @@ public class RuntimeWeapon : RuntimeItem {
         CameraController.aimingFoV = item.weaponData.aimFoV;
         //Check and update server input
 
+
+        reloading = (GetComponent<Player>().model.armAnimator.GetBool("removeMagazine") ||
+            GetComponent<Player>().model.armAnimator.GetBool("insertMagazine"));
+
+
+        if (model == null)
+            model = GetComponent<Player>().model.armAnimator.GetComponentInChildren<WeaponModel>();
+
         if (mouseDown)
         {
             shoot();
@@ -36,7 +48,7 @@ public class RuntimeWeapon : RuntimeItem {
 
     public void shoot()
     {
-        if (bulletsLeft > 0 && !reloading)
+        if (bulletsLeft > 0 && isLoaded && !reloading)
         {
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
@@ -57,22 +69,29 @@ public class RuntimeWeapon : RuntimeItem {
     {
         base.reload();
 
-        if (!reloading)
+        //Wont continiue if we're still reloading
+        if (reloading)
+            return;
+
+        if (isLoaded)//Remove Magazine
         {
-            if (bulletsLeft != 0)
-            {
-                StartCoroutine(Reload());
-            }
-            else StartCoroutine(Reload());
+            GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().RemoveMagazine();
+            reloading = false;
+            isLoaded = false;
+
+            bulletsLeft = 0;
+        }
+        else
+        {            //Insert magazine
+            GetComponent<InventoryManager>().reloadMode = !GetComponent<InventoryManager>().reloadMode;
         }
     }
-
-    IEnumerator Reload()
+    public void insertMagazine(Item mag)        //Called by Inventory Manager when exiting reloading mode
     {
-        reloading = true;
-        yield return new WaitForSeconds(item.weaponData.reloadTime);
-        bulletsLeft = item.weaponData.clipSize;
-        reloading = false;
+        bulletsLeft = mag.magazineData.cartridges;
+        isLoaded = true;
+
+        GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().InsertMagazine(mag);
     }
 
     public void Shoot()
@@ -81,6 +100,9 @@ public class RuntimeWeapon : RuntimeItem {
         GameObject obj = Instantiate(item.weaponData.projectile);//TODO projectile position
         obj.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
         obj.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
+
+        model.Shoot();
+        
 /*
         if (model != null)
         {

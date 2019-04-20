@@ -69,10 +69,11 @@ MonoBehaviour:
     magazineData:
       cartridges: 0
   - Name: 7.62 x 25mm Tokarev Drum Magazine
-    Model: {fileID: 0}
+    Model: {fileID: 5205435559868112425, guid: 331e410af7c268a42966839bc1ad3c11, type: 3}
     runtimeScript: RuntimeItem
     id: 1
-    firstPersonAnimator: {fileID: 0}
+    firstPersonAnimator: {fileID: 9100000, guid: 90b26aab684f5394387a698ad4373db6,
+      type: 2}
     thirdPersonAnimator: {fileID: 0}
     weaponData:
       fireMode: 0

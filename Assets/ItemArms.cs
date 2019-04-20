@@ -12,6 +12,7 @@ public class ItemArms : MonoBehaviour
     public bool ready = false;
 
     public Transform weaponSlot;
+    public Transform magazineSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -74,11 +75,16 @@ public class ItemArms : MonoBehaviour
 
     private void EquipModel(Item item)
     {
-        if (weaponSlot == null)
-            Debug.LogError("Weapon Slot is null");
+        EquipMagazine(null);
 
         if(weaponSlot.childCount > 0)
-            Destroy(weaponSlot.GetChild(0));
+            Destroy(weaponSlot.GetChild(0).gameObject);
+
+        if (weaponSlot == null)
+        {
+            Debug.LogError("Weapon Slot is null");
+            return;
+        }
 
         GameObject obj = Instantiate(item.Model.gameObject);
 
@@ -92,6 +98,56 @@ public class ItemArms : MonoBehaviour
         obj.transform.localScale = Vector3.one;
 
         //Apply animator
-        GetComponent<Animator>().runtimeAnimatorController = item.firstPersonAnimator;
+        anim.runtimeAnimatorController = item.firstPersonAnimator;
+    }
+
+    private void EquipMagazine(Item magazine)
+    {
+        if (magazineSlot.childCount > 0)
+            Destroy(magazineSlot.GetChild(0).gameObject);
+
+        if (magazineSlot == null)
+        {
+            Debug.LogError("Magazine Slot is null");
+            return;
+        }
+
+        if (magazine == null)
+            return;
+
+        GameObject obj = Instantiate(magazine.Model.gameObject);
+
+        obj.transform.parent = magazineSlot;
+
+        obj.name = obj.name.Replace("(Clone)", "");
+
+        //Reset orientations, scale and position
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
+        obj.transform.localScale = Vector3.one;
+    }
+
+    public void RemoveMagazine()
+    {
+        anim.SetBool("removeMagazine", true);
+    }
+
+    public void RemoveMagazineComplete()
+    {
+        anim.SetBool("removeMagazine", false);
+        EquipMagazine(null);
+    }
+
+    public void InsertMagazine(Item magazine)
+    {
+        //Equip magazine
+        anim.SetBool("insertMagazine", true);
+
+        EquipMagazine(magazine);
+    }
+
+    public void InsertMagazineComplete()
+    {
+        anim.SetBool("insertMagazine", false);
     }
 }
