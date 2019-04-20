@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
     public int selected = 0;
 
     public bool reloadMode = false;
-
+    public int lastFrameNumpad = -1;
 
     public void Swap(int indexFrom, int indexTo)
     {
@@ -37,7 +37,10 @@ public class InventoryManager : MonoBehaviour
         if (player.networkInstance != null)
             if (player.networkInstance.input.lastNumpad <= items.Count)
                 if (player.networkInstance.input.lastNumpad-1 != selected)
-                    Select(player.networkInstance.input.lastNumpad-1);
+                    if(lastFrameNumpad != player.networkInstance.input.lastNumpad)
+                        Select(player.networkInstance.input.lastNumpad-1);
+
+        lastFrameNumpad = player.networkInstance.input.lastNumpad;
     }
 
     public void Select(int index)

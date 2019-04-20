@@ -7,9 +7,10 @@ public class RuntimeItem : MonoBehaviour
     public Item item;               // Stats for weapon
 
     public bool aiming = false;
-    public bool mouse = false;
-    public bool mouseDown = false;
-    public bool mouseUp = false;
+    protected bool mouse = false;
+    protected bool mouseDown = false;
+    protected bool mouseUp = false;
+    protected bool lastFrameReload = false;
 
 
     // Start is called before the first frame update
@@ -45,10 +46,12 @@ public class RuntimeItem : MonoBehaviour
 
         mouse = input.shoot;
 
-        if (input.reload)
+        if (input.reload && !lastFrameReload)
         {
             reload();
         }
+
+        lastFrameReload = input.reload;
     }
 
     public virtual void Aim(bool aim)

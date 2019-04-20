@@ -60,7 +60,7 @@ public class PlayerInstanceInput : MonoBehaviour
 
         input.aim = Input.GetMouseButton(1);
         input.shoot = Input.GetMouseButton(0);
-        input.reload = Input.GetKeyDown(KeyCode.R);
+        input.reload = Input.GetKey(KeyCode.R);
 
         KeyCode[] keyCodes = {
          KeyCode.Alpha0,
@@ -75,19 +75,19 @@ public class PlayerInstanceInput : MonoBehaviour
          KeyCode.Alpha9,
      };
 
-        bool changedNumpad = false;
+        bool numpadChanged = false;
+
         for (int i = 0; i < keyCodes.Length; i++)
         {
-            if (Input.GetKeyUp(keyCodes[i]))
+            if (Input.GetKey(keyCodes[i]))
             {
                 input.lastNumpad = i;
-                changedNumpad = true;
+                numpadChanged = true;
             }
         }
-        if (!changedNumpad)
+
+        if (!numpadChanged)
             input.lastNumpad = -1;
-
-
 
         if (showMouse == false)
         {

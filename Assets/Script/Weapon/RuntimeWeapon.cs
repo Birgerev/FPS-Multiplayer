@@ -10,7 +10,7 @@ public class RuntimeWeapon : RuntimeItem {
 
     public int bulletsLeft;
 
-    public bool isLoaded = true; //ie when there is a magazine in the gun
+    public bool isLoaded = false; //ie when there is a magazine in the gun
 
     public WeaponModel model;
 
