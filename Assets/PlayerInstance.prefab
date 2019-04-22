@@ -46,14 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 177, guid: 4888118ff44007f4395d84b50ad35bd9, type: 3}
+  spawnMenuPrefab: {fileID: 6932027835114176848, guid: 8ee30012966df8649bf4c4f6a9af4e41,
+    type: 3}
   player: {fileID: 0}
+  health: 0
   spawned: 0
   input:
     space: 0
     vertical: 0
     horizontal: 0
+    crouch: 0
+    sprint: 0
     pitch: 0
     yaw: 0
+    aim: 0
+    shoot: 0
+    reload: 0
+    lastNumpad: 0
 --- !u!114 &3301297260683799334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,8 +79,14 @@ MonoBehaviour:
     space: 0
     vertical: 0
     horizontal: 0
+    crouch: 0
+    sprint: 0
     pitch: 0
     yaw: 0
+    aim: 0
+    shoot: 0
+    reload: 0
+    lastNumpad: 0
 --- !u!114 &914004166959368486
 MonoBehaviour:
   m_ObjectHideFlags: 0
