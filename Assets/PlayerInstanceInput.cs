@@ -10,8 +10,8 @@ public class PlayerInstanceInput : MonoBehaviour
         //movement
         public bool space;
 
-        public float vertical;
-        public float horizontal;
+        public int vertical;
+        public int horizontal;
 
         public bool crouch;
         public bool sprint;
@@ -33,6 +33,9 @@ public class PlayerInstanceInput : MonoBehaviour
 
     public static float mouseSensitivity = 1;
 
+    private int framesSinceNumpad = 0;
+    private int framesSinceReload = 0;
+
     public InputData input = new InputData();
 
     //public InputData input;
@@ -52,17 +55,34 @@ public class PlayerInstanceInput : MonoBehaviour
 
         input.space = Input.GetKey(KeyCode.Space);
 
-        input.horizontal = Input.GetAxis("Horizontal");
-        input.vertical = Input.GetAxis("Vertical");
+        input.horizontal = 0;
+        input.vertical = 0;
+
+        if (Input.GetAxisRaw("Horizontal") > 0)
+            input.horizontal = 1;
+        if (Input.GetAxisRaw("Horizontal") < 0)
+            input.horizontal = -1;
+        if (Input.GetAxisRaw("Vertical") > 0)
+            input.vertical = 1;
+        if (Input.GetAxisRaw("Vertical") < 0)
+            input.vertical = -1;
 
         input.crouch = Input.GetKey(KeyCode.LeftControl);
         input.sprint = Input.GetKey(KeyCode.LeftShift);
 
         input.aim = Input.GetMouseButton(1);
         input.shoot = Input.GetMouseButton(0);
-        input.reload = Input.GetKey(KeyCode.R);
 
-        KeyCode[] keyCodes = {
+        if (Input.GetKey(KeyCode.R)) {
+            input.reload = true;
+            framesSinceReload = 0;
+        } else framesSinceReload++;
+ 
+        if(framesSinceReload >= 0.5f / Time.deltaTime) {
+            input.reload = false;
+        }
+
+         KeyCode[] keyCodes = {
          KeyCode.Alpha0,
          KeyCode.Alpha1,
          KeyCode.Alpha2,
@@ -83,10 +103,11 @@ public class PlayerInstanceInput : MonoBehaviour
             {
                 input.lastNumpad = i;
                 numpadChanged = true;
+                framesSinceNumpad = 0;
             }
         }
 
-        if (!numpadChanged)
+        if (!numpadChanged && framesSinceNumpad >= 1/Time.deltaTime)
             input.lastNumpad = -1;
 
         if (showMouse == false)
@@ -95,6 +116,7 @@ public class PlayerInstanceInput : MonoBehaviour
             input.pitch -= mouseSensitivity * (mouseSesitivityY * (Input.GetAxis("Mouse Y")));// + (Input.GetAxis("Look Y") * joystickMultiplier));
 
         }
+        framesSinceNumpad++;
     }
 
     public static bool showMouse = false;

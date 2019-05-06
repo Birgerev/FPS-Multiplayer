@@ -24,7 +24,9 @@ public class PlayerInstance : NetworkBehaviour
 
     [SyncVar]
     public PlayerInstanceInput.InputData input;
-
+    
+    //[SyncVar]
+    //public InventoryData inventoryData;
 
     // Start is called before the first frame update
     void Start()
@@ -125,7 +127,12 @@ public class PlayerInstance : NetworkBehaviour
 
         StartCoroutine(syncPositionLoop());
     }
-
+    
+    /*[Command]
+    public void CmdUpdateInventoryData(InventoryData data)
+    {
+        inventoryData = data;
+    }*/
 
     [Command]
     public void CmdSyncInput(PlayerInstanceInput.InputData inputData)

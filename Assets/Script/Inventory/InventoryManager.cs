@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    //0 = Magazine, 1 = Right, 2 = Left, 3> = Belt
     public List<Item> items = new List<Item>(4);
 
-    public int selected = 0;
+    private int lastFrameNumpad = -1;
 
     public bool reloadMode = false;
-    public int lastFrameNumpad = -1;
+    public int selected = 0;
 
     public void Swap(int indexFrom, int indexTo)
     {
+        //swap places in array
         Item fromItem = items[indexFrom];
         Item toItem = items[indexTo];
 
@@ -23,22 +23,28 @@ public class InventoryManager : MonoBehaviour
 
     public void Start()
     {
+        //Default debug items
         items[0] = ItemManager.instance.items[0];
         items[1] = ItemManager.instance.items[1];
         items[2] = ItemManager.instance.items[1];
 
+        //select slot 0
         Select(0);
+    }
+
+    private void SyncInventory()
+    {
+
     }
 
     private void Update()
     {
         Player player = GetComponent<Player>();
 
-        if (player.networkInstance != null)
-            if (player.networkInstance.input.lastNumpad <= items.Count)
-                if (player.networkInstance.input.lastNumpad-1 != selected)
-                    if(lastFrameNumpad != player.networkInstance.input.lastNumpad)
-                        Select(player.networkInstance.input.lastNumpad-1);
+        if (player.networkInstance != null) //If network instance isn't null
+            if (player.networkInstance.input.lastNumpad-1 != selected)  //If the new input isn't the same as what is selected
+                if(lastFrameNumpad != player.networkInstance.input.lastNumpad)  //Check wheter the press is new
+                    Select(player.networkInstance.input.lastNumpad-1);
 
         lastFrameNumpad = player.networkInstance.input.lastNumpad;
     }
