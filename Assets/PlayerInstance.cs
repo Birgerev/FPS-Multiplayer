@@ -84,16 +84,16 @@ public class PlayerInstance : NetworkBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
-            CmdSyncPosition();
+            CmdSyncPosition(player.transform.position);
         }
     }
 
     #region Net Functions
     //Sync Position
     [Command]
-    public void CmdSyncPosition()
+    public void CmdSyncPosition(Vector3 position)
     {
-        Vector3 position = player.transform.position;
+        //Vector3 position = player.transform.position;
 
         RpcSyncPosition(position);
     }
