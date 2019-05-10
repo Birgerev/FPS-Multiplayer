@@ -14,6 +14,9 @@ public class ItemArms : MonoBehaviour
     public Transform weaponSlot;
     public Transform magazineSlot;
 
+    public GameObject itemModel;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,11 +50,13 @@ public class ItemArms : MonoBehaviour
         }
 
         //ready or not
-        if (player.networkInstance.input.sprint)
-            ready = false;
-        if (player.networkInstance.input.aim || player.networkInstance.input.shoot)
-            ready = true;
-
+        if (player.networkInstance != null)
+        {
+            if (player.networkInstance.input.sprint)
+                ready = false;
+            if (player.networkInstance.input.aim || player.networkInstance.input.shoot)
+                ready = true;
+        }
 
         
         animate();
@@ -69,8 +74,11 @@ public class ItemArms : MonoBehaviour
 
     private void animate()
     {
-        anim.SetBool("aiming", player.networkInstance.input.aim);
-        anim.SetBool("ready", ready);
+        if (player.networkInstance != null)
+        {
+            anim.SetBool("aiming", player.networkInstance.input.aim);
+            anim.SetBool("ready", ready);
+        }
     }
 
     private void EquipModel(Item item)
@@ -96,6 +104,8 @@ public class ItemArms : MonoBehaviour
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.identity;
         obj.transform.localScale = Vector3.one;
+
+        itemModel = obj;
 
         //Apply animator
         anim.runtimeAnimatorController = item.firstPersonAnimator;

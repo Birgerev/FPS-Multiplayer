@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     public CharacterModel model;
     public GameObject modelPrefab;
     public CharacterController controller;
+    public CameraController cameraController;
 
     public GameObject death;
 
@@ -97,6 +98,8 @@ public class Player : MonoBehaviour {
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        cameraController = GetComponentInChildren<CameraController>();
+
         print("player spawned");
         ApplyModel();
         removeForeingComponents();

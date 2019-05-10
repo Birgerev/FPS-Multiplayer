@@ -41,10 +41,12 @@ public class InventoryManager : MonoBehaviour
     {
         Player player = GetComponent<Player>();
 
-        if (player.networkInstance != null) //If network instance isn't null
-            if (player.networkInstance.input.lastNumpad-1 != selected)  //If the new input isn't the same as what is selected
-                if(lastFrameNumpad != player.networkInstance.input.lastNumpad)  //Check wheter the press is new
-                    Select(player.networkInstance.input.lastNumpad-1);
+        if (player.networkInstance == null) //If network instance isn't null
+            return;
+
+        if (player.networkInstance.input.lastNumpad-1 != selected)  //If the new input isn't the same as what is selected
+            if(lastFrameNumpad != player.networkInstance.input.lastNumpad)  //Check wheter the press is new
+                Select(player.networkInstance.input.lastNumpad-1);
 
         lastFrameNumpad = player.networkInstance.input.lastNumpad;
     }

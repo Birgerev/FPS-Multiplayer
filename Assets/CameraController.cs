@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
     public static bool aiming = false;
 
     private Camera camera;
+    private CameraSpring cameraSpring;
     private float cameraZoomSpeed = 10f;
 
     public Animator animator;
@@ -19,7 +20,8 @@ public class CameraController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        camera = GetComponent<Camera>();
+        camera = GetComponentInChildren<Camera>();
+        cameraSpring = GetComponentInChildren<CameraSpring>();
         animator = GetComponent<Animator>();
 	}
 	
@@ -33,6 +35,7 @@ public class CameraController : MonoBehaviour {
             animator.SetBool("crouching", player.networkInstance.input.crouch);
         }
 
+        /*
         if (aiming)
         {
             if(camera.fieldOfView > aimingFoV)
@@ -46,6 +49,11 @@ public class CameraController : MonoBehaviour {
             {
                 camera.fieldOfView += cameraZoomSpeed;
             }
-        }
+        }*/
+    }
+
+    public void Recoil(Vector3 vel)
+    {
+        cameraSpring.velocity += vel*cameraSpring.velocityMultiplier;
     }
 }

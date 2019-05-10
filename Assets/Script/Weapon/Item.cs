@@ -32,6 +32,7 @@ public class WeaponData
     public int startClipAmount;                     // How many Magazines does the player spawn with
     
     public float aimFoV = 30;
+    public Vector3 cameraRecoil = Vector3.zero;     //How much the camera recoils upon firing
 
     public float handlePullSpeed;                        // How long the pull handle animation will take
     public float handleReleaseSpeed;                        // How long the release handle animation will take

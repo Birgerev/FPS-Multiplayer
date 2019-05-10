@@ -29,13 +29,9 @@ public class PlayerCamera : MonoBehaviour
 
     public void DestroyIfNotLocal()
     {
-        if (player.networkInstance == null)
+        if (player.networkInstance == null || !player.networkInstance.isLocalPlayer)
         {
-            Destroy(GetComponent<Camera>());
-            return;
-        }
-        if (!player.networkInstance.isLocalPlayer)
-        {
+            Destroy(GetComponent<UnityEngine.PostProcessing.PostProcessingBehaviour>());
             Destroy(GetComponent<Camera>());
             return;
         }

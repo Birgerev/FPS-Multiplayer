@@ -34,7 +34,7 @@ public class RuntimeWeapon : RuntimeItem {
 
 
         if (model == null)
-            model = GetComponent<Player>().model.armAnimator.GetComponentInChildren<WeaponModel>();
+            model = GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().itemModel.GetComponent<WeaponModel>();
 
         if (mouseDown)
         {
@@ -96,14 +96,16 @@ public class RuntimeWeapon : RuntimeItem {
 
     public void Shoot()
     {
-        print("shoot");
-        GameObject obj = Instantiate(item.weaponData.projectile);//TODO projectile position
-        obj.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
-        obj.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
+        GameObject projectile = Instantiate(item.weaponData.projectile);//TODO projectile position
+        projectile.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
+        projectile.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
 
+        model.cocked = isLoaded;
         model.Shoot();
-        
-/*
+
+        //Camera spring recoil
+        GetComponent<Player>().cameraController.Recoil(item.weaponData.cameraRecoil);
+        /*
         if (model != null)
         {
             model.playerModel.armAim = true;
