@@ -19,6 +19,7 @@ public class PlayerInstance : NetworkBehaviour
 
     [SyncVar]
     public bool spawned = false;
+    public bool client_spawned = false;
     [SyncVar]
     public Vector3 spawnPosition;
 
@@ -42,13 +43,21 @@ public class PlayerInstance : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(spawned && player == null)
+        if (player == null && client_spawned)
         {
-            print("if true");
-            Client_Spawn();
+            client_spawned = false;
+            if (isServer)
+                spawned = false;
         }
 
-        if(isLocalPlayer)
+        if (!client_spawned && spawned)
+        {
+            Client_Spawn();
+
+            client_spawned = true;
+        }
+
+        if (isLocalPlayer)
         {
             if (player == null)
                 if(FindObjectOfType<SpawnMenu>() == null)

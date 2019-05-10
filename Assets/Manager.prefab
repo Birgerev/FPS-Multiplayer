@@ -61,7 +61,7 @@ MonoBehaviour:
       clipSize: 71
       startClipAmount: 2
       aimFoV: 30
-      cameraRecoil: {x: 0, y: 0.02, z: -0.21}
+      cameraRecoil: {x: 0, y: 0.002, z: -0.08}
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 2

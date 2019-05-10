@@ -44,19 +44,15 @@ public class Player : MonoBehaviour {
     
     public void TakeDamage(float amount)
     {
-
         health -= amount;
-        if (health <= 0)
-        {
-            health = 0;
-            Debug.Log("Dead!");
+    }
 
-            GameObject boom =Instantiate(death);
-            boom.transform.position = transform.position;
-
-            if (networkInstance.isServer)
-                Destroy(gameObject);
-        }
+    public void Die()
+    {
+        GameObject boom = Instantiate(death);
+        boom.transform.position = transform.position;
+        
+        Destroy(gameObject);
     }
 
     public void Spawn()
@@ -86,12 +82,6 @@ public class Player : MonoBehaviour {
         obj.transform.localRotation = Quaternion.identity;
 
         model = obj.GetComponent<CharacterModel>();
-    }
-    
-    void OnChangeHealth(float health)
-    {
-        //if(!isServer)
-            this.health = health;
     }
 
     // At initialazation of component
@@ -143,6 +133,12 @@ public class Player : MonoBehaviour {
 
         //Runtime weapon instance
         item = transform.GetComponent<RuntimeItem>();
+
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
     
     public void CmdSetPitch(float pitch)
