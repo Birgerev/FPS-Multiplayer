@@ -24,6 +24,9 @@ public class PlayerInstance : NetworkBehaviour
     public Vector3 spawnPosition;
 
     [SyncVar]
+    public bool limitPitch = false;
+
+    [SyncVar]
     public PlayerInstanceInput.InputData input;
     
     //[SyncVar]

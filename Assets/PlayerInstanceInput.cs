@@ -115,6 +115,13 @@ public class PlayerInstanceInput : MonoBehaviour
             input.yaw += mouseSensitivity * (mouseSensitivityX * (Input.GetAxis("Mouse X")));// + (Input.GetAxis("Look X") * joystickMultiplier));
             input.pitch -= mouseSensitivity * (mouseSesitivityY * (Input.GetAxis("Mouse Y")));// + (Input.GetAxis("Look Y") * joystickMultiplier));
 
+            if (GetComponent<PlayerInstance>().limitPitch)
+            {
+                if (input.pitch > 75)
+                    input.pitch = 75;
+                if (input.pitch < -90)
+                    input.pitch = -90;
+            }
         }
         framesSinceNumpad++;
     }

@@ -9,7 +9,14 @@ public class PlayerCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        DestroyIfNotLocal();
+
+        GetComponent<Camera>().enabled = true;
+
+        if (player.networkInstance.isServer)
+        {
+            player.networkInstance.limitPitch = true;
+        }
     }
 
     // Update is called once per frame
@@ -19,11 +26,16 @@ public class PlayerCamera : MonoBehaviour
 
         if (player.networkInstance == null)
             return;
-
+        
+        float pitch = 0;
+    
         if (player.networkInstance.isLocalPlayer)
-            transform.localEulerAngles = new Vector3(player.networkInstance.GetComponent<PlayerInstanceInput>().input.pitch, 0, 0.0f);
+            pitch = player.networkInstance.GetComponent<PlayerInstanceInput>().input.pitch;
         else
-            transform.localEulerAngles = new Vector3(player.pitch, 0, 0.0f);
+            pitch = player.pitch;
+
+
+        transform.localEulerAngles = new Vector3(pitch, 0, 0);
     }
 
 

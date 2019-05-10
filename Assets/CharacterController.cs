@@ -136,7 +136,8 @@ public class CharacterController : MonoBehaviour
     
     void OnCollisionStay()
     {
-        grounded = true;
+        if(Physics.CheckBox(transform.Find("Ground Check").position, new Vector3(0.1f, 0.2f, 0.1f), Quaternion.identity, 11))
+            grounded = true;
     }
 
     float CalculateJumpVerticalSpeed()
