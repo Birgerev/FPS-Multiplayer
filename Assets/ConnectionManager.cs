@@ -18,6 +18,8 @@ public class ConnectionManager : MonoBehaviour {
     
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         network = GetComponent<NetworkManager>();
 
         connect();        
@@ -49,8 +51,6 @@ public class ConnectionManager : MonoBehaviour {
 
     public void Initialize()
     {
-        DontDestroyOnLoad(gameObject);
-
         if (host)
             network.ServerChangeScene(map);
     }
