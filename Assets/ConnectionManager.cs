@@ -21,20 +21,21 @@ public class ConnectionManager : NetworkBehaviour {
     {
         network = GetComponent<NetworkManager>();
 
-        Initialize();
-        
-        if (isServer)
-            synced_map = map;
-        else
-            map = synced_map;
-        
+        connect();
+
+        StartCoroutine(later());
         
     }
 
     IEnumerator later()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
+        Initialize();
+    }
+
+    private void connect()
+    {
         network.networkAddress = ip;
         network.networkPort = port;
 
@@ -57,9 +58,13 @@ public class ConnectionManager : NetworkBehaviour {
 
     public void Initialize()
     {
+        if (isServer)
+            synced_map = map;
+        else
+            map = synced_map;
+
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene(map, LoadSceneMode.Single);
 
-        StartCoroutine(later());
     }
 }
