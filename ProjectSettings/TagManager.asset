@@ -17,7 +17,7 @@ TagManager:
   - Weapon
   - BulletCasing
   - Player
-  - LocalWeapon
+  - FirstPerson
   - Projectile
   - Attachment
   - PlayerHitbox

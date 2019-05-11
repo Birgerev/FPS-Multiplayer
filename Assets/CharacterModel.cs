@@ -14,6 +14,8 @@ public class CharacterModel : MonoBehaviour
     public bool armAim = false;
     public bool headTilt = false;
 
+    public bool firstPerson = false;
+
     // Use this for initialization
     void Start()
     {

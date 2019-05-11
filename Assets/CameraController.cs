@@ -14,6 +14,9 @@ public class CameraController : MonoBehaviour {
     private CameraSpring cameraSpring;
     private float cameraZoomSpeed = 10f;
 
+    public Animator weaponCameraAnimator;
+    public Animator cameraAnimator;
+
     public Animator animator;
 
     public Player player;
@@ -30,10 +33,8 @@ public class CameraController : MonoBehaviour {
         if (player == null)
             player = GetComponentInParent<Player>();
 
-        if (player.networkInstance != null)
-        {
-            animator.SetBool("crouching", player.networkInstance.input.crouch);
-        }
+        animateCameraState();
+        animateWeaponCamera();
 
         /*
         if (aiming)
@@ -55,5 +56,32 @@ public class CameraController : MonoBehaviour {
     public void Recoil(Vector3 vel)
     {
         cameraSpring.velocity += vel*cameraSpring.velocityMultiplier;
+    }
+
+    private void animateCameraState()
+    {
+        if (player.networkInstance != null)
+        {
+            animator.SetBool("crouching", player.networkInstance.input.crouch);
+        }
+    }
+
+    private void animateWeaponCamera()
+    {
+        if (player.networkInstance != null)
+        {
+            weaponCameraAnimator.SetBool("walking", (player.networkInstance.input.vertical != 0 || player.networkInstance.input.horizontal != 0));
+            weaponCameraAnimator.SetBool("sprint", (player.controller.sprinting));
+            weaponCameraAnimator.SetBool("jump", (player.networkInstance.input.space));
+            weaponCameraAnimator.SetBool("crouching", (player.controller.crouching));
+            weaponCameraAnimator.SetBool("grounded", (player.controller.grounded));
+            weaponCameraAnimator.SetBool("aiming",
+                    (player.networkInstance.input.aim && player.item.item.weaponData.isLoaded
+                    && (player.item) is RuntimeWeapon));
+            weaponCameraAnimator.SetBool("shooting", 
+                    (player.networkInstance.input.shoot && player.item.item.weaponData.isLoaded
+                    && (player.item) is RuntimeWeapon));
+
+        }
     }
 }

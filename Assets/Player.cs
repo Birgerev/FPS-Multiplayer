@@ -95,7 +95,9 @@ public class Player : MonoBehaviour {
         removeForeingComponents();
 
         Spawn();
-        
+
+        if (networkInstance.isLocalPlayer)
+            model.firstPerson = true;
     }
 
     private void Update()
