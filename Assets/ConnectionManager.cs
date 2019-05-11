@@ -4,11 +4,10 @@ using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ConnectionManager : NetworkBehaviour {
+public class ConnectionManager : MonoBehaviour {
 
     public static bool host = true;
     //public static bool singleplayer = false
-    public string synced_map = "mp_Test";
     public static string map = "mp_Test";
     public static string ip = "localhost";
     public static int port = 630;
@@ -21,10 +20,9 @@ public class ConnectionManager : NetworkBehaviour {
     {
         network = GetComponent<NetworkManager>();
 
-        connect();
+        connect();        
 
         StartCoroutine(later());
-        
     }
 
     IEnumerator later()
@@ -49,22 +47,11 @@ public class ConnectionManager : NetworkBehaviour {
         }
     }
 
-    private void Update()
-    {
-        if (NetworkClient.active && !ClientScene.ready)
-        {
-        }
-    }
-
     public void Initialize()
     {
-        if (isServer)
-            synced_map = map;
-        else
-            map = synced_map;
-
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene(map, LoadSceneMode.Single);
 
+        if (host)
+            network.ServerChangeScene(map);
     }
 }
