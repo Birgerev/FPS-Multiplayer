@@ -151,9 +151,9 @@ public class ItemArms : MonoBehaviour
     public void InsertMagazine(Item magazine)
     {
         //Equip magazine
-        anim.SetBool("insertMagazine", true);
-
         EquipMagazine(magazine);
+
+        anim.SetBool("insertMagazine", true);
     }
 
     public void InsertMagazineComplete()

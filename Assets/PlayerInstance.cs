@@ -120,8 +120,31 @@ public class PlayerInstance : NetworkBehaviour
     [Command]
     public void CmdSpawn(Vector3 position)
     {
+        //return if spawnpoint wasn't succesfully verified
+        if (!verifySpawnpoint(position))
+            return;
+
         spawnPosition = position;
         spawned = true;
+    }
+
+    private bool verifySpawnpoint(Vector3 pos)
+    {
+        //Get all spawnpoints in scene
+        Spawnpoint[] spawnpoints = FindObjectsOfType<Spawnpoint>();
+
+        //Find the distance to the closest spawnpoint to the given position
+        int closestDistance = 10000;
+        foreach(Spawnpoint spawnpoint in spawnpoints)
+        {
+            int distance = (int)Vector3.Distance(pos, spawnpoint.transform.position);
+
+            if (distance < closestDistance)
+                closestDistance = distance;
+        }
+
+        //verified if distance is less than 10 meters
+        return (closestDistance < 10);
     }
     
     public void Client_Spawn()

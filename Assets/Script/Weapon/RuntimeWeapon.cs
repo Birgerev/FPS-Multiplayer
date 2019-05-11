@@ -6,17 +6,10 @@ using UnityEngine;
 public class RuntimeWeapon : RuntimeItem {
 
     
-    public bool reloading;
-
-    public int bulletsLeft;
-
-    public bool isLoaded = false; //ie when there is a magazine in the gun
-
     public WeaponModel model;
 
     private void Start()
     {
-
     }
 
 
@@ -29,7 +22,7 @@ public class RuntimeWeapon : RuntimeItem {
         //Check and update server input
 
 
-        reloading = (GetComponent<Player>().model.armAnimator.GetBool("removeMagazine") ||
+        item.weaponData.reloading = (GetComponent<Player>().model.armAnimator.GetBool("removeMagazine") ||
             GetComponent<Player>().model.armAnimator.GetBool("insertMagazine"));
 
 
@@ -48,12 +41,12 @@ public class RuntimeWeapon : RuntimeItem {
 
     public void shoot()
     {
-        if (bulletsLeft > 0 && isLoaded && !reloading)
+        if (item.weaponData.bulletsLeft > 0 && item.weaponData.isLoaded && !item.weaponData.reloading)
         {
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
             Shoot();
-            bulletsLeft--;
+            item.weaponData.bulletsLeft--;
         }
         //TODO click noise
     }
@@ -61,7 +54,7 @@ public class RuntimeWeapon : RuntimeItem {
     public override void Aim(bool aim)
     {
         //prevent aiming while reloading
-        if(!reloading)
+        if(!item.weaponData.reloading)
             base.Aim(aim);
     }
 
@@ -70,16 +63,16 @@ public class RuntimeWeapon : RuntimeItem {
         base.reload();
 
         //Wont continiue if we're still reloading
-        if (reloading)
+        if (item.weaponData.reloading)
             return;
 
-        if (isLoaded)//Remove Magazine
+        if (item.weaponData.isLoaded)//Remove Magazine
         {
             GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().RemoveMagazine();
-            reloading = false;
-            isLoaded = false;
+            item.weaponData.reloading = false;
+            item.weaponData.isLoaded = false;
 
-            bulletsLeft = 0;
+            item.weaponData.bulletsLeft = 0;
         }
         else
         {            //Insert magazine
@@ -88,8 +81,8 @@ public class RuntimeWeapon : RuntimeItem {
     }
     public void insertMagazine(Item mag)        //Called by Inventory Manager when exiting reloading mode
     {
-        bulletsLeft = mag.magazineData.cartridges;
-        isLoaded = true;
+        item.weaponData.bulletsLeft = mag.magazineData.cartridges;
+        item.weaponData.isLoaded = true;
 
         GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().InsertMagazine(mag);
     }
@@ -100,7 +93,7 @@ public class RuntimeWeapon : RuntimeItem {
         projectile.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
         projectile.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
 
-        model.cocked = isLoaded;
+        model.cocked = item.weaponData.isLoaded;
         model.Shoot();
 
         //Camera spring recoil

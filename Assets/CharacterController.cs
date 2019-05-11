@@ -112,7 +112,6 @@ public class CharacterController : MonoBehaviour
 
         GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
 
-
         //
         if (!grounded)
             targetVelocity *= airSpeed;

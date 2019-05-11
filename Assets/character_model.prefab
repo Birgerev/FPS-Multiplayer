@@ -445,7 +445,7 @@ Animator:
   m_GameObject: {fileID: 1086097052483484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d7546a4e77d1c8443a155f15e7dc1465, type: 2}
+  m_Controller: {fileID: 9100000, guid: 90b26aab684f5394387a698ad4373db6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -493,16 +493,21 @@ MonoBehaviour:
       clipSize: 0
       startClipAmount: 0
       aimFoV: 30
+      cameraRecoil: {x: 0, y: 0, z: 0}
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 0
       projectile: {fileID: 0}
+      reloading: 0
+      bulletsLeft: 0
+      isLoaded: 0
     magazineData:
       cartridges: 0
   player: {fileID: 0}
   ready: 0
   weaponSlot: {fileID: 684737712917580384}
   magazineSlot: {fileID: 6955958416110228973}
+  itemModel: {fileID: 0}
 --- !u!1 &1094304531738934
 GameObject:
   m_ObjectHideFlags: 0

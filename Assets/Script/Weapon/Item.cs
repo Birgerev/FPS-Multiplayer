@@ -21,6 +21,12 @@ public class Item
     [Header("Item Specific Data")]
     public WeaponData weaponData;
     public MagazineData magazineData;
+
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 [System.Serializable]
@@ -40,6 +46,10 @@ public class WeaponData
     public float reloadTime;                        // How long reloading of the weapon lasts
 
     public GameObject projectile;
+
+    public bool reloading;
+    public int bulletsLeft;
+    public bool isLoaded = false;                   //ie when there is a magazine in the gun
 }
 
 [System.Serializable]

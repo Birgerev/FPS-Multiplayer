@@ -53,19 +53,26 @@ public class InventoryManager : MonoBehaviour
 
     public void Select(int index)
     {
+        //return if new item index is outside our item list
         if (index < 0 || index > items.Count)
             return;
 
+        //Save previous weapon state to inventory
+        if(GetComponent<RuntimeItem>() != null)
+            items[selected] = GetComponent<RuntimeItem>().item;
+
+        //Reload if we're in reload mode
         if (reloadMode)
         {
             GetComponent<RuntimeWeapon>().insertMagazine(items[index]);
-            reloadMode = false;
+            reloadMode = false; //Disable reload mode
             return;
         }
 
-
+        //select new item
         selected = index;
         
-        ItemManager.instance.createInstance(gameObject, items[index].id);
+        //Create a RuntimeItem class
+        ItemManager.instance.createInstance(gameObject, items[index]);
     }
 }

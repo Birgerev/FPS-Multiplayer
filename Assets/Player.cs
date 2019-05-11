@@ -95,6 +95,7 @@ public class Player : MonoBehaviour {
         removeForeingComponents();
 
         Spawn();
+        
     }
 
     private void Update()
