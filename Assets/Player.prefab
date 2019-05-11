@@ -202,6 +202,9 @@ MonoBehaviour:
       handleReleaseSpeed: 0
       reloadTime: 0
       projectile: {fileID: 0}
+      reloading: 0
+      bulletsLeft: 0
+      isLoaded: 0
     magazineData:
       cartridges: 0
   - Name: Weapon name is null
@@ -220,6 +223,9 @@ MonoBehaviour:
       handleReleaseSpeed: 0
       reloadTime: 0
       projectile: {fileID: 0}
+      reloading: 0
+      bulletsLeft: 0
+      isLoaded: 0
     magazineData:
       cartridges: 0
   - Name: Weapon name is null
@@ -238,6 +244,9 @@ MonoBehaviour:
       handleReleaseSpeed: 0
       reloadTime: 0
       projectile: {fileID: 0}
+      reloading: 0
+      bulletsLeft: 0
+      isLoaded: 0
     magazineData:
       cartridges: 0
   - Name: Weapon name is null
@@ -256,6 +265,9 @@ MonoBehaviour:
       handleReleaseSpeed: 0
       reloadTime: 0
       projectile: {fileID: 0}
+      reloading: 0
+      bulletsLeft: 0
+      isLoaded: 0
     magazineData:
       cartridges: 0
   reloadMode: 0
@@ -1448,7 +1460,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Development Build v0.0.2
+  m_Text: Development Build v0.0.4
 --- !u!1 &8932385247597661080
 GameObject:
   m_ObjectHideFlags: 0
