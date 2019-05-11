@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Mp_Test.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/mp_Level.unity
+    path: Assets/Scenes/mp_level.unity
     guid: e378b7d0fa053b0449dbfcd20a25b9a7
   - enabled: 1
     path: Assets/Scenes/mp_bettermap1.unity
