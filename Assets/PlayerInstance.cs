@@ -36,6 +36,7 @@ public class PlayerInstance : NetworkBehaviour
     void Start()
     {
         //Spawn on Game Start
+        DontDestroyOnLoad(gameObject);
 
         StartCoroutine(tick());
 
