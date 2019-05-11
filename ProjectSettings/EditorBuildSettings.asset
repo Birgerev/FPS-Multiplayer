@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: 06fbfd06864f0fd41b8dce3e3ec39602
   - enabled: 1
-    path: Assets/Scenes/Mp_Test.unity
+    path: Assets/Scenes/mp_test.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/mp_Level.unity
+    path: Assets/Scenes/mp_level.unity
     guid: e378b7d0fa053b0449dbfcd20a25b9a7
   m_configObjects: {}

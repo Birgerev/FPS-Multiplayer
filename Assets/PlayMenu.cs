@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayMenu : MonoBehaviour {
 
     public InputField IpInput;
+    public InputField levelNameInput;
 
     // Use this for initialization
     void Start () {
@@ -23,6 +24,7 @@ public class PlayMenu : MonoBehaviour {
         print("host");
         ConnectionManager.host = true;
         ConnectionManager.ip = IpInput.text;
+        ConnectionManager.map = levelNameInput.text;
         SceneManager.LoadScene("Loading");
     }
 
