@@ -80,23 +80,23 @@ MonoBehaviour:
   motionBlur:
     m_Enabled: 1
     m_Settings:
-      shutterAngle: 270
+      shutterAngle: 122
       sampleCount: 10
       frameBlending: 0
   eyeAdaptation:
     m_Enabled: 1
     m_Settings:
-      lowPercent: 23.871778
-      highPercent: 46.858963
+      lowPercent: 43
+      highPercent: 85.496216
       minLuminance: -5.17
       maxLuminance: 5.22
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
       speedUp: 2
-      speedDown: 2
-      logMin: -16
-      logMax: 3
+      speedDown: 1
+      logMin: -5
+      logMax: 16
   bloom:
     m_Enabled: 1
     m_Settings:
@@ -125,8 +125,8 @@ MonoBehaviour:
         temperature: 0
         tint: 0
         hueShift: 0
-        saturation: 1
-        contrast: 1
+        saturation: 1.08
+        contrast: 0.86
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -309,7 +309,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.271
+      intensity: 0.12
   grain:
     m_Enabled: 0
     m_Settings:
@@ -323,7 +323,7 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.12
+      intensity: 0.05
       smoothness: 0.315
       roundness: 1
       mask: {fileID: 0}
