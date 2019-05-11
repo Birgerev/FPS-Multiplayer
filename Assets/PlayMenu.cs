@@ -21,7 +21,6 @@ public class PlayMenu : MonoBehaviour {
 
     public void Host()
     {
-        print("host");
         ConnectionManager.host = true;
         ConnectionManager.ip = IpInput.text;
         ConnectionManager.map = levelNameInput.text;
