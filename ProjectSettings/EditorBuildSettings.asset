@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mp_bettermap1.unity
     guid: 9beb333163c73d548bc954a497f3f61a
+  - enabled: 1
+    path: Assets/Scenes/mp_sarra.unity
+    guid: 54888e2178089364d8c809dbe522ab20
   m_configObjects: {}
