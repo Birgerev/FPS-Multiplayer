@@ -1,11 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
 public class Manager : MonoBehaviour {
 
+    public GameObject gamemode;
+
     private void Start()
     {
-        //DontDestroyOnLoad(gameObject);
+        Invoke("CreateGamemode", 4);
     }
+
+    public void CreateGamemode()
+    {
+        NetworkManager network = GetComponent<NetworkManager>();
+
+        GameObject obj = Instantiate(gamemode);
+
+        //ClientScene.RegisterPrefab();
+        NetworkServer.Spawn(obj);
+    }
+
 }

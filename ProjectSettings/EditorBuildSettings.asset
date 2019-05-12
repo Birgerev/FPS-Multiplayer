@@ -4,5 +4,32 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Startup.unity
+    guid: e72526a6a70f45f4f9e7f97166d9ef38
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: bb813b1292aaa7c4f9b9de5a421b8fcf
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 06fbfd06864f0fd41b8dce3e3ec39602
+  - enabled: 1
+    path: Assets/Scenes/mp_test.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/mp_sarra.unity
+    guid: 54888e2178089364d8c809dbe522ab20
+  - enabled: 1
+    path: Assets/Scenes/mp_level.unity
+    guid: e378b7d0fa053b0449dbfcd20a25b9a7
+  - enabled: 1
+    path: Assets/Scenes/Finland.unity
+    guid: 62f544a6feb50f843a3b907d3878d23a
+  - enabled: 1
+    path: Assets/Scenes/DarkCity.unity
+    guid: 9beb333163c73d548bc954a497f3f61a
+  - enabled: 1
+    path: Assets/Scenes/Testing Range.unity
+    guid: aff5c8b16c0c9a54b8bba350c7967ade
   m_configObjects: {}
