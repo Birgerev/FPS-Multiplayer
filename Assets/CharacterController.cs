@@ -33,7 +33,8 @@ public class CharacterController : MonoBehaviour
     public bool sprinting;
     public Vector3 velocityInput;
     public bool jumping;
-    
+    internal bool Isgrounded;
+
     public void Jump(bool value)
     {
         jumping = value;

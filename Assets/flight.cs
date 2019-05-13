@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class flight : MonoBehaviour {
-   public float speed = 90.0f;
+   public float speed = .0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +24,9 @@ public class flight : MonoBehaviour {
 
         speed -= transform.forward.y * Time.deltaTime * 50.0f;
 
-        if(speed < 90.0f)
+        if(speed < 0.0f)
         {
-            speed = 90.0f;
+            speed = 0.0f;
         }
 
         transform.Rotate(Input.GetAxis("Vertical"), 0.0f, Input.GetAxis("Horizontal"));
