@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using UnityEngine;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class CharacterController : MonoBehaviour
     public void Jump(bool value)
     {
         jumping = value;
+    }
+
+    internal void Move(Vector3 vector3)
+    {
+        throw new NotImplementedException();
     }
 
     public void Crouch(bool value)
