@@ -21,9 +21,9 @@ namespace net.bigdog.game.player
 
         }
 
-        public void hit(float damage)
+        public void hit(float damage, int damagerId)
         {
-            gameObject.GetComponentInParent<Player>().TakeDamage(damage * damageMultiplier);
+            gameObject.GetComponentInParent<Player>().TakeDamage(damage * damageMultiplier, damagerId);
         }
 
         void OnCollisionEnter(Collision col)

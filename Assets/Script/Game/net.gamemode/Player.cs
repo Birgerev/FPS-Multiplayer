@@ -5,16 +5,29 @@ using UnityEngine;
 
 namespace net.bigdog.game.gamemode
 {
+    [System.Serializable]
     public class Player
     {
-        public string name = "Mexico";
+        public int id = 0;
 
-        public List<int> players = new List<int>();
+        public Player()
+        {
 
+        }
 
         public Player(int id)
         {
-            this.name = name;
+            this.id = id;
+        }
+
+        public Player(net.bigdog.game.player.PlayerInstance player)
+        {
+            this.id = player.id;
+        }
+
+        public net.bigdog.game.player.PlayerInstance playerInstance()
+        {
+            return net.bigdog.game.player.PlayerInstance.byId(id);
         }
     }
 }

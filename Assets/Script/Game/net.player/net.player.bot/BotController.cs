@@ -5,7 +5,6 @@ using net.bigdog.game.player;
 
 namespace net.bigdog.game.player.bot
 {
-
     public class BotController : CharacterController
     {
 

@@ -31,6 +31,9 @@ namespace net.bigdog.game.player
         [SyncVar]
         public PlayerInstanceInput.InputData input;
 
+        [SyncVar]
+        public int id;
+
         //[SyncVar]
         //public InventoryData inventoryData;
 
@@ -44,6 +47,20 @@ namespace net.bigdog.game.player
 
             if (isLocalPlayer)
                 localInstance = this;
+
+            if(isServer)
+            {
+                id = (int)Random.Range(1, 999);
+
+                Invoke("joinEvent", 4);
+            }
+            
+        }
+
+        private void joinEvent()
+        {
+            gamemode.Gamemode.instance.Rpc_PlayerJoin(
+                new gamemode.Player(id));
         }
 
         // Update is called once per frame
@@ -101,6 +118,25 @@ namespace net.bigdog.game.player
                 yield return new WaitForSeconds(1);
                 CmdSyncPosition(player.transform.position);
             }
+        }
+
+        /// <summary>
+        /// Get a PlayerInstance class object by the id's shared globally
+        /// </summary>
+        public static PlayerInstance byId(int id)
+        {
+            PlayerInstance result = null;
+
+            foreach (PlayerInstance instance in FindObjectsOfType<PlayerInstance>())
+            {
+                if (instance.id == id)
+                    result = instance;
+            }
+
+            if (result == null)
+                Debug.Log("An unsuccesful 'PlayerInstance.byID()' search was carried out, failed id was '"+id+"'.");
+
+            return result;
         }
 
         #region Net Functions

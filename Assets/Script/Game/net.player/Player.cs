@@ -46,10 +46,31 @@ namespace net.bigdog.game.player
             }
         }
 
-
         public void TakeDamage(float amount)
         {
+            //Reduce player health
             health -= amount;
+        }
+
+        public void TakeDamage(float amount, int damagerId)
+        {
+            TakeDamage(amount);
+
+            //Call gameemode events if we are the server
+            if (networkInstance.isServer)
+            {
+                //Call Damage event
+                print("damage1");
+                gamemode.Gamemode.instance.Rpc_OnPlayerDamage(
+                    new gamemode.Player(networkInstance.id),
+                    new gamemode.Player(damagerId));
+
+                //If our new health is 0, we report a killed event
+                if(health <= 0)
+                    gamemode.Gamemode.instance.Rpc_OnPlayerKilled(
+                        new gamemode.Player(networkInstance.id),
+                        new gamemode.Player(damagerId));
+            }
         }
 
         public void Die()

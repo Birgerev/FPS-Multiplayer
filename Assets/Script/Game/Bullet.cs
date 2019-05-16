@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour{
     public string calibre;
     public float speed;
     public float gravityMultiplier;
-    public GameObject owner;
+    public int ownerId = 0;
     public float maxage = 8;
     public GameObject hitEffect;
 
@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour{
         Destroy(obj, 1);
         
         if (col.gameObject.GetComponent<Hitbox>() != null)
-            col.gameObject.GetComponent<Hitbox>().hit(damage);
+            col.gameObject.GetComponent<Hitbox>().hit(damage, ownerId);
 
 
         Destroy(gameObject);

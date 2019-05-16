@@ -95,6 +95,8 @@ public class RuntimeWeapon : RuntimeItem {
         projectile.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
         projectile.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
 
+        projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
+
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();
 
