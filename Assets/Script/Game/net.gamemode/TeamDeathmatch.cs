@@ -7,7 +7,7 @@ namespace net.bigdog.game.gamemode
 {
     public class TeamDeathmatch : TeamGame
     {
-        public int maxPoints = 100;
+        public int maxPoints = 25;
 
         [SyncVar]
         public int team1Points;
@@ -23,6 +23,15 @@ namespace net.bigdog.game.gamemode
                 team1Points = maxPoints;
                 team2Points = maxPoints;
             }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            //Check Win
+            if (team1Points <= 0 || team2Points <= 0 && isServer)
+                Rpc_End();
         }
 
         public override void OnPlayerKilled(Player victim, Player killer)

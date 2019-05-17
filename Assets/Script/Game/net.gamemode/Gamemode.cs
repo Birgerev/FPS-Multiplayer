@@ -11,6 +11,7 @@ namespace net.bigdog.game.gamemode
 
         public List<PlayerStats> stats = new List<PlayerStats>();
 
+        public string ResultsScreenScene;
 
         public virtual void Start()
         {
@@ -18,6 +19,10 @@ namespace net.bigdog.game.gamemode
 
             if (isServer)
                 Rpc_onStart();
+        }
+
+        public virtual void Update()
+        {
         }
 
         [ClientRpc]
@@ -61,7 +66,14 @@ namespace net.bigdog.game.gamemode
 
         public virtual void End()
         {
+            ConnectionManager.instance.LeaveServer();
 
+            EndScreen();
+        }
+
+        public virtual void EndScreen()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(ResultsScreenScene);
         }
 
         [ClientRpc]
