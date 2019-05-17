@@ -90,6 +90,8 @@ MonoBehaviour:
   controller: {fileID: 875}
   cameraController: {fileID: 0}
   death: {fileID: 1428540705898108, guid: 05773da76fe5ee64584ab0c3d9169be9, type: 3}
+  deadScreenPrefab: {fileID: 6985209127745704347, guid: ada7b0e44b646624f82cdc2b39e8f59c,
+    type: 3}
   pitch: 0
   yaw: 0
 --- !u!114 &875

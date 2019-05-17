@@ -54,7 +54,6 @@ namespace net.bigdog.game.player
 
                 Invoke("joinEvent", 4);
             }
-            
         }
 
         private void joinEvent()
@@ -80,18 +79,18 @@ namespace net.bigdog.game.player
                 client_spawned = true;
             }
 
-            if (isLocalPlayer)
-            {
-                if (player == null)
-                    if (FindObjectOfType<SpawnMenu>() == null)
-                        Instantiate(spawnMenuPrefab);
-            }
-
             //Always syncing local values, so that local players get a smooth experience
             /*if(isLocalPlayer && !isServer)
             {
                 input = GetComponent<PlayerInstanceInput>().input;
             }*/
+
+
+            if (isLocalPlayer)
+                if(player == null)
+                    if(FindObjectOfType<SpawnMenu>() == null)
+                        if(FindObjectOfType<DeathScreen>() == null)
+                            OpenSpawnMenu();
         }
 
         IEnumerator tick()
@@ -137,6 +136,13 @@ namespace net.bigdog.game.player
                 Debug.Log("An unsuccesful 'PlayerInstance.byID()' search was carried out, failed id was '"+id+"'.");
 
             return result;
+        }
+
+        public void OpenSpawnMenu()
+        {
+            if (player == null)
+                if (FindObjectOfType<SpawnMenu>() == null)
+                    Instantiate(spawnMenuPrefab);
         }
 
         #region Net Functions

@@ -22,6 +22,8 @@ namespace net.bigdog.game.player
 
         public GameObject death;
 
+        public GameObject deadScreenPrefab;
+
         public float pitch;
         public float yaw;
 
@@ -77,6 +79,12 @@ namespace net.bigdog.game.player
         {
             GameObject boom = Instantiate(death);
             boom.transform.position = transform.position;
+
+            if (networkInstance.isLocalPlayer)
+            {
+                GameObject deathScene = Instantiate(deadScreenPrefab);
+                death.transform.position = transform.position;
+            }
 
             Destroy(gameObject);
         }
