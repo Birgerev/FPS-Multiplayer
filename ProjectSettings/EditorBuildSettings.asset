@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Startup.unity
     guid: e72526a6a70f45f4f9e7f97166d9ef38
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/cl_menu.unity
     guid: bb813b1292aaa7c4f9b9de5a421b8fcf
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 06fbfd06864f0fd41b8dce3e3ec39602
+  - enabled: 1
+    path: Assets/Scenes/cl_resultsScreen.unity
+    guid: a3ec97583498e0d4682f7b0a00eeab57
   - enabled: 1
     path: Assets/Scenes/mp_test.unity
     guid: 99c9720ab356a0642a771bea13969a05
@@ -32,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing Range.unity
     guid: aff5c8b16c0c9a54b8bba350c7967ade
+  - enabled: 1
+    path: Assets/Scenes/mp_forestpassage.unity
+    guid: d869d00892a9e1d46a5b749fcd7a10f9
   m_configObjects: {}

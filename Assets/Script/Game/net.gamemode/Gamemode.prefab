@@ -78,12 +78,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: []
+  ResultsScreenScene: cl_resultsScreen
   team1:
     name: USA
     players: []
   team2:
     name: Germany
     players: []
-  maxPoints: 100
+  maxPoints: 25
   team1Points: 0
   team2Points: 0

@@ -15,9 +15,13 @@ public class ConnectionManager : MonoBehaviour {
     private NetworkManager network;
 
     public bool connected = false;
+
+    public static ConnectionManager instance;
     
     private void Start()
     {
+        instance = this;
+
         DontDestroyOnLoad(gameObject);
 
         network = GetComponent<NetworkManager>();
@@ -53,5 +57,17 @@ public class ConnectionManager : MonoBehaviour {
     {
         if (host)
             network.ServerChangeScene(map);
+    }
+
+    public void LeaveServer()
+    {
+        network.StopClient();
+    }
+
+    public void CloseServer()
+    {
+        network.StopHost();
+
+        Destroy(gameObject);
     }
 }
