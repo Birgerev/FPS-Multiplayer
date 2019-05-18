@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using net.bigdog.game.player;
 
 public class PlayerUI : MonoBehaviour {
-    /*
+    
     private Player player;
 
     // Use this for initialization
@@ -22,5 +23,5 @@ public class PlayerUI : MonoBehaviour {
         //Destroy UI so that we only show the local ui
         if (player.networkInstance == null || !player.networkInstance.isLocalPlayer)
             Destroy(gameObject);
-    }*/
+    }
 }
