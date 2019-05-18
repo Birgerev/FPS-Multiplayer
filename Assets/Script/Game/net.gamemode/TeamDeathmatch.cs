@@ -40,6 +40,8 @@ namespace net.bigdog.game.gamemode
 
             if (isServer)
             {
+                print("errorbug lol");
+
                 if (getPlayerTeam(victim) == team1)
                     team1Points--;
                 else
