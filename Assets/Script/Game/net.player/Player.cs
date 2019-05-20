@@ -83,7 +83,7 @@ namespace net.bigdog.game.player
             if (networkInstance.isLocalPlayer)
             {
                 GameObject deathScene = Instantiate(deadScreenPrefab);
-                death.transform.position = transform.position;
+                deathScene.transform.position = transform.position;
             }
 
             Destroy(gameObject);

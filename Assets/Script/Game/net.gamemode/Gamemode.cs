@@ -17,6 +17,8 @@ namespace net.bigdog.game.gamemode
         {
             instance = this;
 
+            DontDestroyOnLoad(gameObject);
+
             if (isServer)
                 Rpc_onStart();
         }

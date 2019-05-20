@@ -9,7 +9,7 @@ namespace net.bigdog.game.player
     {
         public static PlayerInstance localInstance;
 
-        public const int TickRate = 40;
+        public const int TickRate = 60;
 
         public GameObject playerPrefab;
         public GameObject spawnMenuPrefab;
@@ -28,7 +28,6 @@ namespace net.bigdog.game.player
         [SyncVar]
         public bool limitPitch = false;
 
-        [SyncVar]
         public PlayerInstanceInput.InputData input;
 
         [SyncVar]
@@ -95,15 +94,20 @@ namespace net.bigdog.game.player
 
         IEnumerator tick()
         {
-            if (!isLocalPlayer)
+            if (!(isLocalPlayer || isServer))
                 yield break;
 
             while (true)
             {
-                yield return new WaitForSeconds(0.05f);
-                PlayerInstanceInput inputData = GetComponent<PlayerInstanceInput>();
+                yield return new WaitForSeconds(1/TickRate);
 
-                CmdSyncInput(inputData.input);
+                if (isLocalPlayer)
+                { //Sync local input to server
+                    print("sync lol");
+                    PlayerInstanceInput inputData = GetComponent<PlayerInstanceInput>();
+
+                    CmdSyncInput(inputData.input);
+                }
             }
         }
 
@@ -114,7 +118,7 @@ namespace net.bigdog.game.player
 
             while (true)
             {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(4);
                 CmdSyncPosition(player.transform.position);
             }
         }
@@ -216,6 +220,14 @@ namespace net.bigdog.game.player
 
         [Command]
         public void CmdSyncInput(PlayerInstanceInput.InputData inputData)
+        {
+            input = inputData;
+
+            RpcSyncInput(inputData);
+        }
+
+        [ClientRpc]
+        public void RpcSyncInput(PlayerInstanceInput.InputData inputData)
         {
             input = inputData;
         }

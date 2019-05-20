@@ -14,12 +14,15 @@ public class Manager : MonoBehaviour {
 
     public void CreateGamemode()
     {
-        NetworkManager network = GetComponent<NetworkManager>();
+        if (ConnectionManager.host)
+        {
+            NetworkManager network = GetComponent<NetworkManager>();
 
-        GameObject obj = Instantiate(gamemode);
+            GameObject obj = Instantiate(gamemode);
 
-        //ClientScene.RegisterPrefab();
-        NetworkServer.Spawn(obj);
+            //ClientScene.RegisterPrefab();
+            NetworkServer.Spawn(obj);
+        }
     }
 
 }
