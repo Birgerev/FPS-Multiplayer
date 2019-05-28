@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: []
-  ResultsScreenScene: cl_resultsScreen
+  ResultsScreenScene: cl_resultsscreen
   team1:
     name: USA
     players: []
