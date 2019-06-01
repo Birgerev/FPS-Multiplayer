@@ -9,6 +9,8 @@ public class PlayMenu : MonoBehaviour {
     public InputField IpInput;
     public InputField levelNameInput;
 
+    public string loadingScene;
+
     // Use this for initialization
     void Start () {
 		
@@ -24,13 +26,13 @@ public class PlayMenu : MonoBehaviour {
         ConnectionManager.host = true;
         ConnectionManager.ip = IpInput.text;
         ConnectionManager.map = levelNameInput.text;
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(loadingScene);
     }
 
     public void Join()
     {
         ConnectionManager.host = false;
         ConnectionManager.ip = IpInput.text;
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(loadingScene);
     }
 }

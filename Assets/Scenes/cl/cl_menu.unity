@@ -427,7 +427,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.6145625, y: 1}
-  m_AnchoredPosition: {x: 0.4000244, y: 1.1000004}
+  m_AnchoredPosition: {x: 0.4000244, y: 1.0999985}
   m_SizeDelta: {x: 0.8000488, y: -10.900002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &216202036
@@ -693,7 +693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.81500006, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.4000244, y: 0.05249977}
+  m_AnchoredPosition: {x: 0.4000244, y: 0.052497864}
   m_SizeDelta: {x: -0.8000488, y: -0.31500244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &448391921
@@ -2068,6 +2068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IpInput: {fileID: 1284393634}
   levelNameInput: {fileID: 448391922}
+  loadingScene: cl_loadingmap
 --- !u!1 &1541803940
 GameObject:
   m_ObjectHideFlags: 0
