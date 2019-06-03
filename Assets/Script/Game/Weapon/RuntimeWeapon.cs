@@ -68,25 +68,31 @@ public class RuntimeWeapon : RuntimeItem {
         if (item.weaponData.reloading)
             return;
 
-        if (item.weaponData.isLoaded)//Remove Magazine
-        {
-            GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().RemoveMagazine();
-            item.weaponData.reloading = false;
-            item.weaponData.isLoaded = false;
+        Item newMag = (GetComponent<InventoryManager>().items[1]);
 
-            item.weaponData.bulletsLeft = 0;
-        }
-        else
-        {            //Insert magazine
-            GetComponent<InventoryManager>().reloadMode = !GetComponent<InventoryManager>().reloadMode;
+        GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().Reload(newMag);
+
+        item.weaponData.reloading = true;
+        item.weaponData.isLoaded = false;
+        item.weaponData.bulletsLeft = newMag.magazineData.cartridges;
+
+        StartCoroutine(waitForReload());
+    }
+
+    IEnumerator waitForReload()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().isReloadComplete())
+                reloadComplete();
         }
     }
-    public void insertMagazine(Item mag)        //Called by Inventory Manager when exiting reloading mode
-    {
-        item.weaponData.bulletsLeft = mag.magazineData.cartridges;
-        item.weaponData.isLoaded = true;
 
-        GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().InsertMagazine(mag);
+    public void reloadComplete()
+    {
+        item.weaponData.isLoaded = true;
+        item.weaponData.reloading = false;
     }
 
     public void Shoot()

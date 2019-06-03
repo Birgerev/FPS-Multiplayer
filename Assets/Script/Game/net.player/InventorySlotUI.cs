@@ -36,14 +36,14 @@ namespace net.bigdog.game.player.ui
             bool magazine;
             magazine = (player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges > 0);
 
-            bool reloadMode = player.GetComponent<InventoryManager>().reloadMode;
+            /*bool reloadMode = player.GetComponent<InventoryManager>().reloadMode;
 
             if (magazine && reloadMode)
             {
                 reloadable = true;
             }
 
-            anim.SetBool("reloadable", reloadable);
+            anim.SetBool("reloadable", reloadable);*/
         }
     }
 }

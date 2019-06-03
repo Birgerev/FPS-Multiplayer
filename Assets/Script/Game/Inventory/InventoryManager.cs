@@ -9,7 +9,6 @@ public class InventoryManager : MonoBehaviour
 
     private int lastFrameNumpad = -1;
 
-    public bool reloadMode = false;
     public int selected = 0;
 
     public void Swap(int indexFrom, int indexTo)
@@ -61,15 +60,7 @@ public class InventoryManager : MonoBehaviour
         //Save previous weapon state to inventory
         if(GetComponent<RuntimeItem>() != null)
             items[selected] = GetComponent<RuntimeItem>().item;
-
-        //Reload if we're in reload mode
-        if (reloadMode)
-        {
-            GetComponent<RuntimeWeapon>().insertMagazine(items[index]);
-            reloadMode = false; //Disable reload mode
-            return;
-        }
-
+        
         //select new item
         selected = index;
         
