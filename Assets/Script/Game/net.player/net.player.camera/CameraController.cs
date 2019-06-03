@@ -38,8 +38,9 @@ namespace net.bigdog.game.player.camera
             if (player == null)
                 player = GetComponentInParent<Player>();
 
-            animateCameraState();
+            animateCameraStance();
             animateWeaponCamera();
+            animateCamera();
 
             /*
             if (aiming)
@@ -63,7 +64,7 @@ namespace net.bigdog.game.player.camera
             cameraSpring.velocity += vel * cameraSpring.velocityMultiplier;
         }
 
-        private void animateCameraState()
+        private void animateCameraStance()
         {
             if (player.networkInstance != null)
             {
@@ -88,6 +89,19 @@ namespace net.bigdog.game.player.camera
                         && (player.item) is RuntimeWeapon));
 
             }
+        }
+
+        private void animateCamera()
+        {
+            /*
+            if (player.networkInstance != null)
+            {
+                cameraAnimator.SetBool("walking", (player.networkInstance.input.vertical != 0 || player.networkInstance.input.horizontal != 0));
+                cameraAnimator.SetBool("sprint", (player.controller.sprinting));
+                cameraAnimator.SetBool("jump", (player.networkInstance.input.space));
+                cameraAnimator.SetBool("crouching", (player.controller.crouching));
+                cameraAnimator.SetBool("grounded", (player.controller.grounded));
+            }*/
         }
     }
 }

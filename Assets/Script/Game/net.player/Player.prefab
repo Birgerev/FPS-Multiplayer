@@ -384,6 +384,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.5, z: 0.05200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5100222868834865180}
   - {fileID: 7861422508983993106}
   m_Father: {fileID: 499}
   m_RootOrder: 2
@@ -650,7 +651,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7861422508983993106}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &766465509621578565
 Camera:
@@ -947,7 +948,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7861422508983993106}
+  m_Father: {fileID: 5084341061856355149}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1424492824595629079
@@ -1870,10 +1871,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5100222868834865180}
   - {fileID: 6115809094968533202}
   m_Father: {fileID: 5084341061856355149}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1243445122487255377
 MonoBehaviour:
@@ -1889,8 +1889,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   accelerationValue: 0.05
-  frictionValue: 0.1
-  velocityMultiplier: 0.1
+  frictionValue: 0.4
+  velocityMultiplier: -0.4
+  maxVelocity: 0.01
 --- !u!1 &9086606373661583181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2723,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36b8b0c00b779d489c7c46dc5b935e4, type: 3}
+--- !u!224 &1854137592924821019 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3894697634287775635}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3127760807289348427 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2118019197183725272, guid: d36b8b0c00b779d489c7c46dc5b935e4,
@@ -2734,12 +2741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b352d63436c7c5f46bc6fc3bc13b666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1854137592924821019 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 3894697634287775635}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9091123214938750538
 PrefabInstance:
   m_ObjectHideFlags: 0

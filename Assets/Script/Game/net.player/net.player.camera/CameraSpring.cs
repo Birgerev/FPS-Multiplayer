@@ -11,6 +11,8 @@ public class CameraSpring : MonoBehaviour
 
     public float velocityMultiplier = 0.1f;
 
+    public float maxVelocity = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,10 @@ public class CameraSpring : MonoBehaviour
             Debug.LogError("Camera spring friction can't be greater than 1!");
             return;
         }
+
+        if (velocity.magnitude > maxVelocity)
+            velocity = velocity.normalized * maxVelocity;
+
 
         //Apply last frames calculated velocity to camera
         transform.localPosition += velocity;
