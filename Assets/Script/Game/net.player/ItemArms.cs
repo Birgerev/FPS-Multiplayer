@@ -67,6 +67,8 @@ namespace net.bigdog.game.player
 
         private void LateUpdate()
         {
+            if (player == null || !player.networkInstance.isLocalPlayer)
+                return;
             //Set arms to camera position, so that the arms pivot around the camera
             Transform camera = GetComponentInParent<Player>().transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform;
 

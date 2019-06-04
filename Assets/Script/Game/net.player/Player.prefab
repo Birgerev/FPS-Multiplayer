@@ -2183,7 +2183,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   accelerationValue: 0.05
   frictionValue: 0.4
-  velocityMultiplier: -0.4
+  velocityMultiplier: 0.4
   maxVelocity: 0.005
 --- !u!1 &9086606373661583181
 GameObject:
