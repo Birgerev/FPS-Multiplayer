@@ -107,7 +107,7 @@ public class RuntimeWeapon : RuntimeItem {
         model.Shoot();
 
         //Camera spring recoil
-        GetComponent<Player>().cameraController.Recoil(item.weaponData.cameraRecoil);
+        GetComponent<Player>().cameraController.Recoil(item.weaponData.visualRecoil, item.weaponData.maxVisualRecoil);
         /*
         if (model != null)
         {
