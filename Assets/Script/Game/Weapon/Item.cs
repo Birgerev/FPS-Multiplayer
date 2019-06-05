@@ -25,7 +25,14 @@ public class Item
 
     public object Clone()
     {
-        return this.MemberwiseClone();
+        object thisItem = this.MemberwiseClone();
+
+        //Clone each item specific data instance individually
+        //,as to avoid just referencing the old one
+        ((Item)thisItem).weaponData = (WeaponData)((Item)thisItem).weaponData.Clone();
+        ((Item)thisItem).magazineData = (MagazineData)((Item)thisItem).magazineData.Clone();
+
+        return thisItem;
     }
 }
 
@@ -38,7 +45,8 @@ public class WeaponData
     public int startClipAmount;                     // How many Magazines does the player spawn with
     
     public float aimFoV = 30;
-    public Vector3 cameraRecoil = Vector3.zero;     //How much the camera recoils upon firing
+    public Vector3 visualRecoil = Vector3.zero;     //How much the weapon recoils upon firing
+    public float maxVisualRecoil = 0.01f;     //How much the weapon recoils upon firing
 
     public float handlePullSpeed;                        // How long the pull handle animation will take
     public float handleReleaseSpeed;                        // How long the release handle animation will take
@@ -50,10 +58,21 @@ public class WeaponData
     public bool reloading;
     public int bulletsLeft;
     public bool isLoaded = false;                   //ie when there is a magazine in the gun
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
 
 [System.Serializable]
 public class MagazineData
 {
     public int cartridges;
+    public int cartridgeCapacity;
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }

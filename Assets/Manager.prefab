@@ -61,7 +61,8 @@ MonoBehaviour:
       clipSize: 71
       startClipAmount: 2
       aimFoV: 30
-      cameraRecoil: {x: 0, y: 0.002, z: -0.08}
+      visualRecoil: {x: 0, y: 0.05, z: 1}
+      maxVisualRecoil: 0.01
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 2
@@ -72,6 +73,7 @@ MonoBehaviour:
       isLoaded: 0
     magazineData:
       cartridges: 0
+      cartridgeCapacity: 0
   - Name: 7.62 x 25mm Tokarev Drum Magazine
     Model: {fileID: 5205435559868112425, guid: 331e410af7c268a42966839bc1ad3c11, type: 3}
     runtimeScript: RuntimeItem
@@ -84,7 +86,8 @@ MonoBehaviour:
       clipSize: 0
       startClipAmount: 0
       aimFoV: 30
-      cameraRecoil: {x: 0, y: 0, z: 0}
+      visualRecoil: {x: 0, y: 0, z: 0}
+      maxVisualRecoil: 0.01
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 0
@@ -94,6 +97,7 @@ MonoBehaviour:
       isLoaded: 0
     magazineData:
       cartridges: 71
+      cartridgeCapacity: 71
 --- !u!114 &114564397694564514
 MonoBehaviour:
   m_ObjectHideFlags: 0

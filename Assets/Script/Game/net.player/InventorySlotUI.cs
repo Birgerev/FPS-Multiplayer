@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using net.bigdog.game.ui;
+
 
 namespace net.bigdog.game.player.ui
 {
@@ -8,9 +10,14 @@ namespace net.bigdog.game.player.ui
         public int slotId = 0;
 
         public Text slotButtonText;
+        public GameObject magazineSection;
+        public ProgressBar magazineFullnessBar;
+
 
         private bool selected;
         private Animator anim;
+
+
 
         // Start is called before the first frame update
         void Start()
@@ -35,15 +42,20 @@ namespace net.bigdog.game.player.ui
 
             bool magazine;
             magazine = (player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges > 0);
+            magazineSection.SetActive(magazine);
+            magazineFullnessBar.value =
+(float)player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges /
+(float)player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridgeCapacity;
 
-            bool reloadMode = player.GetComponent<InventoryManager>().reloadMode;
+
+            /*bool reloadMode = player.GetComponent<InventoryManager>().reloadMode;
 
             if (magazine && reloadMode)
             {
                 reloadable = true;
             }
 
-            anim.SetBool("reloadable", reloadable);
+            anim.SetBool("reloadable", reloadable);*/
         }
     }
 }

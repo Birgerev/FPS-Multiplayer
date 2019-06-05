@@ -67,6 +67,8 @@ namespace net.bigdog.game.player
 
         private void LateUpdate()
         {
+            if (player == null || !player.networkInstance.isLocalPlayer)
+                return;
             //Set arms to camera position, so that the arms pivot around the camera
             Transform camera = GetComponentInParent<Player>().transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform;
 
@@ -140,28 +142,20 @@ namespace net.bigdog.game.player
             obj.transform.localScale = Vector3.one;
         }
 
-        public void RemoveMagazine()
+        public void Reload(Item magazine)
         {
-            anim.SetBool("removeMagazine", true);
-        }
-
-        public void RemoveMagazineComplete()
-        {
-            anim.SetBool("removeMagazine", false);
-            EquipMagazine(null);
-        }
-
-        public void InsertMagazine(Item magazine)
-        {
-            //Equip magazine
+            anim.SetBool("reload", true);
             EquipMagazine(magazine);
-
-            anim.SetBool("insertMagazine", true);
         }
 
-        public void InsertMagazineComplete()
+        public void ReloadComplete()
         {
-            anim.SetBool("insertMagazine", false);
+            anim.SetBool("reload", false);
+        }
+
+        public bool isReloadComplete()
+        {
+            return !anim.GetBool("reload");
         }
     }
 }

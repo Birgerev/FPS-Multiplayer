@@ -59,9 +59,10 @@ namespace net.bigdog.game.player.camera
             }*/
         }
 
-        public void Recoil(Vector3 vel)
+        public void Recoil(Vector3 vel, float maxRecoil)
         {
             cameraSpring.velocity += vel * cameraSpring.velocityMultiplier;
+            cameraSpring.maxVelocity = maxRecoil;
         }
 
         private void animateCameraStance()
