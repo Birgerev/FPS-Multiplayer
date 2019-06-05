@@ -68,14 +68,27 @@ public class RuntimeWeapon : RuntimeItem {
         if (item.weaponData.reloading)
             return;
 
-        Item newMag = (GetComponent<InventoryManager>().items[1]);
+        int slot = bestMagazineSlot();
 
+        if (slot == -1)
+            return;
+
+        Item newMag = (Item)GetComponent<InventoryManager>().items[slot];
+        
+        //replace new magazine with the old one in inventory
+        Item oldMag = (Item)newMag.Clone();
+        oldMag.magazineData.cartridges = item.weaponData.bulletsLeft;
+        GetComponent<InventoryManager>().items[slot] = oldMag;
+
+        //Reload animations
         GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().Reload(newMag);
 
+        //Apply new magazine stats
         item.weaponData.reloading = true;
         item.weaponData.isLoaded = false;
         item.weaponData.bulletsLeft = newMag.magazineData.cartridges;
 
+        //Wait untill reload animation is done to call 'reloadComplete()'
         StartCoroutine(waitForReload());
     }
 
@@ -93,6 +106,25 @@ public class RuntimeWeapon : RuntimeItem {
     {
         item.weaponData.isLoaded = true;
         item.weaponData.reloading = false;
+    }
+
+    private int bestMagazineSlot()
+    {
+        int bestSlot = -1;
+        int bestCartridgeCount = 0;
+
+        for(int slot = 0; slot < GetComponent<InventoryManager>().items.Count; slot++)
+        {
+            Item iteratedItem = GetComponent<InventoryManager>().items[slot];
+            if(iteratedItem.magazineData.cartridges > 0)
+                if(iteratedItem.magazineData.cartridges > bestCartridgeCount)
+                {
+                    bestSlot = slot;
+                    bestCartridgeCount = iteratedItem.magazineData.cartridges;
+                }
+        }
+
+        return bestSlot;
     }
 
     public void Shoot()

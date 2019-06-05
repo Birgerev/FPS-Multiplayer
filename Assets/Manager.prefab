@@ -73,6 +73,7 @@ MonoBehaviour:
       isLoaded: 0
     magazineData:
       cartridges: 0
+      cartridgeCapacity: 0
   - Name: 7.62 x 25mm Tokarev Drum Magazine
     Model: {fileID: 5205435559868112425, guid: 331e410af7c268a42966839bc1ad3c11, type: 3}
     runtimeScript: RuntimeItem
@@ -96,6 +97,7 @@ MonoBehaviour:
       isLoaded: 0
     magazineData:
       cartridges: 71
+      cartridgeCapacity: 71
 --- !u!114 &114564397694564514
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,9 +24,9 @@ public class InventoryManager : MonoBehaviour
     public void Start()
     {
         //Default debug items
-        items[0] = ItemManager.instance.items[0];
-        items[1] = ItemManager.instance.items[1];
-        items[2] = ItemManager.instance.items[1];
+        items[0] = (Item)ItemManager.instance.items[0].Clone();
+        items[1] = (Item)ItemManager.instance.items[1].Clone();
+        items[2] = (Item)ItemManager.instance.items[1].Clone();
 
         //select slot 0
         Select(0);
@@ -59,8 +59,10 @@ public class InventoryManager : MonoBehaviour
 
         //Save previous weapon state to inventory
         if(GetComponent<RuntimeItem>() != null)
-            items[selected] = GetComponent<RuntimeItem>().item;
-        
+            items[selected] = (Item)GetComponent<RuntimeItem>().item.Clone();
+
+        print("select " + index);
+
         //select new item
         selected = index;
         
