@@ -58,6 +58,11 @@ public class RuntimeWeapon : RuntimeItem {
         //prevent aiming while reloading
         if(!item.weaponData.reloading)
             base.Aim(aim);
+
+        //change camera FoV
+        CameraController.aiming = aim;
+        if (aim)
+            CameraController.aimingFoV = item.weaponData.aimFoV;
     }
 
     public override void reload()

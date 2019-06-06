@@ -60,7 +60,7 @@ MonoBehaviour:
       fireMode: 0
       clipSize: 71
       startClipAmount: 2
-      aimFoV: 30
+      aimFoV: 50
       visualRecoil: {x: 0, y: 0.05, z: 1}
       maxVisualRecoil: 0.01
       handlePullSpeed: 0

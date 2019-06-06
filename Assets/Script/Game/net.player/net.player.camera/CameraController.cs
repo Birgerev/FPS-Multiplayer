@@ -12,10 +12,11 @@ namespace net.bigdog.game.player.camera
 
         public static float aimingFoV = 45;
         public static bool aiming = false;
+        public float fovChangeSpeed = 0.7f;
 
-        private Camera camera;
+        public Camera camera;
+        public Camera weaponCamera;
         private CameraSpring cameraSpring;
-        private float cameraZoomSpeed = 10f;
 
         public Animator weaponCameraAnimator;
         public Animator cameraAnimator;
@@ -27,7 +28,6 @@ namespace net.bigdog.game.player.camera
         // Use this for initialization
         void Start()
         {
-            camera = GetComponentInChildren<Camera>();
             cameraSpring = GetComponentInChildren<CameraSpring>();
             animator = GetComponent<Animator>();
         }
@@ -41,22 +41,7 @@ namespace net.bigdog.game.player.camera
             animateCameraStance();
             animateWeaponCamera();
             animateCamera();
-
-            /*
-            if (aiming)
-            {
-                if(camera.fieldOfView > aimingFoV)
-                {
-                    camera.fieldOfView -= cameraZoomSpeed;
-                }
-            }
-            if (!aiming)
-            {
-                if (camera.fieldOfView < normalFoV)
-                {
-                    camera.fieldOfView += cameraZoomSpeed;
-                }
-            }*/
+            applyFoV();
         }
 
         public void Recoil(Vector3 vel, float maxRecoil)
@@ -103,6 +88,24 @@ namespace net.bigdog.game.player.camera
                 cameraAnimator.SetBool("crouching", (player.controller.crouching));
                 cameraAnimator.SetBool("grounded", (player.controller.grounded));
             }*/
+        }
+
+        private void applyFoV()
+        {
+            float resultFOV = normalFoV;
+            float currentFOV = camera.fieldOfView;
+
+            if (aiming)
+            {
+                resultFOV = aimingFoV;
+            }
+
+            //Smooth
+            resultFOV = Mathf.Lerp(currentFOV, resultFOV, Time.deltaTime * fovChangeSpeed);
+
+            //Apply FOV 
+            camera.fieldOfView = resultFOV;
+            weaponCamera.fieldOfView = resultFOV;
         }
     }
 }
