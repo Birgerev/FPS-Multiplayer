@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7120315088f6c4c927d9b1486f3ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fovChangeSpeed: 0.7
+  fovChangeSpeed: 7
   camera: {fileID: 1424492824595629079}
   weaponCamera: {fileID: 766465509621578565}
   weaponCameraAnimator: {fileID: 2072423245835594883}
