@@ -75,6 +75,17 @@ public class InputMaster : IInputActionCollection
                     ""bindings"": []
                 },
                 {
+                    ""name"": ""ToggleCrouch"",
+                    ""id"": ""234eb412-e3de-46bb-b781-5a91fd5dbf64"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
+                },
+                {
                     ""name"": ""Sprint"",
                     ""id"": ""06fa61d0-16b0-4906-9b6b-d468d0b01e1b"",
                     ""expectedControlLayout"": """",
@@ -97,8 +108,19 @@ public class InputMaster : IInputActionCollection
                     ""bindings"": []
                 },
                 {
-                    ""name"": ""SwapWeapon"",
+                    ""name"": ""SwapWeaponPositive"",
                     ""id"": ""50f3cf38-0125-4346-b2ba-046b6d53e065"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
+                },
+                {
+                    ""name"": ""SwapWeaponNegative"",
+                    ""id"": ""9751a6cb-05ce-4792-9c0a-a938508d02f7"",
                     ""expectedControlLayout"": """",
                     ""continuous"": false,
                     ""passThrough"": false,
@@ -291,18 +313,6 @@ public class InputMaster : IInputActionCollection
                 },
                 {
                     ""name"": """",
-                    ""id"": ""79fc70b9-a799-4341-b725-bea14d8c7f3c"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false,
-                    ""modifiers"": """"
-                },
-                {
-                    ""name"": """",
                     ""id"": ""37ca0fb0-928e-4078-a8cc-dc10d4ac698f"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -340,7 +350,7 @@ public class InputMaster : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""1dd6ac8d-44fc-4c07-a308-48265b639c17"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -374,39 +384,39 @@ public class InputMaster : IInputActionCollection
                     ""modifiers"": """"
                 },
                 {
-                    ""name"": ""ShoulderButtons"",
-                    ""id"": ""e4706669-2fd3-41fd-ac2e-ee641420ce19"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""66b09c67-e10d-4bf4-9afd-76bd639a2490"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapon"",
-                    ""isComposite"": true,
+                    ""processors"": ""Invert"",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ToggleCrouch"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false,
                     ""modifiers"": """"
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""b6ae5c36-0e9b-41a6-afc8-accc68ddba30"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""SwapWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true,
-                    ""modifiers"": """"
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""ee5fe695-e7e3-42af-bf8a-2173e6d53fe8"",
+                    ""name"": """",
+                    ""id"": ""cb15a3dc-8012-4281-ad0a-3efd177446d1"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""SwapWeapon"",
+                    ""action"": ""SwapWeaponPositive"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec11b346-acc3-4854-9b55-9f89aa35011c"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""SwapWeaponNegative"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
                     ""modifiers"": """"
                 }
             ]
@@ -451,9 +461,11 @@ public class InputMaster : IInputActionCollection
         m_Soldier_Movement = m_Soldier.GetAction("Movement");
         m_Soldier_Jump = m_Soldier.GetAction("Jump");
         m_Soldier_Crouch = m_Soldier.GetAction("Crouch");
+        m_Soldier_ToggleCrouch = m_Soldier.GetAction("ToggleCrouch");
         m_Soldier_Sprint = m_Soldier.GetAction("Sprint");
         m_Soldier_Reload = m_Soldier.GetAction("Reload");
-        m_Soldier_SwapWeapon = m_Soldier.GetAction("SwapWeapon");
+        m_Soldier_SwapWeaponPositive = m_Soldier.GetAction("SwapWeaponPositive");
+        m_Soldier_SwapWeaponNegative = m_Soldier.GetAction("SwapWeaponNegative");
     }
 
     ~InputMaster()
@@ -511,9 +523,11 @@ public class InputMaster : IInputActionCollection
     private InputAction m_Soldier_Movement;
     private InputAction m_Soldier_Jump;
     private InputAction m_Soldier_Crouch;
+    private InputAction m_Soldier_ToggleCrouch;
     private InputAction m_Soldier_Sprint;
     private InputAction m_Soldier_Reload;
-    private InputAction m_Soldier_SwapWeapon;
+    private InputAction m_Soldier_SwapWeaponPositive;
+    private InputAction m_Soldier_SwapWeaponNegative;
     public struct SoldierActions
     {
         private InputMaster m_Wrapper;
@@ -523,9 +537,11 @@ public class InputMaster : IInputActionCollection
         public InputAction @Movement { get { return m_Wrapper.m_Soldier_Movement; } }
         public InputAction @Jump { get { return m_Wrapper.m_Soldier_Jump; } }
         public InputAction @Crouch { get { return m_Wrapper.m_Soldier_Crouch; } }
+        public InputAction @ToggleCrouch { get { return m_Wrapper.m_Soldier_ToggleCrouch; } }
         public InputAction @Sprint { get { return m_Wrapper.m_Soldier_Sprint; } }
         public InputAction @Reload { get { return m_Wrapper.m_Soldier_Reload; } }
-        public InputAction @SwapWeapon { get { return m_Wrapper.m_Soldier_SwapWeapon; } }
+        public InputAction @SwapWeaponPositive { get { return m_Wrapper.m_Soldier_SwapWeaponPositive; } }
+        public InputAction @SwapWeaponNegative { get { return m_Wrapper.m_Soldier_SwapWeaponNegative; } }
         public InputActionMap Get() { return m_Wrapper.m_Soldier; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -551,15 +567,21 @@ public class InputMaster : IInputActionCollection
                 Crouch.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnCrouch;
                 Crouch.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnCrouch;
                 Crouch.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnCrouch;
+                ToggleCrouch.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnToggleCrouch;
+                ToggleCrouch.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnToggleCrouch;
+                ToggleCrouch.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnToggleCrouch;
                 Sprint.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSprint;
                 Sprint.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSprint;
                 Sprint.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSprint;
                 Reload.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnReload;
                 Reload.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnReload;
                 Reload.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnReload;
-                SwapWeapon.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeapon;
-                SwapWeapon.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeapon;
-                SwapWeapon.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeapon;
+                SwapWeaponPositive.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponPositive;
+                SwapWeaponPositive.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponPositive;
+                SwapWeaponPositive.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponPositive;
+                SwapWeaponNegative.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
+                SwapWeaponNegative.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
+                SwapWeaponNegative.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
             }
             m_Wrapper.m_SoldierActionsCallbackInterface = instance;
             if (instance != null)
@@ -579,15 +601,21 @@ public class InputMaster : IInputActionCollection
                 Crouch.started += instance.OnCrouch;
                 Crouch.performed += instance.OnCrouch;
                 Crouch.canceled += instance.OnCrouch;
+                ToggleCrouch.started += instance.OnToggleCrouch;
+                ToggleCrouch.performed += instance.OnToggleCrouch;
+                ToggleCrouch.canceled += instance.OnToggleCrouch;
                 Sprint.started += instance.OnSprint;
                 Sprint.performed += instance.OnSprint;
                 Sprint.canceled += instance.OnSprint;
                 Reload.started += instance.OnReload;
                 Reload.performed += instance.OnReload;
                 Reload.canceled += instance.OnReload;
-                SwapWeapon.started += instance.OnSwapWeapon;
-                SwapWeapon.performed += instance.OnSwapWeapon;
-                SwapWeapon.canceled += instance.OnSwapWeapon;
+                SwapWeaponPositive.started += instance.OnSwapWeaponPositive;
+                SwapWeaponPositive.performed += instance.OnSwapWeaponPositive;
+                SwapWeaponPositive.canceled += instance.OnSwapWeaponPositive;
+                SwapWeaponNegative.started += instance.OnSwapWeaponNegative;
+                SwapWeaponNegative.performed += instance.OnSwapWeaponNegative;
+                SwapWeaponNegative.canceled += instance.OnSwapWeaponNegative;
             }
         }
     }
@@ -623,8 +651,10 @@ public class InputMaster : IInputActionCollection
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnToggleCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnSwapWeapon(InputAction.CallbackContext context);
+        void OnSwapWeaponPositive(InputAction.CallbackContext context);
+        void OnSwapWeaponNegative(InputAction.CallbackContext context);
     }
 }

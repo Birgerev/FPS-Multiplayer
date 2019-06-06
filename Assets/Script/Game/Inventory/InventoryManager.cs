@@ -5,7 +5,9 @@ using net.bigdog.game.player;
 
 public class InventoryManager : MonoBehaviour
 {
-    public List<Item> items = new List<Item>(4);
+    public const int inventorySize = 4;
+
+    public List<Item> items = new List<Item>(inventorySize);
 
     private int lastFrameNumpad = -1;
 

@@ -30,8 +30,8 @@ namespace net.bigdog.game.player.camera
             }
 
 
-            float movementX = Input.GetAxis("Mouse X") * amountX;
-            float movementY = Input.GetAxis("Mouse Y") * amountY;
+            float movementX = (Input.GetAxis("Right Stick X")*0.01f)+Input.GetAxis("Mouse X") * amountX;
+            float movementY = (Input.GetAxis("Right Stick Y")*0.01f) + Input.GetAxis("Mouse Y") * amountY;
 
             Vector3 totalChange = transform.localPosition - initialPosition;
 

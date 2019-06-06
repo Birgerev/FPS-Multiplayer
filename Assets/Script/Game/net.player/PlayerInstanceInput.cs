@@ -33,10 +33,12 @@ namespace net.bigdog.game.player
         
         public InputMaster inputMaster;
 
-        private float mouseSensitivityX = 4.0f;
-        private float mouseSesitivityY = 4.0f;
+        private float mouseSensitivityX = 8.0f;
+        private float mouseSensitivityY = 8.0f;
+        public static float controllerSensitivity = 8;
 
-        public static float mouseSensitivity = 1;
+
+        public static float sensitivity = 1;
 
         private int framesSinceNumpad = 0;
         private int framesSinceReload = 0;
@@ -67,10 +69,26 @@ namespace net.bigdog.game.player
             inputMaster.Soldier.Jump.canceled += handleJump;
             inputMaster.Soldier.Jump.Enable();
 
+            inputMaster.Soldier.Crouch.performed += handleCrouch;
+            inputMaster.Soldier.Crouch.canceled += handleCrouch;
+            inputMaster.Soldier.Crouch.Enable();
 
-            inputMaster.Soldier.Movement.performed += handleMovement;
-            inputMaster.Soldier.Movement.canceled += handleMovement;
-            inputMaster.Soldier.Movement.Enable();
+            inputMaster.Soldier.ToggleCrouch.performed += handleToggleCrouch;
+            inputMaster.Soldier.ToggleCrouch.Enable();
+
+
+            inputMaster.Soldier.Sprint.performed += handleSprint;
+            inputMaster.Soldier.Sprint.canceled += handleSprint;
+            inputMaster.Soldier.Sprint.Enable();
+            
+            inputMaster.Soldier.SwapWeaponPositive.performed += handleSwapWeaponPositive;
+            inputMaster.Soldier.SwapWeaponPositive.Enable();
+
+            inputMaster.Soldier.SwapWeaponNegative.performed += handleSwapWeaponNegative;
+            inputMaster.Soldier.SwapWeaponNegative.Enable();
+
+            inputMaster.Soldier.Reload.performed += handleReload;
+            inputMaster.Soldier.Reload.Enable();
         }
 
         // Update is called once per frame
@@ -81,16 +99,10 @@ namespace net.bigdog.game.player
 
             CursorSettings();
 
-            input.crouch = Input.GetKey(KeyCode.LeftControl);
-            input.sprint = Input.GetKey(KeyCode.LeftShift);
-            //input.shoot = Input.GetMouseButton(0);
+            handleMouse();
+            handleMovement();
 
-            if (Input.GetKey(KeyCode.R))
-            {
-                input.reload = true;
-                framesSinceReload = 0;
-            }
-            else framesSinceReload++;
+            framesSinceReload++;
 
             if (framesSinceReload >= 0.5f / Time.deltaTime)
             {
@@ -124,20 +136,7 @@ namespace net.bigdog.game.player
 
             if (!numpadChanged && framesSinceNumpad >= 1 / Time.deltaTime)
                 input.lastNumpad = -1;
-
-            if (showMouse == false)
-            {
-                input.yaw += mouseSensitivity * (mouseSensitivityX * (Input.GetAxis("Mouse X")));// + (Input.GetAxis("Look X") * joystickMultiplier));
-                input.pitch -= mouseSensitivity * (mouseSesitivityY * (Input.GetAxis("Mouse Y")));// + (Input.GetAxis("Look Y") * joystickMultiplier));
-
-                if (GetComponent<PlayerInstance>().limitPitch)
-                {
-                    if (input.pitch > 75)
-                        input.pitch = 75;
-                    if (input.pitch < -90)
-                        input.pitch = -90;
-                }
-            }
+            
             framesSinceNumpad++;
         }
 
@@ -168,9 +167,19 @@ namespace net.bigdog.game.player
             input.space = context.performed;
         }
 
-        public void handleMovement(InputAction.CallbackContext context)
+        public void handleCrouch(InputAction.CallbackContext context)
         {
-            Vector2 vel = context.ReadValue<Vector2>();
+            input.crouch = context.performed;
+        }
+
+        public void handleToggleCrouch(InputAction.CallbackContext context)
+        {
+            input.crouch = !input.crouch;
+        }
+
+        public void handleMovement()
+        {
+            Vector2 vel = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             
             input.horizontal = 0;
             input.vertical = 0;
@@ -185,7 +194,58 @@ namespace net.bigdog.game.player
             if (vel.y < 0)
                 input.vertical = -1;
         }
-        
+
+        public void handleMouse()
+        {
+            if (showMouse == false)
+            {
+                input.yaw += (sensitivity * (Input.GetAxis("Mouse X"))) + 
+                    ((Input.GetAxis("Right Stick X")) * controllerSensitivity);// + (Input.GetAxis("Look X") * joystickMultiplier));
+                input.pitch -= (sensitivity * (Input.GetAxis("Mouse Y"))) +
+                    ((Input.GetAxis("Right Stick Y")) * controllerSensitivity);// + (Input.GetAxis("Look Y") * joystickMultiplier));
+
+                if (GetComponent<PlayerInstance>().limitPitch)
+                {
+                    if (input.pitch > 75)
+                        input.pitch = 75;
+                    if (input.pitch < -90)
+                        input.pitch = -90;
+                }
+            }
+        }
+
+        public void handleSprint(InputAction.CallbackContext context)
+        {
+            input.sprint = context.performed;
+        }
+
+        public void handleReload(InputAction.CallbackContext context)
+        {
+            input.reload = true;
+            framesSinceReload = 0;
+        }
+
+        public void handleSwapWeaponPositive(InputAction.CallbackContext context)
+        {
+            input.lastNumpad += 1;
+            if (input.lastNumpad > InventoryManager.inventorySize)
+                input.lastNumpad = 1;
+            if (input.lastNumpad <= 0)
+                input.lastNumpad = InventoryManager.inventorySize;
+            
+            framesSinceNumpad = 0;
+        }
+
+        public void handleSwapWeaponNegative(InputAction.CallbackContext context)
+        {
+            input.lastNumpad -= 1;
+            if (input.lastNumpad > InventoryManager.inventorySize)
+                input.lastNumpad = 1;
+            if (input.lastNumpad <= 0)
+                input.lastNumpad = InventoryManager.inventorySize;
+            
+            framesSinceNumpad = 0;
+        }
 
 
 
