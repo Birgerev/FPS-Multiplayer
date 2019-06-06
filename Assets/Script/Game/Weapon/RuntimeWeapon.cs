@@ -22,12 +22,7 @@ public class RuntimeWeapon : RuntimeItem {
         //TODO
         CameraController.aimingFoV = item.weaponData.aimFoV;
         //Check and update server input
-
-
-        item.weaponData.reloading = (GetComponent<Player>().model.armAnimator.GetBool("removeMagazine") ||
-            GetComponent<Player>().model.armAnimator.GetBool("insertMagazine"));
-
-
+        
         if (model == null)
             model = GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().itemModel.GetComponent<WeaponModel>();
 

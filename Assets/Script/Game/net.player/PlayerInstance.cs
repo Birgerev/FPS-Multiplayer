@@ -103,7 +103,6 @@ namespace net.bigdog.game.player
 
                 if (isLocalPlayer)
                 { //Sync local input to server
-                    print("sync lol");
                     PlayerInstanceInput inputData = GetComponent<PlayerInstanceInput>();
 
                     CmdSyncInput(inputData.input);

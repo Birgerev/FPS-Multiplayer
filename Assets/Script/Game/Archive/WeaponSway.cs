@@ -35,8 +35,6 @@ namespace net.bigdog.game.player.camera
 
             Vector3 totalChange = transform.localPosition - initialPosition;
 
-            print("totalChange: " + totalChange.x + ", " + totalChange.y + " movement: " + movementX + ", " + movementY);
-
             if ((totalChange.x >= maxAmountX && movementX < 0)
                 || (totalChange.x <= -maxAmountX && movementX > 0))
                 movementX = 0;
