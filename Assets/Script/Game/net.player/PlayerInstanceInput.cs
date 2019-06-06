@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 namespace net.bigdog.game.player
@@ -29,6 +30,8 @@ namespace net.bigdog.game.player
 
             public int lastNumpad;
         }
+        
+        public InputMaster inputMaster;
 
         private float mouseSensitivityX = 4.0f;
         private float mouseSesitivityY = 4.0f;
@@ -44,7 +47,30 @@ namespace net.bigdog.game.player
         // Start is called before the first frame update
         void Start()
         {
+            if (!GetComponent<PlayerInstance>().isLocalPlayer)
+                Destroy(this);
 
+            inputMaster = new InputMaster();
+            inputMaster.Enable();
+
+
+            inputMaster.Soldier.Shoot.performed += handleShoot;
+            inputMaster.Soldier.Shoot.canceled += handleShoot;
+            inputMaster.Soldier.Shoot.Enable();
+
+            inputMaster.Soldier.Aim.performed += handleAim;
+            inputMaster.Soldier.Aim.canceled += handleAim;
+            inputMaster.Soldier.Aim.Enable();
+
+
+            inputMaster.Soldier.Jump.performed += handleJump;
+            inputMaster.Soldier.Jump.canceled += handleJump;
+            inputMaster.Soldier.Jump.Enable();
+
+
+            inputMaster.Soldier.Movement.performed += handleMovement;
+            inputMaster.Soldier.Movement.canceled += handleMovement;
+            inputMaster.Soldier.Movement.Enable();
         }
 
         // Update is called once per frame
@@ -55,25 +81,9 @@ namespace net.bigdog.game.player
 
             CursorSettings();
 
-            input.space = Input.GetKey(KeyCode.Space);
-
-            input.horizontal = 0;
-            input.vertical = 0;
-
-            if (Input.GetAxisRaw("Horizontal") > 0)
-                input.horizontal = 1;
-            if (Input.GetAxisRaw("Horizontal") < 0)
-                input.horizontal = -1;
-            if (Input.GetAxisRaw("Vertical") > 0)
-                input.vertical = 1;
-            if (Input.GetAxisRaw("Vertical") < 0)
-                input.vertical = -1;
-
             input.crouch = Input.GetKey(KeyCode.LeftControl);
             input.sprint = Input.GetKey(KeyCode.LeftShift);
-
-            input.aim = Input.GetMouseButton(1);
-            input.shoot = Input.GetMouseButton(0);
+            //input.shoot = Input.GetMouseButton(0);
 
             if (Input.GetKey(KeyCode.R))
             {
@@ -142,5 +152,42 @@ namespace net.bigdog.game.player
             if (Input.GetKeyDown(KeyCode.Escape))
                 showMouse = true;
         }
+
+        public void handleShoot(InputAction.CallbackContext context)
+        {
+            input.shoot = context.performed;
+        }
+
+        public void handleAim(InputAction.CallbackContext context)
+        {
+            input.aim = context.performed;
+        }
+
+        public void handleJump(InputAction.CallbackContext context)
+        {
+            input.space = context.performed;
+        }
+
+        public void handleMovement(InputAction.CallbackContext context)
+        {
+            Vector2 vel = context.ReadValue<Vector2>();
+            
+            input.horizontal = 0;
+            input.vertical = 0;
+
+            if (vel.x > 0)
+                input.horizontal = 1;
+            if (vel.x < 0)
+                input.horizontal = -1;
+
+            if (vel.y > 0)
+                input.vertical = 1;
+            if (vel.y < 0)
+                input.vertical = -1;
+        }
+        
+
+
+
     }
 }
