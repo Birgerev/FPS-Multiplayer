@@ -2,24 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSway : MonoBehaviour {
+namespace net.bigdog.game.player.camera
+{
+    public class WeaponSway : MonoBehaviour {
 
-    public float amount;
-    public float smoothAmount;
+        public float amountX;
+        public float amountY;
+        public float maxAmountX;
+        public float maxAmountY;
 
-    private Vector3 initialPosition;
+        private Vector3 initialPosition;
+        private CameraController cameraController;
 
-	// Use this for initialization
-	void Start () {
-        initialPosition = transform.localPosition;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        float movementX = Input.GetAxis("Mouse X") * amount;
-        float movementY = Input.GetAxis("Mouse Y") * amount;
+        // Use this for initialization
+        void Start() {
+            cameraController = GetComponentInParent<CameraController>();
 
-        Vector3 finalPosition = new Vector3(movementY, 0, movementX);
-        transform.localPosition = Vector3.Lerp(transform.localPosition, finalPosition + initialPosition, Time.deltaTime * smoothAmount);
+            initialPosition = transform.localPosition;
+        }
+
+        // Update is called once per frame
+        void Update() {
+            if (cameraController.player.networkInstance.input.aim)
+            {
+                transform.localPosition = initialPosition;
+                return;
+            }
+
+
+            float movementX = Input.GetAxis("Mouse X") * amountX;
+            float movementY = Input.GetAxis("Mouse Y") * amountY;
+
+            Vector3 totalChange = transform.localPosition - initialPosition;
+
+            print("totalChange: " + totalChange.x + ", " + totalChange.y + " movement: " + movementX + ", " + movementY);
+
+            if ((totalChange.x >= maxAmountX && movementX < 0)
+                || (totalChange.x <= -maxAmountX && movementX > 0))
+                movementX = 0;
+            if ((totalChange.y >= maxAmountY && movementY < 0)
+                || (totalChange.y <= -maxAmountY && movementY > 0))
+                movementY = 0;
+
+            transform.localPosition = transform.localPosition - new Vector3(movementX, movementY);
+        }
     }
 }

@@ -409,7 +409,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4361985464745350}
   - component: {fileID: 95689289518117338}
-  - component: {fileID: 114428684283425800}
   - component: {fileID: 8334495940820204077}
   m_Layer: 0
   m_Name: Arms
@@ -455,20 +454,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114428684283425800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086097052483484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 906268eec493bd64babc47d32d95b3d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: -2
-  smoothAmount: 8
 --- !u!114 &8334495940820204077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +490,7 @@ MonoBehaviour:
       isLoaded: 0
     magazineData:
       cartridges: 0
+      cartridgeCapacity: 0
   player: {fileID: 0}
   ready: 0
   weaponSlot: {fileID: 684737712917580384}
