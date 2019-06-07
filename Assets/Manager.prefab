@@ -63,6 +63,7 @@ MonoBehaviour:
       aimFoV: 50
       visualRecoil: {x: 0, y: 0.05, z: 1}
       maxVisualRecoil: 0.01
+      maxCameraRecoil: {x: 1, y: 2}
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 2
@@ -88,6 +89,7 @@ MonoBehaviour:
       aimFoV: 30
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
+      maxCameraRecoil: {x: 0, y: 0}
       handlePullSpeed: 0
       handleReleaseSpeed: 0
       reloadTime: 0

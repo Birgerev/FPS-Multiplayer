@@ -140,8 +140,15 @@ public class RuntimeWeapon : RuntimeItem {
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();
 
-        //Camera spring recoil
+        //Weapon camera spring recoil
         GetComponent<Player>().cameraController.Recoil(item.weaponData.visualRecoil, item.weaponData.maxVisualRecoil);
+
+        //Camera Recoil
+        if (GetComponent<Player>().networkInstance.isLocalPlayer) {
+            GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.yaw += Random.Range(-item.weaponData.maxCameraRecoil.x, item.weaponData.maxCameraRecoil.x);
+            GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.pitch -= Random.Range(item.weaponData.maxCameraRecoil.y / 4, item.weaponData.maxCameraRecoil.y);
+            print("yup: "+ GetComponent<Player>().networkInstance.input.yaw + " "+ GetComponent<Player>().networkInstance.input.pitch);
+        }
         /*
         if (model != null)
         {

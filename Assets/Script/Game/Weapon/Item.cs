@@ -47,6 +47,8 @@ public class WeaponData
     public float aimFoV = 30;
     public Vector3 visualRecoil = Vector3.zero;     //How much the weapon recoils upon firing
     public float maxVisualRecoil = 0.01f;     //How much the weapon recoils upon firing
+    
+    public Vector2 maxCameraRecoil = Vector2.zero;     //How much the camera recoils upon firing
 
     public float handlePullSpeed;                        // How long the pull handle animation will take
     public float handleReleaseSpeed;                        // How long the release handle animation will take
