@@ -34,7 +34,7 @@ namespace net.bigdog.game.player
             get
             {
                 if (networkInstance == null)
-                    return 100;
+                    return 0;
 
                 return networkInstance.health;
             }
@@ -50,8 +50,11 @@ namespace net.bigdog.game.player
 
         public void TakeDamage(float amount)
         {
-            //Reduce player health
-            health -= amount;
+            if (networkInstance.isServer)
+            {
+                //Reduce player health
+                health -= amount;
+            }
         }
 
         public void TakeDamage(float amount, int damagerId)

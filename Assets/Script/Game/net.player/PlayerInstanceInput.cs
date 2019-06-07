@@ -36,8 +36,9 @@ namespace net.bigdog.game.player
         private float mouseSensitivityX = 8.0f;
         private float mouseSensitivityY = 8.0f;
         public static float controllerSensitivity = 8;
+        public static float aimingSensitivity = 1f;
 
-
+        public static float normalSensitivity = 1f;
         public static float sensitivity = 1;
 
         private int framesSinceNumpad = 0;
@@ -98,6 +99,13 @@ namespace net.bigdog.game.player
                 Destroy(this);
 
             CursorSettings();
+
+            sensitivity = normalSensitivity;
+            if (input.sprint)
+                sensitivity = 0.4f;
+
+            if (input.aim)
+                sensitivity = aimingSensitivity;
 
             handleMouse();
             handleMovement();

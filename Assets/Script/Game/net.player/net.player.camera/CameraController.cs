@@ -8,7 +8,7 @@ namespace net.bigdog.game.player.camera
     public class CameraController : MonoBehaviour
     {
 
-        private const float normalFoV = 60;
+        public const float normalFoV = 60;
 
         public static float aimingFoV = 45;
         public static bool aiming = false;

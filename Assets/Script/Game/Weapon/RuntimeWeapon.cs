@@ -57,7 +57,9 @@ public class RuntimeWeapon : RuntimeItem {
         //change camera FoV
         CameraController.aiming = aim;
         if (aim)
+        {
             CameraController.aimingFoV = item.weaponData.aimFoV;
+        }
     }
 
     public override void reload()
