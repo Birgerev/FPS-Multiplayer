@@ -17,13 +17,13 @@ TagManager:
   - Weapon
   - BulletCasing
   - Player
-  - FirstPerson
+  - 
   - Projectile
   - Attachment
   - PlayerHitbox
   - 
-  - 
-  - 
+  - FirstPersonWeapon
+  - FirstPersonArms
   - 
   - 
   - 

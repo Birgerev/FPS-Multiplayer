@@ -34,6 +34,7 @@ namespace net.bigdog.game.player.camera
             float movementY = (Input.GetAxis("Right Stick Y")*0.01f) + Input.GetAxis("Mouse Y") * amountY;
 
             Vector3 totalChange = transform.localPosition - initialPosition;
+            print(totalChange);
 
             if ((totalChange.x >= maxAmountX && movementX < 0)
                 || (totalChange.x <= -maxAmountX && movementX > 0))

@@ -7,6 +7,7 @@ namespace net.bigdog.game.player.camera
     public class PlayerCamera : MonoBehaviour
     {
         public Player player;
+        public bool rotate = true;
 
         // Start is called before the first frame update
         void Start()
@@ -26,7 +27,7 @@ namespace net.bigdog.game.player.camera
         {
             DestroyIfNotLocal();
 
-            if (player.networkInstance == null)
+            if (player.networkInstance == null || !rotate)
                 return;
 
             float pitch = 0;

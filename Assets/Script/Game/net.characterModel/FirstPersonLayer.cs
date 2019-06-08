@@ -5,10 +5,16 @@ using UnityEngine;
 public class FirstPersonLayer : MonoBehaviour
 {
     public bool assignToChildren = false;
+    public bool weapon = false;
 
     private CharacterModel model;
 
     private int defaultLayer = 0;
+    private int weaponLayer = 17;
+    private int armsLayer = 18;
+
+    private int layer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,14 +26,16 @@ public class FirstPersonLayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        layer = (weapon) ? weaponLayer : armsLayer;
+             
         //Only change layers if the character model is in first person mode
         if (model.firstPerson)
         {
-            gameObject.layer = 12;
+            gameObject.layer = layer;
 
             if (assignToChildren)
             {
-                setLayerRecursively(gameObject, 12);
+                setLayerRecursively(gameObject, layer);
             }
         }
         else
