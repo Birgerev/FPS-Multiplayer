@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fovChangeSpeed: 7
+  supressed: 0
   camera: {fileID: 1424492824595629079}
   weaponCamera: {fileID: 766465509621578565}
   weaponCameraAnimator: {fileID: 2072423245835594883}
@@ -1149,6 +1150,7 @@ GameObject:
   - component: {fileID: 4624211725121425721}
   - component: {fileID: 4676244978210181289}
   - component: {fileID: 7199903561507584328}
+  - component: {fileID: 7134400273708854139}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1249,6 +1251,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: d26012df64ab96741b914a8b75955c36, type: 2}
+--- !u!114 &7134400273708854139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3728558856612777829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c12500f3afdeb24d9444042960a4cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 6581f8d2f208b8340b8d59c7bf38cc9a, type: 3}
+  bloomIntensity: 0.206
+  bloomScatterFactor: 0.721
+  lensDirtScatterFactor: 0.62
+  lensDirtIntensity: 0.95
+  lensDirtTexture: {fileID: 2800000, guid: 4c3ea273eb94af04d8e67f17669af60e, type: 3}
+  inputIsHDR: 1
+  lowQuality: 0
+  depthBlending: 0
+  depthBlendFunction: 0
+  depthBlendFactor: 0.1
+  maxDepthBlendFactor: 1
+  depthScatterFactor: 0.5
 --- !u!1 &3865133915583657885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,6 +2500,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2593,11 +2625,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: slotId
@@ -2618,6 +2645,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI
+      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2738,11 +2770,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b983df5f89f8cc640a4bbac3316c00cf, type: 3}
 --- !u!224 &7560278015878069553 stripped
@@ -2758,6 +2785,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5098744547780176555}
     m_Modifications:
+    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+        type: 3}
+      propertyPath: m_Name
+      value: ProgressBar
+      objectReference: {fileID: 0}
     - target: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2863,11 +2895,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-        type: 3}
-      propertyPath: m_Name
-      value: ProgressBar
-      objectReference: {fileID: 0}
     - target: {fileID: 4790809093359955973, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2915,6 +2942,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36b8b0c00b779d489c7c46dc5b935e4, type: 3}
+--- !u!224 &1077393541270800822 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2397090635359367230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4332632198342164198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2118019197183725272, guid: d36b8b0c00b779d489c7c46dc5b935e4,
@@ -2927,12 +2960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b352d63436c7c5f46bc6fc3bc13b666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1077393541270800822 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2397090635359367230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2943362789830584255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2940,6 +2967,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3060,11 +3092,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: slotId
@@ -3085,6 +3112,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5098744547780176555}
     m_Modifications:
+    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+        type: 3}
+      propertyPath: m_Name
+      value: ProgressBar
+      objectReference: {fileID: 0}
     - target: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3190,11 +3222,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-        type: 3}
-      propertyPath: m_Name
-      value: ProgressBar
-      objectReference: {fileID: 0}
     - target: {fileID: 4790809093359955973, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3267,6 +3294,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3386,11 +3418,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.40868798
-      objectReference: {fileID: 0}
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}

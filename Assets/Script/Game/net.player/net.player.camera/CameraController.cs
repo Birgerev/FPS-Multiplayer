@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.PostProcessing;
 using UnityEngine.Networking;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace net.bigdog.game.player.camera
         public static float aimingFoV = 45;
         public static bool aiming = false;
         public float fovChangeSpeed = 0.7f;
+
+        public bool supressed = false;
 
         public Camera camera;
         public Camera weaponCamera;
@@ -42,6 +45,7 @@ namespace net.bigdog.game.player.camera
             animateWeaponCamera();
             animateCamera();
             applyFoV();
+            applyPostProcessing();
         }
 
         public void Recoil(Vector3 vel, float maxRecoil)
@@ -88,6 +92,31 @@ namespace net.bigdog.game.player.camera
                 cameraAnimator.SetBool("crouching", (player.controller.crouching));
                 cameraAnimator.SetBool("grounded", (player.controller.grounded));
             }*/
+        }
+
+        private void applyPostProcessing()     //Depth Of Field
+        {
+            DepthOfFieldModel.Settings dof = camera.GetComponent<PostProcessingBehaviour>().profile.depthOfField.settings;
+            VignetteModel.Settings vignette = camera.GetComponent<PostProcessingBehaviour>().profile.vignette.settings;
+
+
+            dof.aperture = 32f;
+
+            vignette.intensity = 0.17f;
+            vignette.smoothness = 0.2f;
+
+
+            if (supressed)//Apply Supressed DoF
+            {
+                dof.aperture = 6;
+                dof.focusDistance = 0.3f;
+
+                vignette.intensity = 0.34f;
+                vignette.smoothness = 0.85f;
+            }
+
+            camera.GetComponent<PostProcessingBehaviour>().profile.depthOfField.settings = dof;
+            camera.GetComponent<PostProcessingBehaviour>().profile.vignette.settings = vignette;
         }
 
         private void applyFoV()
