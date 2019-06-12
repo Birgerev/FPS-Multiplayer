@@ -6,7 +6,7 @@ using net.bigdog.game.player;
 
 public class PlayerUI : MonoBehaviour {
     
-    private Player player;
+    public Player player;
 
     // Use this for initialization
     void Start () {
