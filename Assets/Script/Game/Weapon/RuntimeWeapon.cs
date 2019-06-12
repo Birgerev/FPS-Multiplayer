@@ -140,6 +140,8 @@ public class RuntimeWeapon : RuntimeItem {
 
         projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
 
+        projectile.GetComponent<Bullet>().damageCurve = item.weaponData.damageCurve;
+
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();
 
@@ -150,7 +152,6 @@ public class RuntimeWeapon : RuntimeItem {
         if (GetComponent<Player>().networkInstance.isLocalPlayer) {
             GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.yaw += Random.Range(-item.weaponData.maxCameraRecoil.x, item.weaponData.maxCameraRecoil.x);
             GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.pitch -= Random.Range(item.weaponData.maxCameraRecoil.y / 4, item.weaponData.maxCameraRecoil.y);
-            print("yup: "+ GetComponent<Player>().networkInstance.input.yaw + " "+ GetComponent<Player>().networkInstance.input.pitch);
         }
         /*
         if (model != null)

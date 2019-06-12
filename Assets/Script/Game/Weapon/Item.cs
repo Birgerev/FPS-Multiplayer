@@ -53,6 +53,7 @@ public class WeaponData
     public float reloadTime;                        // How long reloading of the weapon lasts
 
     public float rpm;                               // How many rounds can be fired a minute
+    public AnimationCurve damageCurve;
 
     public GameObject projectile;
 

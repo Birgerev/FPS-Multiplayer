@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile {
 
-    public int damage;
+    /*public int damage;
     public string calibre;
     public float speed;
 
@@ -17,5 +17,5 @@ public class Projectile {
         bullet.calibre = calibre;
         bullet.speed = speed;
         bullet.ownerId = ownerId;
-    }
+    }*/
 }
