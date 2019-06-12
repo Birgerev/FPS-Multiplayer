@@ -64,13 +64,12 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0.05, z: 1}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 2, y: 4}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 2
+      rpm: 900
       projectile: {fileID: 1687746713840202, guid: 8ccb5adf1e92418418b995b25303dec9,
         type: 3}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -90,12 +89,11 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 71

@@ -50,15 +50,15 @@ public class WeaponData
     
     public Vector2 maxCameraRecoil = Vector2.zero;     //How much the camera recoils upon firing
 
-    public float handlePullSpeed;                        // How long the pull handle animation will take
-    public float handleReleaseSpeed;                        // How long the release handle animation will take
-
     public float reloadTime;                        // How long reloading of the weapon lasts
+
+    public float rpm;                               // How many rounds can be fired a minute
 
     public GameObject projectile;
 
     public bool reloading;
-    public int bulletsLeft;
+
+    public int roundsLeft;
     public bool isLoaded = false;                   //ie when there is a magazine in the gun
 
     public object Clone()

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour{
     public float speed;
     public float gravityMultiplier;
     public int ownerId = 0;
-    public float maxage = 8;
+    private float maxage = 4;
     public GameObject hitEffect;
 
     private Rigidbody rb;
