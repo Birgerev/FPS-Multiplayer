@@ -41,7 +41,7 @@ namespace net.bigdog.game.player.ui
             bool reloadable = false;
 
             bool magazine;
-            magazine = (player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges > 0);
+            magazine = (player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridgeCapacity > 0);
             magazineSection.SetActive(magazine);
             magazineFullnessBar.value =
 (float)player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges /

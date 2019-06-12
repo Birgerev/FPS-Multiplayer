@@ -10,6 +10,8 @@ public class RuntimeWeapon : RuntimeItem {
     
     public WeaponModel model;
 
+    private float timeSinceFire;
+
     private void Start()
     {
     }
@@ -26,24 +28,28 @@ public class RuntimeWeapon : RuntimeItem {
         if (model == null)
             model = GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().itemModel.GetComponent<WeaponModel>();
 
-        if (mouseDown)
-        {
-            shoot();
-        }else if(item.weaponData.fireMode == FireMode.Automatic)
-        {
-            if (mouse)
+        timeSinceFire += Time.deltaTime;
+        if (timeSinceFire > (60 / item.weaponData.rpm)) {
+            if (mouseDown)
+            {
                 shoot();
+            } else if (item.weaponData.fireMode == FireMode.Automatic)
+            {
+                if (mouse)
+                    shoot();
+            }
         }
     }
 
     public void shoot()
     {
-        if (item.weaponData.bulletsLeft > 0 && item.weaponData.isLoaded && !item.weaponData.reloading)
+        if (item.weaponData.roundsLeft > 0 && item.weaponData.isLoaded && !item.weaponData.reloading)
         {
+            timeSinceFire = 0;
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
             Shoot();
-            item.weaponData.bulletsLeft--;
+            item.weaponData.roundsLeft--;
         }
         //TODO click noise
     }
@@ -79,7 +85,7 @@ public class RuntimeWeapon : RuntimeItem {
         
         //replace new magazine with the old one in inventory
         Item oldMag = (Item)newMag.Clone();
-        oldMag.magazineData.cartridges = item.weaponData.bulletsLeft;
+        oldMag.magazineData.cartridges = item.weaponData.roundsLeft;
         GetComponent<InventoryManager>().items[slot] = oldMag;
 
         //Reload animations
@@ -88,7 +94,7 @@ public class RuntimeWeapon : RuntimeItem {
         //Apply new magazine stats
         item.weaponData.reloading = true;
         item.weaponData.isLoaded = false;
-        item.weaponData.bulletsLeft = newMag.magazineData.cartridges;
+        item.weaponData.roundsLeft = newMag.magazineData.cartridges;
 
         //Wait untill reload animation is done to call 'reloadComplete()'
         StartCoroutine(waitForReload());
@@ -96,16 +102,13 @@ public class RuntimeWeapon : RuntimeItem {
 
     IEnumerator waitForReload()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().isReloadComplete())
-                reloadComplete();
-        }
+        yield return new WaitForSeconds(item.weaponData.reloadTime);
+        reloadComplete();
     }
 
     public void reloadComplete()
     {
+        GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().ReloadComplete();
         item.weaponData.isLoaded = true;
         item.weaponData.reloading = false;
     }
@@ -137,6 +140,8 @@ public class RuntimeWeapon : RuntimeItem {
 
         projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
 
+        projectile.GetComponent<Bullet>().damageCurve = item.weaponData.damageCurve;
+
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();
 
@@ -147,7 +152,6 @@ public class RuntimeWeapon : RuntimeItem {
         if (GetComponent<Player>().networkInstance.isLocalPlayer) {
             GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.yaw += Random.Range(-item.weaponData.maxCameraRecoil.x, item.weaponData.maxCameraRecoil.x);
             GetComponent<Player>().networkInstance.GetComponent<PlayerInstanceInput>().input.pitch -= Random.Range(item.weaponData.maxCameraRecoil.y / 4, item.weaponData.maxCameraRecoil.y);
-            print("yup: "+ GetComponent<Player>().networkInstance.input.yaw + " "+ GetComponent<Player>().networkInstance.input.pitch);
         }
         /*
         if (model != null)
