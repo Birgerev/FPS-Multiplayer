@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4377792955960042}
   - component: {fileID: 114821024620718266}
   - component: {fileID: 114564397694564514}
-  - component: {fileID: 114772691842162802}
   - component: {fileID: 114721200138198314}
   - component: {fileID: 114471310542806890}
   - component: {fileID: 114674039481128392}
@@ -64,13 +63,45 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0.05, z: 1}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 2, y: 4}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 2
+      rpm: 900
+      damageCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: -0.043881714
+          value: 32.19487
+          inSlope: 0.070598125
+          outSlope: 0.070598125
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.49376842
+        - serializedVersion: 3
+          time: 42.37499
+          value: 14.946336
+          inSlope: -0.0013663598
+          outSlope: -0.0013663598
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 1
+          outWeight: 0.5532268
+        - serializedVersion: 3
+          time: 150.38477
+          value: -0.01117532
+          inSlope: -0.02389875
+          outSlope: -0.02389875
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.42176968
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 1687746713840202, guid: 8ccb5adf1e92418418b995b25303dec9,
         type: 3}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -90,12 +121,17 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
+      damageCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 71
@@ -185,22 +221,6 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
---- !u!114 &114772691842162802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690866032694486}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4394a3eef724546f896557197e2d6c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  showGUI: 1
-  offsetX: 0
-  offsetY: 0
 --- !u!114 &114721200138198314
 MonoBehaviour:
   m_ObjectHideFlags: 0

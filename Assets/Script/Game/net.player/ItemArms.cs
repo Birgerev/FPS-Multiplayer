@@ -152,10 +152,5 @@ namespace net.bigdog.game.player
         {
             anim.SetBool("reload", false);
         }
-
-        public bool isReloadComplete()
-        {
-            return !anim.GetBool("reload");
-        }
     }
 }

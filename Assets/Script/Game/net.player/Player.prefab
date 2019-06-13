@@ -203,12 +203,17 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
+      damageCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -227,12 +232,17 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
+      damageCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -251,12 +261,17 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
+      damageCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -275,12 +290,17 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0, z: 0}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
-      handlePullSpeed: 0
-      handleReleaseSpeed: 0
       reloadTime: 0
+      rpm: 0
+      damageCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
       projectile: {fileID: 0}
       reloading: 0
-      bulletsLeft: 0
+      roundsLeft: 0
       isLoaded: 0
     magazineData:
       cartridges: 0
@@ -3134,12 +3154,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36b8b0c00b779d489c7c46dc5b935e4, type: 3}
---- !u!224 &1077393541270800822 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2397090635359367230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4332632198342164198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2118019197183725272, guid: d36b8b0c00b779d489c7c46dc5b935e4,
@@ -3152,6 +3166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b352d63436c7c5f46bc6fc3bc13b666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1077393541270800822 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2397090635359367230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2943362789830584255
 PrefabInstance:
   m_ObjectHideFlags: 0
