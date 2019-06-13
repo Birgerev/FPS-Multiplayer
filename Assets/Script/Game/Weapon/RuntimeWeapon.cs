@@ -141,6 +141,7 @@ public class RuntimeWeapon : RuntimeItem {
         projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
 
         projectile.GetComponent<Bullet>().damageCurve = item.weaponData.damageCurve;
+        projectile.GetComponent<Bullet>().speed = item.weaponData.projectileVelocity;
 
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();

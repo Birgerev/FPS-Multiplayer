@@ -51,7 +51,7 @@ public class WeaponData
     public Vector2 maxCameraRecoil = Vector2.zero;     //How much the camera recoils upon firing
 
     public float reloadTime;                        // How long reloading of the weapon lasts
-
+    public float projectileVelocity;                // Speed of fired projectiles
     public float rpm;                               // How many rounds can be fired a minute
     public AnimationCurve damageCurve;
 
