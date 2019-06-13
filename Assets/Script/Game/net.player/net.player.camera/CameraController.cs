@@ -11,8 +11,8 @@ namespace net.bigdog.game.player.camera
 
         public const float normalFoV = 60;
 
-        public static float aimingFoV = 45;
-        public static bool aiming = false;
+        public float aimingFoV = 45;
+        public bool aiming = false;
         public float fovChangeSpeed = 0.7f;
 
         public bool supressed = false;

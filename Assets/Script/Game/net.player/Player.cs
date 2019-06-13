@@ -126,7 +126,7 @@ namespace net.bigdog.game.player
         {
             controller = GetComponent<CharacterController>();
             cameraController = GetComponentInChildren<CameraController>();
-
+            
             print("player spawned");
             ApplyModel();
             removeForeingComponents();
@@ -134,7 +134,10 @@ namespace net.bigdog.game.player
             Spawn();
 
             if (networkInstance.isLocalPlayer)
+            {
+                PlayerInstanceInput.showMouse = false;
                 model.firstPerson = true;
+            }
         }
 
         private void Update()

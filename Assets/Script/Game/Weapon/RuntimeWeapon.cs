@@ -22,7 +22,7 @@ public class RuntimeWeapon : RuntimeItem {
         base.Update();
         //Make sure the aimfov for camera is set to this guns specified value
         //TODO
-        CameraController.aimingFoV = item.weaponData.aimFoV;
+        GetComponent<Player>().cameraController.aimingFoV = item.weaponData.aimFoV;
         //Check and update server input
         
         if (model == null)
@@ -61,10 +61,10 @@ public class RuntimeWeapon : RuntimeItem {
             base.Aim(aim);
 
         //change camera FoV
-        CameraController.aiming = aim;
+        GetComponent<Player>().cameraController.aiming = aim;
         if (aim)
         {
-            CameraController.aimingFoV = item.weaponData.aimFoV;
+            GetComponent<Player>().cameraController.aimingFoV = item.weaponData.aimFoV;
         }
     }
 
@@ -141,6 +141,7 @@ public class RuntimeWeapon : RuntimeItem {
         projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
 
         projectile.GetComponent<Bullet>().damageCurve = item.weaponData.damageCurve;
+        projectile.GetComponent<Bullet>().speed = item.weaponData.projectileVelocity;
 
         model.cocked = item.weaponData.isLoaded;
         model.Shoot();
