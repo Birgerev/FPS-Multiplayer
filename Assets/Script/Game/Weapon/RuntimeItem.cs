@@ -58,7 +58,7 @@ public class RuntimeItem : MonoBehaviour
 
     public virtual void Aim(bool aim)
     {
-        CameraController.aiming = aim;
+        GetComponent<Player>().cameraController.aiming = aim;
         PlayerInstanceInput.aimingSensitivity = item.weaponData.aimFoV / CameraController.normalFoV;
 
         this.aiming = aim;
