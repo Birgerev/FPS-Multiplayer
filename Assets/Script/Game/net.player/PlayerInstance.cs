@@ -17,6 +17,9 @@ namespace net.bigdog.game.player
         public Player player;
 
         [SyncVar]
+        public GameProfile profile;
+
+        [SyncVar]
         public float health = 0;
 
         [SyncVar]
@@ -45,7 +48,10 @@ namespace net.bigdog.game.player
             StartCoroutine(tick());
 
             if (isLocalPlayer)
+            {
                 localInstance = this;
+                Cmd_InformServerOfProfileToken(MenuManager.instance.playerProfile.gameToken);
+            }
 
             if(isServer)
             {
@@ -162,6 +168,15 @@ namespace net.bigdog.game.player
         public void RpcSyncPosition(Vector3 pos)
         {
             player.transform.position = pos;
+        }
+
+        [Command]
+        public void Cmd_InformServerOfProfileToken(string token)
+        {
+            if (!Database.VerifyToken(token))
+                Debug.LogError("Invalid Token");
+
+            this.profile = new GameProfile(Database.GetIdFromToken(token));
         }
 
         //Spawn

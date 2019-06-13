@@ -204,6 +204,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
       reloadTime: 0
+      projectileVelocity: 0
       rpm: 0
       damageCurve:
         serializedVersion: 2
@@ -233,6 +234,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
       reloadTime: 0
+      projectileVelocity: 0
       rpm: 0
       damageCurve:
         serializedVersion: 2
@@ -262,6 +264,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
       reloadTime: 0
+      projectileVelocity: 0
       rpm: 0
       damageCurve:
         serializedVersion: 2
@@ -291,6 +294,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 0, y: 0}
       reloadTime: 0
+      projectileVelocity: 0
       rpm: 0
       damageCurve:
         serializedVersion: 2
@@ -507,6 +511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c7120315088f6c4c927d9b1486f3ae6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimingFoV: 45
+  aiming: 0
   fovChangeSpeed: 7
   supressed: 0
   camera: {fileID: 1424492824595629079}
@@ -639,7 +645,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -17708757
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &7028894453398720511
@@ -1787,10 +1793,10 @@ RectTransform:
   m_Father: {fileID: 6144565996381307508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.27374268, y: 0.12896729}
-  m_SizeDelta: {x: 215.93, y: 29.136}
+  m_SizeDelta: {x: 78.36029, y: 5.0898}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7463933150139237512
 CanvasRenderer:
@@ -1822,7 +1828,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4cadfde8d478f6642b6571f19834de64, type: 3}
-    m_FontSize: 20
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2342,6 +2348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6144565996381307508}
+  - component: {fileID: 5505506386174612921}
   m_Layer: 11
   m_Name: nameplate
   m_TagString: Untagged
@@ -2356,7 +2363,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8434218516846996015}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -1.491}
   m_LocalScale: {x: 0.014652, y: 0.014652, z: 0.014652}
   m_Children:
@@ -2364,12 +2371,25 @@ RectTransform:
   - {fileID: 7618467262925020208}
   m_Father: {fileID: 1407878604486938203}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1000.0047, y: -538.3378}
+  m_AnchoredPosition: {x: -999.9985, y: -538.5795}
   m_SizeDelta: {x: 137.5697, y: 24.0462}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5505506386174612921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8434218516846996015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5465177a75f4e94c88cc17c7d0a2a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNameField: {fileID: 485303096972572158}
 --- !u!1 &8765146171687252477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,11 +2732,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2837,6 +2852,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: slotId
@@ -2857,11 +2877,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI
-      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2982,6 +2997,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b983df5f89f8cc640a4bbac3316c00cf, type: 3}
 --- !u!224 &7560278015878069553 stripped
@@ -2997,11 +3017,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5098744547780176555}
     m_Modifications:
-    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-        type: 3}
-      propertyPath: m_Name
-      value: ProgressBar
-      objectReference: {fileID: 0}
     - target: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3117,6 +3132,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 124.9
       objectReference: {fileID: 0}
+    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+        type: 3}
+      propertyPath: m_Name
+      value: ProgressBar
+      objectReference: {fileID: 0}
     - target: {fileID: 6466989499238499714, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_Color.r
@@ -3154,6 +3174,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36b8b0c00b779d489c7c46dc5b935e4, type: 3}
+--- !u!224 &1077393541270800822 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2397090635359367230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4332632198342164198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2118019197183725272, guid: d36b8b0c00b779d489c7c46dc5b935e4,
@@ -3166,12 +3192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b352d63436c7c5f46bc6fc3bc13b666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1077393541270800822 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2397090635359367230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2943362789830584255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3179,11 +3199,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3304,6 +3319,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.40868798
       objectReference: {fileID: 0}
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: slotId
@@ -3324,11 +3344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5098744547780176555}
     m_Modifications:
-    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
-        type: 3}
-      propertyPath: m_Name
-      value: ProgressBar
-      objectReference: {fileID: 0}
     - target: {fileID: 3438364777074506120, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3444,6 +3459,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5563354640578909814, guid: d36b8b0c00b779d489c7c46dc5b935e4,
+        type: 3}
+      propertyPath: m_Name
+      value: ProgressBar
+      objectReference: {fileID: 0}
     - target: {fileID: 6466989499238499714, guid: d36b8b0c00b779d489c7c46dc5b935e4,
         type: 3}
       propertyPath: m_Color.r
@@ -3506,11 +3526,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4852008256496178696}
     m_Modifications:
-    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
-        type: 3}
-      propertyPath: m_Name
-      value: InventorySlotUI (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 8984956626041092548, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3630,6 +3645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.40868798
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403368497043776760, guid: b983df5f89f8cc640a4bbac3316c00cf,
+        type: 3}
+      propertyPath: m_Name
+      value: InventorySlotUI (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6905170646947219450, guid: b983df5f89f8cc640a4bbac3316c00cf,
         type: 3}
