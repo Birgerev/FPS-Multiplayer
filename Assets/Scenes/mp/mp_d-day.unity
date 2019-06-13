@@ -127,6 +127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 241469342}
     m_Modifications:
+    - target: {fileID: 1940261068655037807, guid: c8750ed73dddde04ebaab7679f8c2da6,
+        type: 3}
+      propertyPath: m_Name
+      value: Spawnpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6634571557878803716, guid: c8750ed73dddde04ebaab7679f8c2da6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -181,11 +186,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940261068655037807, guid: c8750ed73dddde04ebaab7679f8c2da6,
-        type: 3}
-      propertyPath: m_Name
-      value: Spawnpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8750ed73dddde04ebaab7679f8c2da6, type: 3}
@@ -493,6 +493,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 241469342}
     m_Modifications:
+    - target: {fileID: 1940261068655037807, guid: c8750ed73dddde04ebaab7679f8c2da6,
+        type: 3}
+      propertyPath: m_Name
+      value: Spawnpoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6634571557878803716, guid: c8750ed73dddde04ebaab7679f8c2da6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -501,12 +506,12 @@ PrefabInstance:
     - target: {fileID: 6634571557878803716, guid: c8750ed73dddde04ebaab7679f8c2da6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.512
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 6634571557878803716, guid: c8750ed73dddde04ebaab7679f8c2da6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 78.167
+      value: 180.3
       objectReference: {fileID: 0}
     - target: {fileID: 6634571557878803716, guid: c8750ed73dddde04ebaab7679f8c2da6,
         type: 3}
@@ -547,11 +552,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1940261068655037807, guid: c8750ed73dddde04ebaab7679f8c2da6,
-        type: 3}
-      propertyPath: m_Name
-      value: Spawnpoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8750ed73dddde04ebaab7679f8c2da6, type: 3}
@@ -621,7 +621,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095323689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: -5, z: 250}
+  m_LocalPosition: {x: 500, y: -0.5, z: 250}
   m_LocalScale: {x: 100, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 1885362349}
