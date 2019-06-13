@@ -175,7 +175,7 @@ namespace net.bigdog.game.player
             item = transform.GetComponent<RuntimeItem>();
 
 
-            if (health <= 0)
+            if (health <= 0 || !networkInstance.spawned)
             {
                 Die();
             }
