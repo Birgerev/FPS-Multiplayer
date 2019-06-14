@@ -10,9 +10,16 @@ namespace net.bigdog.game.player
         public Animator anim;
 
         public Item lastItem;
-        public Player player;
+        public Item item
+        {
+            get
+            {
+                return model.item;
+            }
+        }
 
-        public bool ready = false;
+        //public Player player;
+        public CharacterModel model;
 
         public Transform weaponSlot;
         public Transform magazineSlot;
@@ -23,54 +30,31 @@ namespace net.bigdog.game.player
         // Start is called before the first frame update
         void Start()
         {
-
+            model = GetComponentInParent<CharacterModel>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (player == null)//If player instance is null, find our player
-                player = transform.GetComponentInParent<Player>();
-
-            //If no player instance still was found, keep searching
-            if (player == null)
-                return;
-
-            if (anim == null)
-                anim = GetComponent<Animator>();
-
-            if (player.item == null)
-                return;
+            anim = GetComponent<Animator>();
 
             //If current weapon has been changed, update our weapon
-            if (lastItem != player.item.item)
+            if (lastItem != item)
             {
-
-                print("h");
-                lastItem = player.item.item;
+                lastItem = item;
 
                 EquipModel(lastItem);
             }
-
-            //ready or not
-            if (player.networkInstance != null)
-            {
-                if (player.networkInstance.input.sprint)
-                    ready = false;
-                if (player.networkInstance.input.aim || player.networkInstance.input.shoot)
-                    ready = true;
-            }
-
 
             animate();
         }
 
         private void LateUpdate()
         {
-            if (player == null || !player.networkInstance.isLocalPlayer)
+            if (GetComponentInParent<Player>() == null || !model.firstPerson)
                 return;
             //Set arms to camera position, so that the arms pivot around the camera
-            Transform camera = GetComponentInParent<Player>().transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform;
+            Transform camera = GetComponentInParent<Player>().cameraController.camera.transform;
 
             transform.position = camera.position;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, camera.localRotation.eulerAngles.x - 90);
@@ -79,11 +63,8 @@ namespace net.bigdog.game.player
 
         private void animate()
         {
-            if (player.networkInstance != null)
-            {
-                anim.SetBool("aiming", player.networkInstance.input.aim);
-                anim.SetBool("ready", ready);
-            }
+            anim.SetBool("aiming", model.aim);
+            anim.SetBool("ready", model.ready);
         }
 
         private void EquipModel(Item item)

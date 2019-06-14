@@ -23,6 +23,8 @@ namespace net.bigdog.game.player
 
         public void hit(float damage, int damagerId)
         {
+            if (gameObject.GetComponentInParent<Player>() == null)
+                return;
             gameObject.GetComponentInParent<Player>().TakeDamage(damage * damageMultiplier, damagerId);
         }
 

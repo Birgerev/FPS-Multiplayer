@@ -127,7 +127,6 @@ namespace net.bigdog.game.player
             controller = GetComponent<CharacterController>();
             cameraController = GetComponentInChildren<CameraController>();
             
-            print("player spawned");
             ApplyModel();
             removeForeingComponents();
 
@@ -150,6 +149,19 @@ namespace net.bigdog.game.player
             model.characterAnimator.SetBool("crouching", controller.crouching);
             model.characterAnimator.SetBool("sprinting", controller.sprinting);
 
+            model.aim = networkInstance.input.aim;
+            if (networkInstance.input.shoot)
+                model.ready = true;
+            if (controller.sprinting)
+                model.ready = false;
+
+
+            //Animate spine / player model looks up or down
+            if (model != null)   //Make sure we dont get a null pointer error
+                model.pitch = pitch;
+
+            model.item = GetComponent<InventoryManager>().items[GetComponent<InventoryManager>().selected];
+
             //Set global variable so that we easily can access the local player
             if (networkInstance != null)
                 if (networkInstance.isLocalPlayer)
@@ -166,13 +178,6 @@ namespace net.bigdog.game.player
                 {
                     transform.localEulerAngles = new Vector3(0, yaw, 0.0f);
                 }
-
-            //Animate spine / player model looks up or down
-            if (model != null)   //Make sure we dont get a null pointer error
-                if (networkInstance == null)
-                    model.spineRotator.pitch = pitch;
-                else if (!networkInstance.isLocalPlayer)  //Make sure we arent the local player, since animating the spine would mess up camera animations
-                    model.spineRotator.pitch = pitch;
 
             //Runtime weapon instance
             item = transform.GetComponent<RuntimeItem>();
