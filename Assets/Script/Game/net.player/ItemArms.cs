@@ -94,7 +94,10 @@ namespace net.bigdog.game.player
             itemModel = obj;
 
             //Apply animator
-            anim.runtimeAnimatorController = item.firstPersonAnimator;
+            if(model.firstPerson)
+                anim.runtimeAnimatorController = item.firstPersonAnimator;
+            else
+                anim.runtimeAnimatorController = item.thirdPersonAnimator;
         }
 
         private void EquipMagazine(Item magazine)

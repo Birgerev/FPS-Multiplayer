@@ -34,7 +34,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PPSH-41_Arms
+  m_Name: arms3_m1-garand
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: aiming
@@ -420,7 +420,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7314bd1fec9decf4cbebe10e07d73495, type: 2}
+  m_Motion: {fileID: 7400000, guid: 82ee1729143c9e44b930dff6680f828d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -433,7 +433,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ppd-41_ready_arms
+  m_Name: ready
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -449,7 +449,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 199654c1142326341896f194c38b78e3, type: 2}
+  m_Motion: {fileID: 7400000, guid: a4a39653e68559b4f9d823147536598a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -478,7 +478,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0e96e5020111a114383eeaf1b7c75919, type: 2}
+  m_Motion: {fileID: 7400000, guid: c71d063d5c009a742b11dfd0d610c41c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -491,7 +491,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ppd-40_reload 0
+  m_Name: reload
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -506,7 +506,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e301ba34605a8f04dacbf2cb6845784a, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0282608c65194914a9aab9f71e2ceb2b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

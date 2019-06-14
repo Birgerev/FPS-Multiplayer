@@ -27,8 +27,9 @@ public class InventoryManager : MonoBehaviour
     {
         //Default debug items
         items[0] = (Item)ItemManager.instance.items[0].Clone();
-        items[1] = (Item)ItemManager.instance.items[1].Clone();
-        items[2] = (Item)ItemManager.instance.items[1].Clone();
+        items[1] = (Item)ItemManager.instance.items[2].Clone();
+        items[2] = (Item)ItemManager.instance.items[2].Clone();
+        items[3] = (Item)ItemManager.instance.items[1].Clone();
 
         //select slot 0
         Select(0);

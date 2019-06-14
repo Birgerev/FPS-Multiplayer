@@ -52,9 +52,10 @@ MonoBehaviour:
     Model: {fileID: 1235166565920392, guid: 7fccc29fd4fca214080e107e1bc6c4ac, type: 3}
     runtimeScript: RuntimeWeapon
     id: 0
-    firstPersonAnimator: {fileID: 9100000, guid: d7546a4e77d1c8443a155f15e7dc1465,
+    firstPersonAnimator: {fileID: 9100000, guid: 9c5ccde87c732524ab9efbf7d64f127d,
       type: 2}
-    thirdPersonAnimator: {fileID: 0}
+    thirdPersonAnimator: {fileID: 9100000, guid: d7546a4e77d1c8443a155f15e7dc1465,
+      type: 2}
     weaponData:
       fireMode: 0
       clipSize: 71
@@ -63,7 +64,7 @@ MonoBehaviour:
       visualRecoil: {x: 0, y: 0.05, z: 1}
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 2, y: 4}
-      reloadTime: 2
+      reloadTime: 3
       projectileVelocity: 7000
       rpm: 900
       damageCurve:
@@ -107,10 +108,97 @@ MonoBehaviour:
     magazineData:
       cartridges: 0
       cartridgeCapacity: 0
+  - Name: M1-Garand
+    Model: {fileID: 9142481797549335989, guid: c0c3096684ec4a546afc3cdb13a59a44, type: 3}
+    runtimeScript: RuntimeWeapon
+    id: 1
+    firstPersonAnimator: {fileID: 9100000, guid: 6919ef22a1525c945b844a3e408274ab,
+      type: 2}
+    thirdPersonAnimator: {fileID: 9100000, guid: 99c9a384f48cea5408ada03419f5d7e8,
+      type: 2}
+    weaponData:
+      fireMode: 1
+      clipSize: 71
+      startClipAmount: 2
+      aimFoV: 30
+      visualRecoil: {x: 0, y: 1, z: 2}
+      maxVisualRecoil: 0.01
+      maxCameraRecoil: {x: 18, y: 20}
+      reloadTime: 1.5
+      projectileVelocity: 7000
+      rpm: 150
+      damageCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0.5864701
+          value: 100.11205
+          inSlope: 0.0024645044
+          outSlope: 0.0024645044
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.678924
+        - serializedVersion: 3
+          time: 100.350784
+          value: 100.2269
+          inSlope: -0.0016101582
+          outSlope: -0.0016101582
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.34408015
+        - serializedVersion: 3
+          time: 231.16043
+          value: 92.58264
+          inSlope: -0.0017811047
+          outSlope: -0.0017811047
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.29422456
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 274.43692
+          value: 40.348038
+          inSlope: -0.0005525001
+          outSlope: -0.0005525001
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.86442596
+        - serializedVersion: 3
+          time: 400.57712
+          value: 40.0193
+          inSlope: 0.002447001
+          outSlope: 0.002447001
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.42176968
+          outWeight: 0.6870031
+        - serializedVersion: 3
+          time: 500.29645
+          value: 0.00504601
+          inSlope: -0.0013663598
+          outSlope: -0.0013663598
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 1
+          outWeight: 0.5532268
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      projectile: {fileID: 1687746713840202, guid: 8ccb5adf1e92418418b995b25303dec9,
+        type: 3}
+      reloading: 0
+      roundsLeft: 0
+      isLoaded: 0
+    magazineData:
+      cartridges: 0
+      cartridgeCapacity: 0
   - Name: 7.62 x 25mm Tokarev Drum Magazine
     Model: {fileID: 5205435559868112425, guid: 331e410af7c268a42966839bc1ad3c11, type: 3}
     runtimeScript: RuntimeItem
-    id: 1
+    id: 2
     firstPersonAnimator: {fileID: 9100000, guid: 90b26aab684f5394387a698ad4373db6,
       type: 2}
     thirdPersonAnimator: {fileID: 0}

@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1p_7.62TokarevDrumMagazine
+  m_Name: PPD-40 Drum Magazine
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
