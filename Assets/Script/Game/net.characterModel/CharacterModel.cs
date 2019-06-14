@@ -15,15 +15,19 @@ public class CharacterModel : MonoBehaviour
 
     public bool firstPerson = false;
     public bool rotateSpine = false;
-
+    
     public float pitch;
 
     public Item item;
+
+    public float radgrollPhysicsTime = 20;
 
     // Use this for initialization
     void Start()
     {
         gameObject.name = "character_model";
+
+        ChangeRagdollMode(gameObject, false);
     }
 
     // Update is called once per frame
@@ -42,8 +46,61 @@ public class CharacterModel : MonoBehaviour
         mainCamera.SetActive(false);
     }
 
-    public void Quickdraw()
+    public void ChangeRagdollMode(bool mode)
     {
-        //TODO armAnimator.SetTrigger("quickdraw");
+        ChangeRagdollMode(gameObject, mode);
+        
+        GetComponentInChildren<SkinnedMeshRenderer>().updateWhenOffscreen = mode;
+
+        if (mode)
+        {
+            firstPerson = false;
+
+            Invoke("RagdollKinematic", radgrollPhysicsTime);
+        }
+
+    }
+
+    public void ChangeRagdollMode(GameObject obj, bool mode)
+    {
+        if (obj.GetComponent<Rigidbody>() != null)
+            obj.GetComponent<Rigidbody>().isKinematic = !mode;
+        if (obj.GetComponent<Animator>() != null)
+            obj.GetComponent<Animator>().enabled = !mode;
+
+
+        //Pass by this function to children
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            ChangeRagdollMode(obj.transform.GetChild(i).gameObject, mode);
+        }
+    }
+
+
+
+    public void RagdollKinematic()
+    {
+        RagdollKinematic(gameObject);
+
+        //GetComponentInChildren<SkinnedMeshRenderer>().updateWhenOffscreen = false;
+    }
+
+    public void RagdollKinematic(GameObject obj)
+    {
+        if (obj.GetComponent<Joint>() != null)
+            Destroy(obj.GetComponent<Joint>());
+        if (obj.GetComponent<Rigidbody>() != null)
+            Destroy(obj.GetComponent<Rigidbody>());
+        if (obj.GetComponent<Animator>() != null)
+            Destroy(obj.GetComponent<Animator>());
+        if (obj.GetComponent<Collider>() != null)
+            Destroy(obj.GetComponent<Collider>());
+
+
+        //Pass by this function to children
+        for (int i = 0; i < obj.transform.childCount; i++)
+        {
+            RagdollKinematic(obj.transform.GetChild(i).gameObject);
+        }
     }
 }

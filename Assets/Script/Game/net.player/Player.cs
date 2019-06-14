@@ -89,6 +89,10 @@ namespace net.bigdog.game.player
                 deathScene.transform.position = transform.position;
             }
 
+            //Ragdoll
+            model.ChangeRagdollMode(true);
+            model.transform.parent = null;
+
             Destroy(gameObject);
         }
 
