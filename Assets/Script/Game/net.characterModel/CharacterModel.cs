@@ -67,6 +67,9 @@ public class CharacterModel : MonoBehaviour
             obj.GetComponent<Rigidbody>().isKinematic = !mode;
         if (obj.GetComponent<Animator>() != null)
             obj.GetComponent<Animator>().enabled = !mode;
+        if(mode)
+            if (obj.name == "WeaponSlot" || obj.name == "MagazineSlot")
+                Destroy(obj);
 
 
         //Pass by this function to children
@@ -95,6 +98,12 @@ public class CharacterModel : MonoBehaviour
             Destroy(obj.GetComponent<Animator>());
         if (obj.GetComponent<Collider>() != null)
             Destroy(obj.GetComponent<Collider>());
+        if (obj.GetComponent<net.bigdog.game.player.ItemArms>() != null)
+            Destroy(obj.GetComponent<net.bigdog.game.player.ItemArms>());
+        if (obj.GetComponent<CharacterModel>() != null)
+            Destroy(obj.GetComponent<CharacterModel>());
+        if (obj.GetComponent<WeaponModel>() != null)
+            Destroy(obj.GetComponent<WeaponModel>());
 
 
         //Pass by this function to children

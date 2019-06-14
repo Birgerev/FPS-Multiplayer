@@ -124,7 +124,8 @@ namespace net.bigdog.game.player
             while (true)
             {
                 yield return new WaitForSeconds(4);
-                CmdSyncPosition(player.transform.position);
+                if(player != null)
+                    CmdSyncPosition(player.transform.position);
             }
         }
 
