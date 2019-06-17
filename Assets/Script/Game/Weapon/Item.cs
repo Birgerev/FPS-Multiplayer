@@ -18,6 +18,8 @@ public class Item
     public RuntimeAnimatorController firstPersonAnimator;
     public RuntimeAnimatorController thirdPersonAnimator;
 
+    public PriorityData priorityData;
+
     [Header("Item Specific Data")]
     public WeaponData weaponData;
     public MagazineData magazineData;
@@ -31,19 +33,32 @@ public class Item
         //,as to avoid just referencing the old one
         ((Item)thisItem).weaponData = (WeaponData)((Item)thisItem).weaponData.Clone();
         ((Item)thisItem).magazineData = (MagazineData)((Item)thisItem).magazineData.Clone();
+        ((Item)thisItem).priorityData = (PriorityData)((Item)thisItem).priorityData.Clone();
 
         return thisItem;
     }
 }
 
 [System.Serializable]
+public class PriorityData
+{
+    public bool reloading;
+
+    public int cartridges;
+    public bool isLoaded = false;                   //ie when there is a magazine in the gun
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+}
+
+
+[System.Serializable]
 public class WeaponData
 {
     public FireMode fireMode;                       // Weapons availible FireModes TODO multiple fire modes
 
-    public int clipSize;                            // The amount of bullets in each Magazine
-    public int startClipAmount;                     // How many Magazines does the player spawn with
-    
     public float aimFoV = 30;
     public Vector3 visualRecoil = Vector3.zero;     //How much the weapon recoils upon firing
     public float maxVisualRecoil = 0.01f;     //How much the weapon recoils upon firing
@@ -56,12 +71,7 @@ public class WeaponData
     public AnimationCurve damageCurve;
 
     public GameObject projectile;
-
-    public bool reloading;
-
-    public int roundsLeft;
-    public bool isLoaded = false;                   //ie when there is a magazine in the gun
-
+    
     public object Clone()
     {
         return this.MemberwiseClone();
@@ -71,7 +81,6 @@ public class WeaponData
 [System.Serializable]
 public class MagazineData
 {
-    public int cartridges;
     public int cartridgeCapacity;
 
     public object Clone()

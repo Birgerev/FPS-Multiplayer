@@ -11,6 +11,8 @@ public class RuntimeWeapon : RuntimeItem {
     public WeaponModel model;
 
     private float timeSinceFire;
+    private Quaternion lastFrameCameraRotation;
+
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class RuntimeWeapon : RuntimeItem {
     public override void Update()
     {
         base.Update();
+
         //Make sure the aimfov for camera is set to this guns specified value
         //TODO
         GetComponent<Player>().cameraController.aimingFoV = item.weaponData.aimFoV;
@@ -39,17 +42,20 @@ public class RuntimeWeapon : RuntimeItem {
                     shoot();
             }
         }
+
+        lastFrameCameraRotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
+
     }
 
     public void shoot()
     {
-        if (item.weaponData.roundsLeft > 0 && item.weaponData.isLoaded && !item.weaponData.reloading)
+        if (item.priorityData.cartridges > 0 && item.priorityData.isLoaded && !item.priorityData.reloading)
         {
             timeSinceFire = 0;
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
             Shoot();
-            item.weaponData.roundsLeft--;
+            item.priorityData.cartridges--;
         }
         //TODO click noise
     }
@@ -57,7 +63,7 @@ public class RuntimeWeapon : RuntimeItem {
     public override void Aim(bool aim)
     {
         //prevent aiming while reloading
-        if(!item.weaponData.reloading)
+        if(!item.priorityData.reloading)
             base.Aim(aim);
 
         //change camera FoV
@@ -73,7 +79,7 @@ public class RuntimeWeapon : RuntimeItem {
         base.reload();
 
         //Wont continiue if we're still reloading
-        if (item.weaponData.reloading)
+        if (item.priorityData.reloading)
             return;
 
         int slot = bestMagazineSlot();
@@ -85,16 +91,16 @@ public class RuntimeWeapon : RuntimeItem {
         
         //replace new magazine with the old one in inventory
         Item oldMag = (Item)newMag.Clone();
-        oldMag.magazineData.cartridges = item.weaponData.roundsLeft;
+        oldMag.priorityData.cartridges = item.priorityData.cartridges;
         GetComponent<InventoryManager>().items[slot] = oldMag;
 
         //Reload animations
         GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().Reload(newMag);
 
         //Apply new magazine stats
-        item.weaponData.reloading = true;
-        item.weaponData.isLoaded = false;
-        item.weaponData.roundsLeft = newMag.magazineData.cartridges;
+        item.priorityData.reloading = true;
+        item.priorityData.isLoaded = false;
+        item.priorityData.cartridges = newMag.priorityData.cartridges;
 
         //Wait untill reload animation is done to call 'reloadComplete()'
         StartCoroutine(waitForReload());
@@ -109,8 +115,8 @@ public class RuntimeWeapon : RuntimeItem {
     public void reloadComplete()
     {
         GetComponent<Player>().model.armAnimator.GetComponent<ItemArms>().ReloadComplete();
-        item.weaponData.isLoaded = true;
-        item.weaponData.reloading = false;
+        item.priorityData.isLoaded = true;
+        item.priorityData.reloading = false;
     }
 
     private int bestMagazineSlot()
@@ -121,11 +127,11 @@ public class RuntimeWeapon : RuntimeItem {
         for(int slot = 0; slot < GetComponent<InventoryManager>().items.Count; slot++)
         {
             Item iteratedItem = GetComponent<InventoryManager>().items[slot];
-            if(iteratedItem.magazineData.cartridges > 0)
-                if(iteratedItem.magazineData.cartridges > bestCartridgeCount)
+            if(iteratedItem.priorityData.cartridges > 0)
+                if(iteratedItem.priorityData.cartridges > bestCartridgeCount)
                 {
                     bestSlot = slot;
-                    bestCartridgeCount = iteratedItem.magazineData.cartridges;
+                    bestCartridgeCount = iteratedItem.priorityData.cartridges;
                 }
         }
 
@@ -138,12 +144,16 @@ public class RuntimeWeapon : RuntimeItem {
         projectile.transform.rotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
         projectile.transform.position = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.position;
 
+        if(GetComponent<Player>().networkInstance.isLocalPlayer)
+            projectile.transform.rotation = lastFrameCameraRotation;
+
+
         projectile.GetComponent<Bullet>().ownerId = GetComponent<Player>().networkInstance.id;
 
         projectile.GetComponent<Bullet>().damageCurve = item.weaponData.damageCurve;
         projectile.GetComponent<Bullet>().speed = item.weaponData.projectileVelocity;
 
-        model.cocked = item.weaponData.isLoaded;
+        model.cocked = item.priorityData.isLoaded;
         model.Shoot();
 
         //Weapon camera spring recoil

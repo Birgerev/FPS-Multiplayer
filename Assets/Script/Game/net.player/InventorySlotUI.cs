@@ -44,7 +44,7 @@ namespace net.bigdog.game.player.ui
             magazine = (player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridgeCapacity > 0);
             magazineSection.SetActive(magazine);
             magazineFullnessBar.value =
-(float)player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridges /
+(float)player.GetComponent<InventoryManager>().items[slotId].priorityData.cartridges /
 (float)player.GetComponent<InventoryManager>().items[slotId].magazineData.cartridgeCapacity;
 
 

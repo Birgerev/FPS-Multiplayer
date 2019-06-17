@@ -32,7 +32,7 @@ namespace net.bigdog.game.player
         public bool limitPitch = false;
 
         public PlayerInstanceInput.InputData input;
-
+        
         [SyncVar]
         public int id;
 
