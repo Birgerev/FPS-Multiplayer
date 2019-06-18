@@ -67,7 +67,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 2, y: 4}
       reloadTime: 3
-      projectileVelocity: 700
+      projectileVelocity: 2000
       rpm: 900
       damageCurve:
         serializedVersion: 2
@@ -125,7 +125,7 @@ MonoBehaviour:
       maxVisualRecoil: 0.01
       maxCameraRecoil: {x: 18, y: 20}
       reloadTime: 1.5
-      projectileVelocity: 700
+      projectileVelocity: 4000
       rpm: 150
       damageCurve:
         serializedVersion: 2

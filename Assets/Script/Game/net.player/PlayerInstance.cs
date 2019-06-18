@@ -171,6 +171,38 @@ namespace net.bigdog.game.player
             player.transform.position = pos;
         }
 
+        [ClientRpc]
+        public void RpcSyncInventoryItem(int id, int slot)
+        {
+            if (isServer)
+                return;
+            player.GetComponent<InventoryManager>().items[slot] = (Item)ItemManager.instance.items[id].Clone();
+        }
+
+        [ClientRpc]
+        public void RpcSyncInventoryPriorityData(PriorityData item, int slot)
+        {
+            if (isServer)
+                return;
+            player.GetComponent<InventoryManager>().items[slot].priorityData = item;
+        }
+
+        [ClientRpc]
+        public void RpcSyncRuntimeItemPriorityData(PriorityData item)
+        {
+            if (isServer)
+                return;
+            if (player.GetComponent<RuntimeItem>() != null)
+                player.GetComponent<RuntimeItem>().item.priorityData = item;
+        }
+        
+        [ClientRpc]
+        public void RpcSyncInventorySlot(int slot)
+        {
+            player.GetComponent<InventoryManager>().selected = slot;
+            player.GetComponent<InventoryManager>().Select(slot);
+        }
+
         [Command]
         public void Cmd_InformServerOfProfileToken(string token)
         {

@@ -127,7 +127,7 @@ public class RuntimeWeapon : RuntimeItem {
         for(int slot = 0; slot < GetComponent<InventoryManager>().items.Count; slot++)
         {
             Item iteratedItem = GetComponent<InventoryManager>().items[slot];
-            if(iteratedItem.priorityData.cartridges > 0)
+            if(iteratedItem.magazineData.cartridgeCapacity > 0)
                 if(iteratedItem.priorityData.cartridges > bestCartridgeCount)
                 {
                     bestSlot = slot;
