@@ -17,19 +17,17 @@ namespace net.bigdog.game.player
         public override void Update()
         {
             base.Update();
-
-
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            Movement();
         }
 
-        private void Movement()
+        public override void Movement()
         {
+            base.Movement();
+
             if (transform.GetComponent<Player>().networkInstance == null)
                 return;
 
@@ -54,42 +52,11 @@ namespace net.bigdog.game.player
             //sprint
             Sprint(input.sprint);
 
-
-            // We apply gravity manually for more tuning control
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
-
             grounded = false;
 
             //Mouse
             pitch = input.pitch;
             yaw = input.yaw;
-
-
-            //Crouching
-            /*if (Input.GetButtonDown("Crouch"))
-                CmdCrouch(true);
-            else if (Input.GetButtonUp("Crouch"))
-                CmdCrouch(false);
-            else if ((Input.GetButtonDown("Joystick Crouch") && lastframecrouch > 10)) { 
-                print("crouch:");
-                CmdCrouch(!crouching);
-                lastframecrouch = 0;
-            }
-            else lastframecrouch++;
-
-            //Sprinting
-            if (Input.GetButtonDown("Sprint"))
-                CmdSprint(true);
-            else if (Input.GetButtonUp("Sprint"))
-                CmdSprint(false);
-            else if ((Input.GetButtonDown("Joystick Sprint") && lastframesprint > 10))
-            {
-                CmdSprint(!sprinting);
-                lastframesprint = 0;
-            }
-            else lastframesprint++;
-                */
-
         }
     }
 }

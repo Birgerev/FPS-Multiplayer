@@ -8,31 +8,35 @@ namespace net.bigdog.game.player {
     {
         public float sensitivityMultiplier = 1;
 
+        [Header("Mouse")]
         public float yaw = 0.0f;
         public float pitch = 0.0f;
 
         private float maxpitch = 89.9f;
         private float minpitch = -89.9f;
+        
+        private float currentSpeed = 0f;
+        private float accelerationMultiplier = 4f;
 
+        [Header("Speed Values")]
+        public float walkSpeed = 3.0f;
+        public float crouchSpeed = 2.0f;
+        public float sprintSpeed = 6.0f;
+
+        [Header("Other Values")]
+        private const float Gravity = 9.81f;
+        public float jumpHeight = 1.0f;
+        public float airSpeedMultiplier = 0.5f;
         public float maxVelocityChange = 10.0f;
 
-        private float speed = 0f;
-
-        private float walkSpeed = 3.0f;
-        private float crouchSpeed = 2.0f;
-        private float sprintSpeed = 6.0f;
-
-        public float gravity = 9.81f;
-        public bool canJump = true;
-        public float jumpHeight = 1.0f;
-        public float airSpeed = 4f;
-        public bool grounded = false;
-
+        public Vector3 velocityInput;
         public Vector3 targetVelocity;
-    
+
+        [Header("States")]
+        public bool canJump = true;
+        public bool grounded = false;
         public bool crouching;
         public bool sprinting;
-        public Vector3 velocityInput;
         public bool jumping;
     
         public void Jump(bool value)
@@ -69,11 +73,11 @@ namespace net.bigdog.game.player {
                 sprinting = false;
 
             if (crouching)
-                speed = crouchSpeed;
+                currentSpeed = crouchSpeed;
             else if (sprinting)
-                speed = sprintSpeed;
+                currentSpeed = sprintSpeed;
             else
-                speed = walkSpeed;
+                currentSpeed = walkSpeed;
 
             if(GetComponent<RuntimeItem>().aiming)
                 sensitivityMultiplier = 0.5f;
@@ -85,36 +89,50 @@ namespace net.bigdog.game.player {
         {
             Movement();
             Face();
+
+            // We apply gravity manually for more tuning control
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity, 0), ForceMode.VelocityChange);
         }
 
-        private void Movement()
+        public virtual void Movement()
         {
             if (targetVelocity.magnitude > 1)
                 targetVelocity.Normalize();
 
             VelocityInput(targetVelocity);
 
+            //Make target velocity local
             targetVelocity = transform.TransformDirection(targetVelocity);
+
             // Apply a force that attempts to reach our target velocity
             Vector3 velocity = GetComponent<Rigidbody>().velocity;
-            Vector3 velocityChange = (targetVelocity * speed - velocity);
+            Vector3 velocityChange = (targetVelocity * currentSpeed - velocity);
+
+            //Clamp values (min and max)
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+
+            //Reset y change
             velocityChange.y = 0;
 
+            //Apply Speed
+            velocityChange *= currentSpeed;
+
+            if(!grounded)
+            velocityChange *= airSpeedMultiplier;
+
+            //If we detect a jump, perform jump
             if (jumping)
             {
                 GetComponent<Rigidbody>().velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
                 Jump(false);
             }
 
-            GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
+            //Acceleration
+            velocityChange *= accelerationMultiplier * Time.fixedDeltaTime;
 
-            //
-            if (!grounded)
-                targetVelocity *= airSpeed;
-            else
-                targetVelocity *= speed;
+            //Apply velocity change
+            GetComponent<Rigidbody>().AddForce(velocityChange, ForceMode.VelocityChange);
         }
 
         private void Face()
@@ -141,7 +159,7 @@ namespace net.bigdog.game.player {
         {
             // From the jump height and gravity we deduce the upwards speed 
             // for the character to reach at the apex.
-            return Mathf.Sqrt(2 * jumpHeight * gravity);
+            return Mathf.Sqrt(2 * jumpHeight * Gravity);
         }
     }
 }
