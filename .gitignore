@@ -36,3 +36,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 ww2-shooter/
+Assets/Script/Game/net.postProcessing.meta
+Assets/Sound/Ambiance.meta
+Assets/Sound/Menus.meta
+Assets/Sound/Music.meta
+Assets/Sound/Weapons.meta
