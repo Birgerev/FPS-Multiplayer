@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Database
+public class Database : MonoBehaviour
 {
-    public static string GenerateToken(int userId)
-    {
-        return userId+"";
-    }
+    public const string databaseServerAdress = "http://hille.evansson.se/game_ww2/";
+    public const string database_login = "login.php";
+    public const string database_getIdFromToken = "get_id_from_token.php";
+    
+    public static Database instance;
 
-    public static bool VerifyToken(string token)
+    private void Awake()
     {
-        return true;
+        instance = this;
     }
-
     public static int GetIdFromToken(string token)
     {
-        return 1;
+        print(token);
+        return -1;
     }
 }

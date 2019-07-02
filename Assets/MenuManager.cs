@@ -19,7 +19,8 @@ public class MenuManager : MonoBehaviour
         instance = this;
 
 
-        playerProfile = new GameProfile(1);
+        playerProfile = new GameProfile(2);
+        playerProfile.login();
     }
 
     // Update is called once per frame

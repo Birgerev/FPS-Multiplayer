@@ -50,6 +50,7 @@ namespace net.bigdog.game.player
             if (isLocalPlayer)
             {
                 localInstance = this;
+                print("local token = " + MenuManager.instance.playerProfile.gameToken);
                 Cmd_InformServerOfProfileToken(MenuManager.instance.playerProfile.gameToken);
             }
 
@@ -206,10 +207,10 @@ namespace net.bigdog.game.player
         [Command]
         public void Cmd_InformServerOfProfileToken(string token)
         {
-            if (!Database.VerifyToken(token))
-                Debug.LogError("Invalid Token");
+            this.profile = new GameProfile(token);
 
-            this.profile = new GameProfile(Database.GetIdFromToken(token));
+            //if (!Database.VerifyToken(token))
+            //    Debug.LogError("Invalid Token");
         }
 
         //Spawn
