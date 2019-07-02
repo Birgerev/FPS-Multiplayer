@@ -12,7 +12,7 @@ public class RuntimeWeapon : RuntimeItem {
 
     private float timeSinceFire;
     private Quaternion lastFrameCameraRotation;
-
+    private bool scheduledShot = false;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class RuntimeWeapon : RuntimeItem {
 
         timeSinceFire += Time.deltaTime;
         if (timeSinceFire > (60 / item.weaponData.rpm)) {
-            if (mouseDown)
+            if (mouseDown || scheduledShot)
             {
                 shoot();
             } else if (item.weaponData.fireMode == FireMode.Automatic)
@@ -41,6 +41,10 @@ public class RuntimeWeapon : RuntimeItem {
                 if (mouse)
                     shoot();
             }
+        }
+        else if(item.weaponData.fireMode == FireMode.Semi && mouseDown)
+        {
+            scheduledShot = true;
         }
 
         lastFrameCameraRotation = transform.Find("Camera").GetComponentInChildren<PlayerCamera>().transform.rotation;
@@ -51,6 +55,7 @@ public class RuntimeWeapon : RuntimeItem {
     {
         if (item.priorityData.cartridges > 0 && item.priorityData.isLoaded && !item.priorityData.reloading)
         {
+            scheduledShot = false;
             timeSinceFire = 0;
             //stop player sprinting
             //model.playerModel.transform.parent.GetComponent<Player>().controller.sprinting = false;
