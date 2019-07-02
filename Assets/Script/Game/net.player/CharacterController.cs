@@ -89,13 +89,13 @@ namespace net.bigdog.game.player {
         {
             Movement();
             Face();
-
-            // We apply gravity manually for more tuning control
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity, 0), ForceMode.VelocityChange);
         }
 
         public virtual void Movement()
         {
+            // We apply gravity manually for more tuning control
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, -Gravity * GetComponent<Rigidbody>().mass, 0));
+
             if (targetVelocity.magnitude > 1)
                 targetVelocity.Normalize();
 
