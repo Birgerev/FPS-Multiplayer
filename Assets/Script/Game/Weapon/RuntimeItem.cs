@@ -14,6 +14,7 @@ public class RuntimeItem : MonoBehaviour
     protected bool mouseUp = false;
     protected bool lastFrameReload = false;
 
+    private bool lastFrameMouse = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class RuntimeItem : MonoBehaviour
         //since these variables should only be set to true one frame at a time, we mark them as false
         mouseDown = false;
         mouseUp = false;
+        lastFrameMouse = mouse;
     }
 
     public void input()
@@ -47,6 +49,8 @@ public class RuntimeItem : MonoBehaviour
             Aim(false);
 
         mouse = input.shoot;
+        mouseDown = (mouse && !lastFrameMouse);
+        mouseUp = (!mouse && lastFrameMouse);
 
         if (input.reload && !lastFrameReload)
         {
@@ -54,6 +58,7 @@ public class RuntimeItem : MonoBehaviour
         }
 
         lastFrameReload = input.reload;
+
     }
 
     public virtual void Aim(bool aim)

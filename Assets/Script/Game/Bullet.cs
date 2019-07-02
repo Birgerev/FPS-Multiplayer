@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     
     public string calibre;
     public float speed;
-    public float gravityMultiplier;
     public int ownerId = 0;
     private float maxage = 4;
     public GameObject hitEffect;
@@ -32,7 +31,6 @@ public class Bullet : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward*speed);
-        rb.mass = gravityMultiplier;
         rb.useGravity = false;
 
         //Destroy object if it never hit anything
@@ -41,8 +39,8 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 gravity = 9.81f * gravityMultiplier * Vector3.up;
-        rb.AddForce(-gravity, ForceMode.Acceleration);
+        Vector3 gravity = 9.81f * Vector3.down;
+        rb.AddForce(gravity, ForceMode.Force);
     }
 
     void OnCollisionEnter(Collision col)

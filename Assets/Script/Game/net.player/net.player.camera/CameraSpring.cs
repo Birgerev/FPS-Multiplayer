@@ -25,6 +25,7 @@ public class CameraSpring : MonoBehaviour
         if (velocity.magnitude <= 0.001f && transform.localPosition.magnitude < 0.01f)
         {
             velocity = Vector3.zero;
+            transform.localPosition = Vector3.zero;
             return;
         }        
 

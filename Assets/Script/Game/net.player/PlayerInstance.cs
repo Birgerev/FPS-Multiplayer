@@ -32,7 +32,7 @@ namespace net.bigdog.game.player
         public bool limitPitch = false;
 
         public PlayerInstanceInput.InputData input;
-
+        
         [SyncVar]
         public int id;
 
@@ -50,6 +50,7 @@ namespace net.bigdog.game.player
             if (isLocalPlayer)
             {
                 localInstance = this;
+                print("local token = " + MenuManager.instance.playerProfile.gameToken);
                 Cmd_InformServerOfProfileToken(MenuManager.instance.playerProfile.gameToken);
             }
 
@@ -124,7 +125,8 @@ namespace net.bigdog.game.player
             while (true)
             {
                 yield return new WaitForSeconds(4);
-                CmdSyncPosition(player.transform.position);
+                if(player != null)
+                    CmdSyncPosition(player.transform.position);
             }
         }
 
@@ -170,13 +172,45 @@ namespace net.bigdog.game.player
             player.transform.position = pos;
         }
 
+        [ClientRpc]
+        public void RpcSyncInventoryItem(int id, int slot)
+        {
+            if (isServer)
+                return;
+            player.GetComponent<InventoryManager>().items[slot] = (Item)ItemManager.instance.items[id].Clone();
+        }
+
+        [ClientRpc]
+        public void RpcSyncInventoryPriorityData(PriorityData item, int slot)
+        {
+            if (isServer)
+                return;
+            player.GetComponent<InventoryManager>().items[slot].priorityData = item;
+        }
+
+        [ClientRpc]
+        public void RpcSyncRuntimeItemPriorityData(PriorityData item)
+        {
+            if (isServer)
+                return;
+            if (player.GetComponent<RuntimeItem>() != null)
+                player.GetComponent<RuntimeItem>().item.priorityData = item;
+        }
+        
+        [ClientRpc]
+        public void RpcSyncInventorySlot(int slot)
+        {
+            player.GetComponent<InventoryManager>().selected = slot;
+            player.GetComponent<InventoryManager>().Select(slot);
+        }
+
         [Command]
         public void Cmd_InformServerOfProfileToken(string token)
         {
-            if (!Database.VerifyToken(token))
-                Debug.LogError("Invalid Token");
+            this.profile = new GameProfile(token);
 
-            this.profile = new GameProfile(Database.GetIdFromToken(token));
+            //if (!Database.VerifyToken(token))
+            //    Debug.LogError("Invalid Token");
         }
 
         //Spawn

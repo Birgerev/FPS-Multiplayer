@@ -65,9 +65,6 @@ namespace net.bigdog.game.player {
 
         public virtual void Update()
         {
-            if (sprinting)
-                GetComponent<Player>().model.armAim = false;
-
             if (crouching)
                 sprinting = false;
 

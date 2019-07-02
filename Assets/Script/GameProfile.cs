@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public class GameProfile
@@ -9,6 +10,8 @@ public class GameProfile
     public int id;
     public string gameToken;
 
+    public bool verified = true;
+
     public Sprite getIcon()
     {
         return null;
@@ -16,18 +19,63 @@ public class GameProfile
 
     public GameProfile()
     {
-
+        Debug.Log("Bad"+id);
     }
 
     public GameProfile(int id)
     {
         name = "birgere";
         this.id = id;
-        gameToken = Database.GenerateToken(id);
+        Debug.Log("Good "+id);
     }
 
-    public bool verifyProfile()
+    public GameProfile(string token)
     {
-        return Database.VerifyToken(gameToken);
-    } 
+        name = "birgere";
+        this.gameToken = token;
+    }
+
+    public void verify()
+    {
+        //TODO
+        Database.instance.StartCoroutine(getIdFromToken());
+    }
+
+    IEnumerator getIdFromToken()
+    {
+        UnityWebRequest www = UnityWebRequest.Get(Database.databaseServerAdress + Database.database_getIdFromToken + "/?token=" + gameToken);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            string result = www.downloadHandler.text;
+            if (result == "")
+                verified = false;
+            id = int.Parse(result);
+        }
+    }
+
+    public void login()
+    {
+        Database.instance.StartCoroutine(retrieveToken());
+    }
+
+    IEnumerator retrieveToken()
+    {
+        UnityWebRequest www = UnityWebRequest.Get(Database.databaseServerAdress+Database.database_login+"/?player-id="+id);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            gameToken = www.downloadHandler.text;
+        }
+    }
 }

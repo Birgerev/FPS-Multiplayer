@@ -72,10 +72,10 @@ namespace net.bigdog.game.player.camera
                 weaponCameraAnimator.SetBool("crouching", (player.controller.crouching));
                 weaponCameraAnimator.SetBool("grounded", (player.controller.grounded));
                 weaponCameraAnimator.SetBool("aiming",
-                        (player.networkInstance.input.aim && player.item.item.weaponData.isLoaded
+                        (player.networkInstance.input.aim && player.item.item.priorityData.isLoaded
                         && (player.item) is RuntimeWeapon));
                 weaponCameraAnimator.SetBool("shooting",
-                        (player.networkInstance.input.shoot && player.item.item.weaponData.isLoaded
+                        (player.networkInstance.input.shoot && player.item.item.priorityData.isLoaded
                         && (player.item) is RuntimeWeapon));
 
             }
