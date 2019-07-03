@@ -270,6 +270,15 @@ namespace net.bigdog.game.player
             inventoryData = data;
         }*/
 
+
+        public void KickPlayer()
+        {
+            if(isServer)
+            {
+                GetComponent<NetworkBehaviour>().connectionToServer.Disconnect();
+            }
+        }
+
         [Command]
         public void CmdSyncInput(PlayerInstanceInput.InputData inputData)
         {

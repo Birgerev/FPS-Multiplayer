@@ -4,15 +4,13 @@ using UnityEngine.Networking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ConnectionManager : MonoBehaviour {
+public class ConnectionManager : NetworkManager {
 
     public static bool host = true;
     //public static bool singleplayer = false
     public static string map = "mp_Test";
     public static string ip = "localhost";
     public static int port = 630;
-
-    private NetworkManager network;
 
     public bool connected = false;
 
@@ -24,49 +22,71 @@ public class ConnectionManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        network = GetComponent<NetworkManager>();
-
-        connect();        
-
-        StartCoroutine(later());
+        establishServerOrConnection();
     }
-
-    IEnumerator later()
+    
+    private void establishServerOrConnection()
     {
-        yield return new WaitForSeconds(1f);
-
-        Initialize();
-    }
-
-    private void connect()
-    {
-        network.networkAddress = ip;
-        network.networkPort = port;
+        networkAddress = ip;
+        networkPort = port;
 
         if (host)
         {
-            network.StartHost();
+            StartHost();
         }
         else
         {
-            network.StartClient();
+            StartClient();
         }
-    }
-
-    public void Initialize()
-    {
-        if (host)
-            network.ServerChangeScene(map);
     }
 
     public void LeaveServer()
     {
-        network.StopClient();
+        if (host)
+            CloseServer();
+
+        StopClient();
     }
 
     public void CloseServer()
     {
-        network.StopHost();
+        StopHost();
+
+        Destroy(gameObject);
+    }
+
+    public override void OnStartHost()
+    {
+        base.OnStartHost();
+
+        if (host)
+            ServerChangeScene(map);
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientDisconnect(conn);
+
+        performDisconnect();
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        performDisconnect();
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+
+        performDisconnect();
+    }
+
+    private void performDisconnect()
+    {
+        SceneManager.LoadScene("cl_menu");
 
         Destroy(gameObject);
     }
