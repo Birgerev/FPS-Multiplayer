@@ -16,7 +16,6 @@ namespace net.bigdog.game.gamemode
         public Text opposite_pointText;
 
         public Gamemode game;
-        public bigdog.game.player.Player player;
         public int localTeam = 0;
 
         // Start is called before the first frame update
@@ -29,8 +28,6 @@ namespace net.bigdog.game.gamemode
         {
             if(game == null)
                 game = Gamemode.instance;
-            if(player == null)
-                player = GetComponentInParent<bigdog.game.player.Player>();
 
             localTeam = TeamGame.localTeam;
 

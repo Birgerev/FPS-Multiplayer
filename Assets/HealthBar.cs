@@ -25,7 +25,7 @@ namespace net.bigdog.game.player.ui
         // Update is called once per frame
         void Update()
         {
-            value = GetComponentInParent<PlayerUI>().player.health / 100;
+            value = PlayerUI.instance.playerInstance.player.health / 100;
 
             float visualValue = value;
             bool valueChanged = (lastValue != value);

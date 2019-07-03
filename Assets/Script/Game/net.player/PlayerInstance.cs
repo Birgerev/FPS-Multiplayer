@@ -13,6 +13,7 @@ namespace net.bigdog.game.player
 
         public GameObject playerPrefab;
         public GameObject spawnMenuPrefab;
+        public GameObject playerUIPrefab;
 
         public Player player;
 
@@ -50,7 +51,10 @@ namespace net.bigdog.game.player
             if (isLocalPlayer)
             {
                 localInstance = this;
-                print("local token = " + MenuManager.instance.playerProfile.gameToken);
+
+                //Create UI
+                Instantiate(playerUIPrefab);
+
                 Cmd_InformServerOfProfileToken(MenuManager.instance.playerProfile.gameToken);
             }
 

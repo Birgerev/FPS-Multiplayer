@@ -32,7 +32,7 @@ namespace net.bigdog.game.player.ui
             slotButtonText.text = (slotId + 1).ToString();
 
             //check whether this slot is selected
-            Player player = GetComponentInParent<Player>();
+            Player player = PlayerUI.instance.playerInstance.player;
             selected = (player.GetComponent<InventoryManager>().selected == slotId);
 
 

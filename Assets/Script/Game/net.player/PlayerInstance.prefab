@@ -48,9 +48,19 @@ MonoBehaviour:
   playerPrefab: {fileID: 177, guid: 4888118ff44007f4395d84b50ad35bd9, type: 3}
   spawnMenuPrefab: {fileID: 6932027835114176848, guid: 8ee30012966df8649bf4c4f6a9af4e41,
     type: 3}
+  playerUIPrefab: {fileID: 3720648765440218081, guid: 97d53a5593d2d0544995e5d5fcb3fa31,
+    type: 3}
   player: {fileID: 0}
+  profile:
+    name: 
+    id: 0
+    gameToken: 
+    verified: 1
   health: 0
   spawned: 0
+  client_spawned: 0
+  spawnPosition: {x: 0, y: 0, z: 0}
+  limitPitch: 0
   input:
     space: 0
     vertical: 0
@@ -63,6 +73,7 @@ MonoBehaviour:
     shoot: 0
     reload: 0
     lastNumpad: 0
+  id: 0
 --- !u!114 &3301297260683799334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 914004166959368481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
