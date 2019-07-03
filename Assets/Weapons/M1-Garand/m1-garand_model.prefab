@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6128903907679738588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -74.17, y: -2.31, z: 0.007}
+  m_LocalPosition: {x: -74.17, y: -1.86, z: 0.007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9145250291722812377}
@@ -108,10 +108,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9145250291722812377}
     m_Modifications:
-    - target: {fileID: 1103511012436976, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
-      propertyPath: m_Name
-      value: SM_Wep_American_Rifle_01
-      objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.3900003
@@ -126,19 +122,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.0020980053
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.70710367
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0020980053
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70710367
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_RootOrder
@@ -146,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 4525899957293392, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -168,18 +164,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 100.00004
       objectReference: {fileID: 0}
-    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.457712e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.19696873
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.05065395
-      objectReference: {fileID: 0}
     - target: {fileID: 4876343158463946, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -199,6 +183,22 @@ PrefabInstance:
     - target: {fileID: 4876343158463946, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.457712e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.19696873
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096915926376170, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05065395
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103511012436976, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
+      propertyPath: m_Name
+      value: SM_Wep_American_Rifle_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc13ea7aca755ee4bb10925b6bf586c8, type: 3}
