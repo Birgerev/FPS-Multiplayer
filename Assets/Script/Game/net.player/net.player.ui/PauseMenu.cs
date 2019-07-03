@@ -24,10 +24,18 @@ public class PauseMenu : MonoBehaviour
     {
         CanvasGroup group = GetComponent<CanvasGroup>();
         
+        if(active)
+            PlayerInstanceInput.showMouse = true;
+        if(group.interactable && !active)
+            PlayerInstanceInput.showMouse = false;
+
         group.interactable = active;
         group.alpha = (active) ? 1 : 0;
         group.blocksRaycasts = active;
+    }
 
-        PlayerInstanceInput.showMouse = active;
+    public void LeaveGame()
+    {
+        ConnectionManager.instance.LeaveServer();
     }
 }

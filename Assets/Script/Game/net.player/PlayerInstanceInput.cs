@@ -110,6 +110,8 @@ namespace net.bigdog.game.player
         {
             if (!GetComponent<PlayerInstance>().isLocalPlayer)
                 Destroy(this);
+            
+            CursorSettings();
 
             //Disable input if paused
             if (input_Paused)
@@ -117,8 +119,6 @@ namespace net.bigdog.game.player
                 disableInput();
                 return;
             }
-
-            CursorSettings();
 
             sensitivity = normalSensitivity;
             if (input.sprint)
@@ -185,11 +185,6 @@ namespace net.bigdog.game.player
         {
             Cursor.visible = showMouse;
             Cursor.lockState = (showMouse) ? CursorLockMode.None : CursorLockMode.Locked;
-
-            if (Input.GetMouseButtonDown(0))
-                showMouse = false;
-            if (Input.GetKeyDown(KeyCode.Escape))
-                showMouse = true;
         }
 
         public void handleScoreboard(InputAction.CallbackContext context)
