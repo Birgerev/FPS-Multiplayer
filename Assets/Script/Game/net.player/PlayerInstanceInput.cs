@@ -44,9 +44,14 @@ namespace net.bigdog.game.player
         private int framesSinceNumpad = 0;
         private int framesSinceReload = 0;
 
+        [Header("Local Input")]
+        public bool input_Paused = false;
+        public bool input_Scoreboard = false;
+
+
+        [Header("Synced Input")]
         public InputData input = new InputData();
 
-        //public InputData input;
         // Start is called before the first frame update
         void Start()
         {
@@ -56,6 +61,14 @@ namespace net.bigdog.game.player
             inputMaster = new InputMaster();
             inputMaster.Enable();
 
+
+            inputMaster.Soldier.Scoreboard.performed += handleScoreboard;
+            inputMaster.Soldier.Scoreboard.canceled += handleScoreboard;
+            inputMaster.Soldier.Scoreboard.Enable();
+
+            inputMaster.Soldier.Pause.performed += handlePause;
+            inputMaster.Soldier.Pause.canceled += handlePause;
+            inputMaster.Soldier.Pause.Enable();
 
             inputMaster.Soldier.Shoot.performed += handleShoot;
             inputMaster.Soldier.Shoot.canceled += handleShoot;
@@ -97,6 +110,13 @@ namespace net.bigdog.game.player
         {
             if (!GetComponent<PlayerInstance>().isLocalPlayer)
                 Destroy(this);
+
+            //Disable input if paused
+            if (input_Paused)
+            {
+                disableInput();
+                return;
+            }
 
             CursorSettings();
 
@@ -148,6 +168,18 @@ namespace net.bigdog.game.player
             framesSinceNumpad++;
         }
 
+        private void disableInput()
+        {
+            float saved_pitch = input.pitch;
+            float saved_yaw = input.yaw;
+
+            input = new InputData();
+
+            input.pitch = saved_pitch;
+            input.yaw = saved_yaw;
+        }
+
+
         public static bool showMouse = false;
         private void CursorSettings()
         {
@@ -158,6 +190,17 @@ namespace net.bigdog.game.player
                 showMouse = false;
             if (Input.GetKeyDown(KeyCode.Escape))
                 showMouse = true;
+        }
+
+        public void handleScoreboard(InputAction.CallbackContext context)
+        {
+            input_Scoreboard = context.performed;
+        }
+
+        public void handlePause(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+                input_Paused = !input_Paused;
         }
 
         public void handleShoot(InputAction.CallbackContext context)

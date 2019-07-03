@@ -128,6 +128,28 @@ public class InputMaster : IInputActionCollection
                     ""processors"": """",
                     ""interactions"": """",
                     ""bindings"": []
+                },
+                {
+                    ""name"": ""Scoreboard"",
+                    ""id"": ""28358efc-1e2f-415e-a323-e72453bff1c7"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""id"": ""fa1eb61a-5e78-496b-84ed-4c71059272ba"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
                 }
             ],
             ""bindings"": [
@@ -418,6 +440,54 @@ public class InputMaster : IInputActionCollection
                     ""isComposite"": false,
                     ""isPartOfComposite"": false,
                     ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b45c0517-c3f4-4d8b-b0e8-960ded6745e4"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Scoreboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dacc5a7a-8ec7-4183-b4b7-89b33c19bb53"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Scoreboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7beea52-0bea-47d3-9c0c-47299a611b63"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bd0b2ed-747b-4daf-9fe6-2125548c81a0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
                 }
             ]
         }
@@ -466,6 +536,8 @@ public class InputMaster : IInputActionCollection
         m_Soldier_Reload = m_Soldier.GetAction("Reload");
         m_Soldier_SwapWeaponPositive = m_Soldier.GetAction("SwapWeaponPositive");
         m_Soldier_SwapWeaponNegative = m_Soldier.GetAction("SwapWeaponNegative");
+        m_Soldier_Scoreboard = m_Soldier.GetAction("Scoreboard");
+        m_Soldier_Pause = m_Soldier.GetAction("Pause");
     }
 
     ~InputMaster()
@@ -528,6 +600,8 @@ public class InputMaster : IInputActionCollection
     private InputAction m_Soldier_Reload;
     private InputAction m_Soldier_SwapWeaponPositive;
     private InputAction m_Soldier_SwapWeaponNegative;
+    private InputAction m_Soldier_Scoreboard;
+    private InputAction m_Soldier_Pause;
     public struct SoldierActions
     {
         private InputMaster m_Wrapper;
@@ -542,6 +616,8 @@ public class InputMaster : IInputActionCollection
         public InputAction @Reload { get { return m_Wrapper.m_Soldier_Reload; } }
         public InputAction @SwapWeaponPositive { get { return m_Wrapper.m_Soldier_SwapWeaponPositive; } }
         public InputAction @SwapWeaponNegative { get { return m_Wrapper.m_Soldier_SwapWeaponNegative; } }
+        public InputAction @Scoreboard { get { return m_Wrapper.m_Soldier_Scoreboard; } }
+        public InputAction @Pause { get { return m_Wrapper.m_Soldier_Pause; } }
         public InputActionMap Get() { return m_Wrapper.m_Soldier; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -582,6 +658,12 @@ public class InputMaster : IInputActionCollection
                 SwapWeaponNegative.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
                 SwapWeaponNegative.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
                 SwapWeaponNegative.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnSwapWeaponNegative;
+                Scoreboard.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnScoreboard;
+                Scoreboard.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnScoreboard;
+                Scoreboard.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnScoreboard;
+                Pause.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
+                Pause.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
+                Pause.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_SoldierActionsCallbackInterface = instance;
             if (instance != null)
@@ -616,6 +698,12 @@ public class InputMaster : IInputActionCollection
                 SwapWeaponNegative.started += instance.OnSwapWeaponNegative;
                 SwapWeaponNegative.performed += instance.OnSwapWeaponNegative;
                 SwapWeaponNegative.canceled += instance.OnSwapWeaponNegative;
+                Scoreboard.started += instance.OnScoreboard;
+                Scoreboard.performed += instance.OnScoreboard;
+                Scoreboard.canceled += instance.OnScoreboard;
+                Pause.started += instance.OnPause;
+                Pause.performed += instance.OnPause;
+                Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -656,5 +744,7 @@ public class InputMaster : IInputActionCollection
         void OnReload(InputAction.CallbackContext context);
         void OnSwapWeaponPositive(InputAction.CallbackContext context);
         void OnSwapWeaponNegative(InputAction.CallbackContext context);
+        void OnScoreboard(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
