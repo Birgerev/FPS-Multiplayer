@@ -150,6 +150,17 @@ public class InputMaster : IInputActionCollection
                     ""processors"": """",
                     ""interactions"": """",
                     ""bindings"": []
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""id"": ""3e03a3a0-03bc-4001-9d23-253aa50719bd"",
+                    ""expectedControlLayout"": """",
+                    ""continuous"": false,
+                    ""passThrough"": false,
+                    ""initialStateCheck"": false,
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""bindings"": []
                 }
             ],
             ""bindings"": [
@@ -488,6 +499,30 @@ public class InputMaster : IInputActionCollection
                     ""isComposite"": false,
                     ""isPartOfComposite"": false,
                     ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e6a91bd-8653-44ee-af1c-ed6fb795d4b9"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fd7f616-8323-47fd-ac4a-5fb98263af56"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false,
+                    ""modifiers"": """"
                 }
             ]
         }
@@ -538,6 +573,7 @@ public class InputMaster : IInputActionCollection
         m_Soldier_SwapWeaponNegative = m_Soldier.GetAction("SwapWeaponNegative");
         m_Soldier_Scoreboard = m_Soldier.GetAction("Scoreboard");
         m_Soldier_Pause = m_Soldier.GetAction("Pause");
+        m_Soldier_Interact = m_Soldier.GetAction("Interact");
     }
 
     ~InputMaster()
@@ -602,6 +638,7 @@ public class InputMaster : IInputActionCollection
     private InputAction m_Soldier_SwapWeaponNegative;
     private InputAction m_Soldier_Scoreboard;
     private InputAction m_Soldier_Pause;
+    private InputAction m_Soldier_Interact;
     public struct SoldierActions
     {
         private InputMaster m_Wrapper;
@@ -618,6 +655,7 @@ public class InputMaster : IInputActionCollection
         public InputAction @SwapWeaponNegative { get { return m_Wrapper.m_Soldier_SwapWeaponNegative; } }
         public InputAction @Scoreboard { get { return m_Wrapper.m_Soldier_Scoreboard; } }
         public InputAction @Pause { get { return m_Wrapper.m_Soldier_Pause; } }
+        public InputAction @Interact { get { return m_Wrapper.m_Soldier_Interact; } }
         public InputActionMap Get() { return m_Wrapper.m_Soldier; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -664,6 +702,9 @@ public class InputMaster : IInputActionCollection
                 Pause.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
                 Pause.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
                 Pause.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnPause;
+                Interact.started -= m_Wrapper.m_SoldierActionsCallbackInterface.OnInteract;
+                Interact.performed -= m_Wrapper.m_SoldierActionsCallbackInterface.OnInteract;
+                Interact.canceled -= m_Wrapper.m_SoldierActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_SoldierActionsCallbackInterface = instance;
             if (instance != null)
@@ -704,6 +745,9 @@ public class InputMaster : IInputActionCollection
                 Pause.started += instance.OnPause;
                 Pause.performed += instance.OnPause;
                 Pause.canceled += instance.OnPause;
+                Interact.started += instance.OnInteract;
+                Interact.performed += instance.OnInteract;
+                Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -746,5 +790,6 @@ public class InputMaster : IInputActionCollection
         void OnSwapWeaponNegative(InputAction.CallbackContext context);
         void OnScoreboard(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
