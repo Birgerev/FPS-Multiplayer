@@ -260,7 +260,15 @@ namespace net.bigdog.game.player
 
             StartCoroutine(syncPositionLoop());
         }
-
+        
+        public void KickPlayer()
+        {
+            if(isServer)
+            {
+                GetComponent<NetworkBehaviour>().connectionToServer.Disconnect();
+            }
+        }
+        
         [Command]
         public void CmdSyncInput(PlayerInstanceInput.InputData inputData)
         {
