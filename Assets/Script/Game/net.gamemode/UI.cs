@@ -26,8 +26,21 @@ namespace net.bigdog.game.gamemode
         // Update is called once per frame
         void Update()
         {
-            if(game == null)
+            if (game == null)
+            {
                 game = Gamemode.instance;
+                return;
+            }
+            if (local_progressBar == null)
+            {
+                Debug.LogError("GameUI: local_progressBar is null");
+                return;
+            }
+            if (opposite_progressBar == null)
+            {
+                Debug.LogError("GameUI: opposite_progressBar is null");
+                return;
+            }
 
             localTeam = TeamGame.localTeam;
 

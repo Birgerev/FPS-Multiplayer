@@ -9,8 +9,6 @@ namespace net.bigdog.game.player
 
         private float joystickMultiplier = 1f;
 
-        public static bool showMouse = false;
-
         private int lastframecrouch = 0;
         private int lastframesprint = 0;
 

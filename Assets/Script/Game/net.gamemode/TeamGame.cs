@@ -33,8 +33,6 @@ namespace net.bigdog.game.gamemode
         {
             base.PlayerJoin(player);
 
-            print("join");
-
             if (isServer)
                 joinRandomTeam(player);
         }

@@ -250,7 +250,6 @@ namespace net.bigdog.game.player
 
         public void Client_Spawn()
         {
-            print("client spawn");
             GameObject obj = Instantiate(playerPrefab);
 
             player = obj.GetComponent<Player>();
@@ -259,18 +258,9 @@ namespace net.bigdog.game.player
 
             obj.transform.position = spawnPosition;
 
-            print("client spawn done");
-
             StartCoroutine(syncPositionLoop());
         }
-
-        /*[Command]
-        public void CmdUpdateInventoryData(InventoryData data)
-        {
-            inventoryData = data;
-        }*/
-
-
+        
         public void KickPlayer()
         {
             if(isServer)
@@ -278,7 +268,7 @@ namespace net.bigdog.game.player
                 GetComponent<NetworkBehaviour>().connectionToServer.Disconnect();
             }
         }
-
+        
         [Command]
         public void CmdSyncInput(PlayerInstanceInput.InputData inputData)
         {

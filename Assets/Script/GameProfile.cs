@@ -19,14 +19,13 @@ public class GameProfile
 
     public GameProfile()
     {
-        Debug.Log("Bad"+id);
+
     }
 
     public GameProfile(int id)
     {
         name = "birgere";
         this.id = id;
-        Debug.Log("Good "+id);
     }
 
     public GameProfile(string token)
