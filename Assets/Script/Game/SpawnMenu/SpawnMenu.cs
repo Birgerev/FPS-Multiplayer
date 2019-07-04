@@ -46,7 +46,7 @@ public class SpawnMenu : MonoBehaviour
         {
             GameObject obj = Instantiate(spawnpointUiPrefab);
             obj.transform.position = spawnpoint.transform.position;
-            obj.transform.parent = transform.Find("Canvas");
+            obj.transform.SetParent(transform.Find("Canvas"));
         }
     }
 }

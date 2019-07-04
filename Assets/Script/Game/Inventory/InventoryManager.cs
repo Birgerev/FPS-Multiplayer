@@ -114,8 +114,6 @@ public class InventoryManager : MonoBehaviour
         if(GetComponent<RuntimeItem>() != null)
             items[selected] = (Item)GetComponent<RuntimeItem>().item.Clone();
 
-        print("select " + index);
-
         //select new item
         selected = index;
         
