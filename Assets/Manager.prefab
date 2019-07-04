@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4377792955960042}
   - component: {fileID: 114821024620718266}
-  - component: {fileID: 114564397694564514}
   - component: {fileID: 114721200138198314}
   - component: {fileID: 114471310542806890}
   - component: {fileID: 114674039481128392}
@@ -220,7 +219,7 @@ MonoBehaviour:
       projectile: {fileID: 0}
     magazineData:
       cartridgeCapacity: 71
---- !u!114 &114564397694564514
+--- !u!114 &114721200138198314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,7 +228,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1690866032694486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c2fd873b12541b392f10ecc4846574, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aed004ff8a634c469802d1ce01d4ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114471310542806890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690866032694486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ac70428d607ae4daa3d9d9b18aae0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamemode: {fileID: 7631757134848054738, guid: 7e54b14af67e50744901d89d78e4c6c0,
+    type: 3}
+--- !u!114 &114674039481128392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690866032694486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418555cc0347043478c5455b3f3a53e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -237,7 +262,7 @@ MonoBehaviour:
   m_ServerBindAddress: 
   m_NetworkAddress: localhost
   m_DontDestroyOnLoad: 0
-  m_RunInBackground: 0
+  m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
@@ -248,10 +273,9 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1455006549851510, guid: b919001c2c9abae4f8eb778d82b7f096, type: 3}
   - {fileID: 7631757134848054738, guid: 7e54b14af67e50744901d89d78e4c6c0, type: 3}
   m_CustomConfig: 0
-  m_MaxConnections: 4
+  m_MaxConnections: 100
   m_ConnectionConfig:
     m_PacketSize: 1440
     m_FragmentSize: 500
@@ -292,7 +316,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 0500000000000000
+  m_Channels: 
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -305,42 +329,4 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
---- !u!114 &114721200138198314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690866032694486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aed004ff8a634c469802d1ce01d4ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114471310542806890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690866032694486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ac70428d607ae4daa3d9d9b18aae0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamemode: {fileID: 7631757134848054738, guid: 7e54b14af67e50744901d89d78e4c6c0,
-    type: 3}
---- !u!114 &114674039481128392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690866032694486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418555cc0347043478c5455b3f3a53e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   connected: 0
