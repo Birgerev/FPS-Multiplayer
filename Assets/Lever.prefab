@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3814661393698275559}
   - component: {fileID: 3814661393698275558}
+  - component: {fileID: 583195928173701243}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -80,6 +81,19 @@ MonoBehaviour:
   lever_stick: {fileID: 3814661394912636116}
   defaultRotation: {x: 0, y: 0, z: 70}
   activeRotation: {x: 0, y: 0, z: -30}
+--- !u!65 &583195928173701243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3814661393698275557}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 1.75, z: 1.75}
+  m_Center: {x: 0, y: 0, z: 0.86}
 --- !u!1 &3814661394912636123
 GameObject:
   m_ObjectHideFlags: 0
