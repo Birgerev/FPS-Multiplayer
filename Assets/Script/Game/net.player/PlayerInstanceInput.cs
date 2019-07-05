@@ -19,6 +19,8 @@ namespace net.bigdog.game.player
             public bool crouch;
             public bool sprint;
 
+            public bool interact;
+
             //Mouse
             public float pitch;
             public float yaw;
@@ -61,6 +63,9 @@ namespace net.bigdog.game.player
             inputMaster = new InputMaster();
             inputMaster.Enable();
 
+            inputMaster.Soldier.Interact.performed += handleInteract;
+            inputMaster.Soldier.Interact.canceled += handleInteract;
+            inputMaster.Soldier.Interact.Enable();
 
             inputMaster.Soldier.Scoreboard.performed += handleScoreboard;
             inputMaster.Soldier.Scoreboard.canceled += handleScoreboard;
@@ -185,6 +190,11 @@ namespace net.bigdog.game.player
         {
             Cursor.visible = showMouse;
             Cursor.lockState = (showMouse) ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
+        public void handleInteract(InputAction.CallbackContext context)
+        {
+            input.interact = context.performed;
         }
 
         public void handleScoreboard(InputAction.CallbackContext context)

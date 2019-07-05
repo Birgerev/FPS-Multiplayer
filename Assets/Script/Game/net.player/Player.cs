@@ -28,7 +28,7 @@ namespace net.bigdog.game.player
         public float yaw;
 
         public const int maxHealth = 100;
-
+        
         public float health
         {
             get
