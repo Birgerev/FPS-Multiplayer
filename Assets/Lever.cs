@@ -14,13 +14,13 @@ public class Lever : Interactable
     public Vector3 activeRotation;
 
     // Start is called before the first frame update
-    public override void Start()
+    void Start()
     {
         base.Start();
     }
 
     // Update is called once per frame
-    public override void Update()
+    void Update()
     {
         base.Update();
 

@@ -562,11 +562,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114821024620718266, guid: 310dd863b07d132458e925b427c7f801,
-        type: 3}
-      propertyPath: items.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 114564397694564514, guid: 310dd863b07d132458e925b427c7f801,
         type: 3}
       propertyPath: m_NetworkPort
