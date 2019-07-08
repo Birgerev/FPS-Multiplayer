@@ -8,7 +8,7 @@ public class ConnectionManager : NetworkManager {
 
     public static bool host = true;
     //public static bool singleplayer = false
-    public static string map = "mp_Test";
+    public static string map = "mp_sarra";
     public static string ip = "localhost";
     public static int port = 630;
 
