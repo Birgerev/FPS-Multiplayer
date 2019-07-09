@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
     public virtual string popup_title { get; } = "Interactable";
     public virtual string popup_text { get; } = "Press F To Use";
 
-    public Player triggered_player = null;
+    private Player triggered_player = null;
     private bool lastFrameInput = false;
 
     // Start is called before the first frame update
