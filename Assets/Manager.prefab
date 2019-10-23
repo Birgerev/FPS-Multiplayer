@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114721200138198314}
   - component: {fileID: 114471310542806890}
   - component: {fileID: 114674039481128392}
+  - component: {fileID: 6998259186085984749}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -330,3 +331,17 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   connected: 0
+--- !u!114 &6998259186085984749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690866032694486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4177d38962b287e4ab63c3d0637c4600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vehicles:
+  - {fileID: 2905145922595182068, guid: 7346a24311428f54294c5238ec8637c3, type: 3}

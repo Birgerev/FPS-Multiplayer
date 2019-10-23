@@ -6,7 +6,6 @@ namespace net.bigdog.game.player
 {
     public class PlayerController : CharacterController
     {
-
         private float joystickMultiplier = 1f;
 
         private int lastframecrouch = 0;

@@ -38,7 +38,14 @@ namespace net.bigdog.game.player {
         public bool crouching;
         public bool sprinting;
         public bool jumping;
-    
+
+        [Header("Abillities")]
+        public bool canMove = true;
+        public bool canSprint = true;
+        public bool canCollide = true;
+        public bool canLook = true;
+        public bool forceStand = false;
+
         public void Jump(bool value)
         {
             jumping = value;
@@ -46,6 +53,7 @@ namespace net.bigdog.game.player {
 
         public void Crouch(bool value)
         {
+
             crouching = value;
         }
     
@@ -87,8 +95,28 @@ namespace net.bigdog.game.player {
 
         public virtual void FixedUpdate()
         {
+            CheckAbillities();
             Movement();
             Face();
+        }
+
+        public void CheckAbillities()
+        {
+            if (!canMove)
+            {
+                Jump(false);
+                velocityInput = Vector3.zero;
+            }
+            if (forceStand)
+            {
+                crouching = false;
+            }
+            if (!canSprint)
+            {
+                sprinting = false;
+            }
+
+            GetComponent<Collider>().enabled = canCollide;
         }
 
         public virtual void Movement()

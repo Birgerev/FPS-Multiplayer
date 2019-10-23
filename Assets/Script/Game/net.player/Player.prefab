@@ -122,6 +122,11 @@ MonoBehaviour:
   crouching: 0
   sprinting: 0
   jumping: 0
+  canMove: 1
+  canSprint: 1
+  canCollide: 1
+  canLook: 1
+  forceStand: 0
 --- !u!114 &872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +719,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 61239
+    m_Bits: 2158391
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

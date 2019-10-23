@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour
     public virtual string popup_title { get; } = "Interactable";
     public virtual string popup_text { get; } = "Press F To Use";
 
-    private Player triggered_player = null;
+    public Player triggered_player = null;
     private bool lastFrameInput = false;
 
     // Start is called before the first frame update
@@ -76,6 +76,6 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        print("base interact");
+
     }
 }
